@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import Card from '../../components/card/Card';
+import './Board.scss'
 
 class Board extends Component {
   render() {
     return (
-    <div>Board here
+    <span className='Board'>Board here
       <Card/>
-    </div>
+      <Card name="test name here" />
+    </span>
     );
   }
 }
