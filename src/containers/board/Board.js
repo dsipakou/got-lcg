@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import Card from '../../components/card/Card';
-import './Board.scss'
+import './board.scss'
 
 class Board extends Component {
   render() {
     return (
-    <span className='Board'>Board here
+    <span className='board'>Board here
       <Card/>
       <Card name="test name here" />
     </span>
