@@ -5,16 +5,24 @@ import './card.scss';
 class Card extends Component {
 
   render() {
+    const isOwn = this.props.own;
+    let cardTitle = null;
+    if (isOwn) {
+      cardTitle = <h1>{this.props.name || 'No name'}</h1>
+    } else {
+      cardTitle = <h1>Opp</h1>
+    }
     return (
       <div className='card'>Card container
-        <h1>{this.props.name || 'No name'}</h1>
+        {cardTitle}
       </div>
     );
   }
 }
 
 Card.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
+  own: PropTypes.bool.isRequired
 }
 
 export default Card;

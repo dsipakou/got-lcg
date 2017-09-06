@@ -6,9 +6,9 @@ class Hand extends Component {
   render() {
     return (
       <div className='hand'>
-        <Card />
-        <Card />
-        <Card />
+        <Card own={true} />
+        <Card own={true} />
+        <Card own={false} />
       </div>
     );
   }
