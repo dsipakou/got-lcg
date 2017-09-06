@@ -1,0 +1,10 @@
+.player {
+  display: flex;
+  align-items: flex-end;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.player-wrapper {
+  flex-grow: 1;
+}

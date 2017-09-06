@@ -6,9 +6,9 @@ class Card extends Component {
 
   render() {
     return (
-      <span className='card'>Card container
+      <div className='card'>Card container
         <h1>{this.props.name || 'No name'}</h1>
-      </span>
+      </div>
     );
   }
 }
