@@ -1,28 +1,46 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { DragSource } from 'react-dnd';
 import './card.scss';
+
+const cardSource = {
+  beginDrag(props) {
+    return {
+      text: props.text
+    };
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
 
 class Card extends Component {
 
   static propTypes = {
     name: PropTypes.string,
-    own: PropTypes.bool.isRequired
+    own: PropTypes.bool.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    connectDragSource: PropTypes.func.isRequired
   };
 
   render() {
-    const isOwn = this.props.own;
+    const {name, own, isDragging, connectDragSource } = this.props;
     let cardTitle = null;
-    if (isOwn) {
-      cardTitle = <h1>{this.props.name || 'No name'}</h1>
+    if (own) {
+      cardTitle = <h1>{name || 'No name'}</h1>
     } else {
       cardTitle = <h1>Opp</h1>
     }
-    return (
-      <div className='card'>Card container
+    return connectDragSource(
+      <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>Card container
         {cardTitle}
       </div>
     );
   }
 }
 
-export default Card;
+export default DragSource('CARD', cardSource, collect)(Card);

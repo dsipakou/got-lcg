@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Hand from '../hand/hand';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import './player.scss';
 
 class Player extends Component {
@@ -14,4 +16,4 @@ class Player extends Component {
   }
 }
 
-export default Player;
+export default DragDropContext(HTML5Backend)(Player);
