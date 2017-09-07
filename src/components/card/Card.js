@@ -4,6 +4,11 @@ import './card.scss';
 
 class Card extends Component {
 
+  static propTypes = {
+    name: PropTypes.string,
+    own: PropTypes.bool.isRequired
+  };
+
   render() {
     const isOwn = this.props.own;
     let cardTitle = null;
@@ -18,11 +23,6 @@ class Card extends Component {
       </div>
     );
   }
-}
-
-Card.propTypes = {
-  name: PropTypes.string,
-  own: PropTypes.bool.isRequired
 }
 
 export default Card;
