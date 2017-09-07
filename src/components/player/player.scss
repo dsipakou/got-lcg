@@ -1,11 +1,16 @@
 .player {
+  flex: 1 100%;
   display: flex;
-  align-items: flex-end;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
   width: 100%;
   justify-content: center;
 }
 
-.player-wrapper {
+.player-locations {
   flex-grow: 1;
+}
+
+.player-wrapper {
+  flex-flow: row;
+  align-items: flex-end;
 }
