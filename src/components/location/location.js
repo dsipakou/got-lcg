@@ -15,6 +15,7 @@ function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
   };
 }
 
@@ -34,17 +35,11 @@ class Location extends Component {
     )
   }
   render() {
-    const { isOver, connectDropTarget } = this.props;
+    const { isOver, canDrop, connectDropTarget } = this.props;
     return connectDropTarget(
-      <div className='location-inner' >
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%'
-        }}>
-          {isOver && this.renderOverlay('yellow')}
-          {!isOver && this.renderOverlay('green')}
-        </div>
+      <div className='location-inner'>
+        {isOver && canDrop && this.renderOverlay('yellow')}
+        {!isOver && canDrop && this.renderOverlay('green')}
         <Card own={false} />
       </div>
     );
