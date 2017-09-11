@@ -6,7 +6,9 @@ import './card.scss';
 const cardSource = {
   beginDrag(props) {
     return {
-      name: props.name
+      name: props.name,
+      key: props.id,
+      index: props.index,
     };
   }
 };
@@ -20,15 +22,15 @@ function collect(connect, monitor) {
 
 class Card extends Component {
   render() {
-    const {name, own, isDragging, connectDragSource } = this.props;
+    const {name, revealed, isDragging, connectDragSource } = this.props;
     let cardTitle = null;
-    if (own) {
+    if (revealed) {
       cardTitle = <h1>{name || 'No name'}</h1>
     } else {
       cardTitle = <h1>Opp</h1>
     }
     return connectDragSource(
-      <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>Card container
+      <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>
         {cardTitle}
       </div>
     );
@@ -36,8 +38,10 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+  id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   name: PropTypes.string,
-  own: PropTypes.bool.isRequired,
+  revealed: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired
 };
