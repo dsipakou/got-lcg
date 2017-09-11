@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import Card from '../card/card';
 import './location.scss';
@@ -18,11 +19,6 @@ function collect(connect, monitor) {
 }
 
 class Location extends Component {
-  static propTypes = {
-    connectDropTarget: PropTypes.func.isRequired,
-    isOver: PropTypes.bool.isRequired,
-  }
-
   renderOverlay(color) {
     return (
       <div style={{
@@ -53,6 +49,11 @@ class Location extends Component {
       </div>
     );
   }
+}
+
+Location.propTypes = {
+  connectDropTarget: PropTypes.func.isRequired,
+  isOver: PropTypes.bool.isRequired,
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Location)

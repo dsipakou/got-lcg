@@ -19,14 +19,6 @@ function collect(connect, monitor) {
 }
 
 class Card extends Component {
-
-  static propTypes = {
-    name: PropTypes.string,
-    own: PropTypes.bool.isRequired,
-    isDragging: PropTypes.bool.isRequired,
-    connectDragSource: PropTypes.func.isRequired
-  };
-
   render() {
     const {name, own, isDragging, connectDragSource } = this.props;
     let cardTitle = null;
@@ -42,5 +34,12 @@ class Card extends Component {
     );
   }
 }
+
+Card.propTypes = {
+  name: PropTypes.string,
+  own: PropTypes.bool.isRequired,
+  isDragging: PropTypes.bool.isRequired,
+  connectDragSource: PropTypes.func.isRequired
+};
 
 export default DragSource('CARD', cardSource, collect)(Card);
