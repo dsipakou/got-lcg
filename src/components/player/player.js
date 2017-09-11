@@ -9,12 +9,8 @@ class Player extends Component {
   render() {
     return(
       <div className='player'>
-        <div className='player-locations'>
-          <Location />
-        </div>
-        <div className='player-wrapper'>
-          <Hand />
-        </div>
+        <Location />
+        <Hand />
       </div>
     );
   }
