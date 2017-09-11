@@ -21,6 +21,10 @@ function collect(connect, monitor) {
 }
 
 class Card extends Component {
+  placeCard() {
+    const { id, index, name, revealed, action } = this.props;
+  }
+
   render() {
     const {name, revealed, isDragging, connectDragSource } = this.props;
     let cardTitle = null;
@@ -42,6 +46,7 @@ Card.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string,
   revealed: PropTypes.bool.isRequired,
+  action: PropTypes.func,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired
 };
