@@ -7,10 +7,10 @@ class Hand extends Component {
   constructor(props) {
     super(props);
     this.cards = [
-      {id: 23, revealed: true, name: 'New card'},
-      {id: 543, revealed: false, name: 'Old card'},
-      {id: 54, revealed: true, name: 'Funny card'},
-      {id: 44, revealed: true, name: 'One more card'}
+      {id: 23, revealed: true, name: 'New card', type: 'LOCATION'},
+      {id: 543, revealed: false, name: 'Old card', type: 'CHARACTER'},
+      {id: 54, revealed: true, name: 'Funny card', type: 'LOCATION'},
+      {id: 44, revealed: true, name: 'One more card', type: 'CHARACTER'}
     ]
   }
 

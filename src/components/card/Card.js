@@ -9,6 +9,7 @@ const cardSource = {
       name: props.name,
       key: props.id,
       index: props.index,
+      type: props.type,
     };
   }
 };
@@ -45,6 +46,7 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string,
+  type: PropTypes.string,
   revealed: PropTypes.bool.isRequired,
   action: PropTypes.func,
   isDragging: PropTypes.bool.isRequired,

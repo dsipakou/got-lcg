@@ -13,7 +13,7 @@ function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    currentItem: monitor.getItem(),
   };
 }
 
@@ -33,7 +33,11 @@ class Character extends Component {
     )
   }
   render() {
-    const { isOver, canDrop, connectDropTarget } = this.props;
+    const { isOver, currentItem, connectDropTarget } = this.props;
+    let canDrop = false;
+    if (currentItem != null && currentItem.type === 'CHARACTER') {
+      canDrop = true;
+    }
     return connectDropTarget(
       <div className='character-inner' >
         <div style={{

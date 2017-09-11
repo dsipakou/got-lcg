@@ -6,16 +6,18 @@ import './location.scss';
 
 const boardTarget = {
   drop(props, monitor) {
-    props.playCard(monitor.getItem());
-    console.log(monitor.getItem());
+    const { name, index, type } = monitor.getItem();
+    console.log(index);
+    console.log(monitor.getItem())
   },
 };
 
 function collect(connect, monitor) {
+
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
+    currentItem: monitor.getItem(),
   };
 }
 
@@ -35,7 +37,11 @@ class Location extends Component {
     )
   }
   render() {
-    const { isOver, canDrop, connectDropTarget } = this.props;
+    const { isOver, currentItem, connectDropTarget } = this.props;
+    let canDrop = false;
+    if (currentItem != null && currentItem.type === 'LOCATION') {
+      canDrop = true;
+    }
     return connectDropTarget(
       <div className='location-inner'>
         {isOver && canDrop && this.renderOverlay('yellow')}
