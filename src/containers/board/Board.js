@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import Player from '../../components/player/player';
+import Opponent from '../opponent/opponent';
 import './board.scss'
 
 class Board extends Component {
   render() {
     return (
-    <div className='board'>Board here
+    <div className='board'>
+      <Opponent />
       <Player />
     </div>
     );
