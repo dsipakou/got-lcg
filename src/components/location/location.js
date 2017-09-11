@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget } from 'react-dnd';
+import Card from '../card/card';
 import './location.scss';
 
 const boardTarget = {
   drop(props, monitor) {
     props.playCard(monitor.getItem());
+    console.log(monitor.getItem());
   },
 };
 
@@ -47,6 +49,7 @@ class Location extends Component {
           {isOver && this.renderOverlay('yellow')}
           {!isOver && this.renderOverlay('green')}
         </div>
+        <Card own={false} />
       </div>
     );
   }
