@@ -13,6 +13,7 @@ class Hand extends Component {
   componentDidMount() {
     console.log(this.props);
   }
+  
   render() {
     const { cards } = this.props;
     return (
