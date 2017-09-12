@@ -1,6 +1,16 @@
 import React from 'react';
 import ReactDOM, {render} from 'react-dom';
 import Board from './containers/board/Board';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import deckReducer from './redux/hand';
 import './style/base.scss';
 
-render(<Board/>, document.getElementById('app'));
+const store = createStore(deckReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+render(
+  <Provider store={store}>
+    <Board/>
+  </Provider>,
+  document.getElementById('app')
+);
