@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
+import { connect } from 'react-redux';
 import './card.scss';
 
 const cardSource = {
