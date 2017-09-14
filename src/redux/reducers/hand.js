@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { PLAY_CARD, LOG_CARD, DRAW_CARD } from '../actions/card';
 
 const initialState = [
   {id: 23, revealed: true, name: 'Lannister', type: 'CHARACTER'},
@@ -9,14 +10,21 @@ const initialState = [
 
 function deckReducer(state = initialState, action) {
   switch (action.type) {
-    case 'PLACE_CARD':
+    case DRAW_CARD:
+      return [
+        ...state,
+        {id: 45, revealed: true, name: 'new card', type: 'CHARACTER'}
+      ]
+    case PLAY_CARD:
+      console.log('asdfsafdsafsafsadsadsafsafdsafsafdf');
       const index = action.index;
       const length = action.length;
       return [
         ...state.slice(0, index),
         ...state.slice(index + 1, length),
       ];
-    case 'LOG_CARD':
+    case LOG_CARD:
+      console.log('teststetestest');
       console.log(action.card);
       return state;
     default:
