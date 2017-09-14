@@ -7,7 +7,6 @@ import './location.scss';
 const boardTarget = {
   drop(props, monitor) {
     const { name, index, type } = monitor.getItem();
-    console.log(index);
     console.log(monitor.getItem())
   },
 };

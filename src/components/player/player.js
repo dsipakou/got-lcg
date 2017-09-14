@@ -11,14 +11,14 @@ import './player.scss';
 class Player extends Component {
 
   render() {
-    const { cards } = this.props
-    
+    const { cards, onClick } = this.props
+
     return(
       <div className='player'>
         <Character />
         <Location />
         <div>
-          <Deck />
+          <Deck onDeckClick={onClick} />
           <Hand cards={cards} />
         </div>
       </div>
@@ -27,7 +27,8 @@ class Player extends Component {
 }
 
 Player.propTypes = {
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default DragDropContext(HTML5Backend)(Player);
