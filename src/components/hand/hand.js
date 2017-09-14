@@ -15,6 +15,7 @@ class Hand extends Component {
   componentDidMount() {
     console.log(this.props);
   }
+  
   render() {
     const { cards, playCard } = this.props;
     console.log(cards)
