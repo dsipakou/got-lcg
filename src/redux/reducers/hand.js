@@ -11,6 +11,7 @@ const initialState = [
 function deckReducer(state = initialState, action) {
   switch (action.type) {
     case DRAW_CARD:
+      console.log('asfasfsfasfasfasdf')
       return [
         ...state,
         {id: 45, revealed: true, name: 'new card', type: 'CHARACTER'}

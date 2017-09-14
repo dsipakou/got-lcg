@@ -7,10 +7,10 @@ import { bindActionCreators } from 'redux'
 
 class PlayerContainer extends Component {
   render() {
-    const { cards, playCard } = this.props
-    console.log(playCard)
+    const { cards, drawCard } = this.props
+    console.log(drawCard)
     return (
-      <Player cards={cards} onDeckClick={playCard} />
+      <Player cards={cards} onDeckClick={drawCard} />
     )
   }
 }
@@ -31,7 +31,8 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ playCard }, dispatch)
+  console.log(drawCard)
+  return bindActionCreators({ drawCard }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer)
