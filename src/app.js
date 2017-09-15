@@ -6,7 +6,7 @@ import { createStore, combineReducers } from 'redux';
 import deckReducer from './redux/reducers/hand';
 import './style/base.scss';
 
-const store = createStore(deckReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(handReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 render(
   <Provider store={store}>

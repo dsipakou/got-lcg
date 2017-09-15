@@ -1,4 +1,3 @@
-import { createStore } from 'redux';
 import { PLAY_CARD, LOG_CARD, DRAW_CARD } from '../actions/card';
 
 const initialState = [
@@ -8,7 +7,7 @@ const initialState = [
   {id: 44, revealed: true, name: 'Wall', type: 'LOCATION'}
 ]
 
-function deckReducer(state = initialState, action) {
+function handReducer(state = initialState, action) {
   switch (action.type) {
     case DRAW_CARD:
       return [
@@ -29,4 +28,4 @@ function deckReducer(state = initialState, action) {
   }
 }
 
-export default deckReducer;
+export default handReducer;
