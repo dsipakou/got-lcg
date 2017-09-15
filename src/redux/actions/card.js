@@ -4,7 +4,7 @@ export const LOG_CARD = 'LOG_CARD'
 
 export const playCard = (card) => {
   return {
-    type: 'PLAY_CARD',
+    type: PLAY_CARD,
     card
   }
 }
@@ -13,7 +13,7 @@ let cardId = 0;
 
 export const drawCard = () => {
   return {
-    type: 'DRAW_CARD',
+    type: DRAW_CARD,
     id: cardId++
   }
 }

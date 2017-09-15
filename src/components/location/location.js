@@ -9,7 +9,8 @@ const boardTarget = {
     return (monitor.getItem().type === 'LOCATION');
   },
   drop(props, monitor) {
-    props.onPlayCard(monitor.getItem())
+    props.onPlayCard(monitor.getItem());
+    props.onAddLocation(monitor.getItem());
     const { name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
   },
@@ -40,22 +41,26 @@ class Location extends Component {
     )
   }
   render() {
-    const { isOver, currentItem, connectDropTarget } = this.props;
+    const { isOver, cards, currentItem, connectDropTarget } = this.props;
     let canDrop = currentItem != null && currentItem.type === 'LOCATION';
     return connectDropTarget(
       <div className='location-inner'>
         {isOver && canDrop && this.renderOverlay('yellow')}
         {!isOver && canDrop && this.renderOverlay('green')}
-        <Card own={false} />
+        { cards.map((card, index) => (
+          <Card {...card} index={index} key={card.id} revealed={true} name={card.name}/>
+        )) }
       </div>
     );
   }
 }
 
 Location.propTypes = {
+  cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  onPlayCard: PropTypes.func.isRequired
+  onPlayCard: PropTypes.func.isRequired,
+  onAddLocation: PropTypes.func.isRequired
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Location)
