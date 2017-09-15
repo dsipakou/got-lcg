@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './Deck.scss';
 
-class Deck extends Component {
-  render() {
-  const { onDeckClick } = this.props
-    return (
-      <div className='deck-inner' onClick={onDeckClick}>Deck here</div>
-    )
+const Deck = ({onDeckClick}) => {
+  const draw = () => {
+    onDeckClick('hello there')
   }
+  return (
+    <div className='deck-inner' onClick={onDeckClick}>Deck here</div>
+  )
 }
 
 Deck.propTypes = {

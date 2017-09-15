@@ -17,7 +17,7 @@ class Player extends Component {
       <div className='player'>
         <Character />
         <Location />
-        <div>
+        <div className='cards-zone'>
           <Deck onDeckClick={onDeckClick} />
           <Hand cards={cards} />
         </div>
