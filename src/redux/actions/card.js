@@ -9,8 +9,11 @@ export const playCard = (index) => {
   }
 }
 
+let cardId = 0;
+
 export const drawCard = () => {
   return {
-    type: 'DRAW_CARD'
+    type: 'DRAW_CARD',
+    id: cardId++
   }
 }

@@ -11,13 +11,11 @@ const initialState = [
 function deckReducer(state = initialState, action) {
   switch (action.type) {
     case DRAW_CARD:
-      console.log('asfasfsfasfasfasdf')
       return [
         ...state,
-        {id: 45, revealed: true, name: 'new card', type: 'CHARACTER'}
+        {id: action.id, revealed: true, name: 'new card', type: 'CHARACTER'}
       ]
     case PLAY_CARD:
-      console.log('asdfsafdsafsafsadsadsafsafdsafsafdf');
       const index = action.index;
       const length = action.length;
       return [
@@ -25,8 +23,6 @@ function deckReducer(state = initialState, action) {
         ...state.slice(index + 1, length),
       ];
     case LOG_CARD:
-      console.log('teststetestest');
-      console.log(action.card);
       return state;
     default:
       return state;
