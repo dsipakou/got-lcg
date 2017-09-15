@@ -5,8 +5,10 @@ import Card from '../card/card';
 import './location.scss';
 
 const boardTarget = {
+  canDrop(props, monitor) {
+    return (monitor.getItem().type === 'LOCATION');
+  },
   drop(props, monitor) {
-    console.log(props)
     props.onPlayCard(monitor.getItem())
     const { name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
@@ -39,10 +41,7 @@ class Location extends Component {
   }
   render() {
     const { isOver, currentItem, connectDropTarget } = this.props;
-    let canDrop = false;
-    if (currentItem != null && currentItem.type === 'LOCATION') {
-      canDrop = true;
-    }
+    let canDrop = currentItem != null && currentItem.type === 'LOCATION';
     return connectDropTarget(
       <div className='location-inner'>
         {isOver && canDrop && this.renderOverlay('yellow')}

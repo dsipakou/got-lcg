@@ -22,25 +22,20 @@ function collect(connect, monitor) {
   };
 }
 
-class Card extends Component {
-  placeCard() {
-    const { id, index, name, revealed, action } = this.props;
+const Card = ({name, revealed, isDragging, connectDragSource}) => {
+
+  let cardTitle = null;
+  if (revealed) {
+    cardTitle = <h3>{name || 'No name'}</h3>
+  } else {
+    cardTitle = <h3>Closed</h3>
   }
 
-  render() {
-    const {name, revealed, isDragging, connectDragSource } = this.props;
-    let cardTitle = null;
-    if (revealed) {
-      cardTitle = <h1>{name || 'No name'}</h1>
-    } else {
-      cardTitle = <h1>Opp</h1>
-    }
-    return connectDragSource(
-      <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>
-        {cardTitle}
-      </div>
-    );
-  }
+  return connectDragSource(
+    <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>
+      {cardTitle}
+    </div>
+  )
 }
 
 Card.propTypes = {

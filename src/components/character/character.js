@@ -4,6 +4,9 @@ import { DropTarget } from 'react-dnd';
 import './character.scss';
 
 const boardTarget = {
+  canDrop(props, monitor){
+    return (monitor.getItem().type === 'CHARACTER');
+  },
   drop(props, monitor) {
     console.log(monitor.getItem());
   },
@@ -34,10 +37,7 @@ class Character extends Component {
   }
   render() {
     const { isOver, currentItem, connectDropTarget } = this.props;
-    let canDrop = false;
-    if (currentItem != null && currentItem.type === 'CHARACTER') {
-      canDrop = true;
-    }
+    let canDrop = currentItem != null && currentItem.type === 'CHARACTER';
     return connectDropTarget(
       <div className='character-inner' >
         <div style={{

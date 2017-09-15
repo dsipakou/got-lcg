@@ -16,14 +16,12 @@ function deckReducer(state = initialState, action) {
         {id: action.id, revealed: true, name: 'new card', type: 'CHARACTER'}
       ]
     case PLAY_CARD:
-      const index = action.index;
-      const length = action.length;
-      console.log('played');
-      return state;
-//      return [
-//        ...state.slice(0, index),
-//        ...state.slice(index + 1, length),
-//      ];
+      const index = action.card.index;
+      const length = state.length;
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1, length),
+      ];
     case LOG_CARD:
       return state;
     default:
