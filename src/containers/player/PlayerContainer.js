@@ -6,13 +6,14 @@ import { addLocation } from '../../redux/actions/location';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-const PlayerContainer = ({hand, locations, drawCard, playCard, addLocation}) => {
+const PlayerContainer = ({deck, hand, locations, drawCard, playCard, addLocation}) => {
   return (
-    <Player cards={hand} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
+    <Player deck={deck} cards={hand} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
   )
 }
 
 PlayerContainer.propTypes = {
+  deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   drawCard: PropTypes.func.isRequired,
@@ -23,7 +24,8 @@ PlayerContainer.propTypes = {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    hand: state.handReducer ,
+    deck: state.deckReducer,
+    hand: state.handReducer,
     locations: state.locationReducer
   }
 }

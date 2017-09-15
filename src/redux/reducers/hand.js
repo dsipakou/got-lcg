@@ -1,18 +1,12 @@
 import { PLAY_CARD, LOG_CARD, DRAW_CARD } from '../actions/card';
+import cards from '../../data/cards.json';
 
-const initialState = [
-  {id: 23, revealed: true, name: 'Lannister', type: 'CHARACTER'},
-  {id: 543, revealed: false, name: 'Stark', type: 'CHARACTER'},
-  {id: 54, revealed: true, name: 'Winterfell', type: 'LOCATION'},
-  {id: 44, revealed: true, name: 'Wall', type: 'LOCATION'}
-]
-
-function handReducer(state = initialState, action) {
+function handReducer(state = [], action) {
   switch (action.type) {
     case DRAW_CARD:
       return [
         ...state,
-        {id: action.id, revealed: true, name: 'new card', type: 'CHARACTER'}
+        {id: action.id, revealed: true, name: action.name, type: action.type}
       ]
     case PLAY_CARD:
       const index = action.card.index;

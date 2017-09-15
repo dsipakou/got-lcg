@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './Deck.scss';
 
-const Deck = ({onDeckClick}) => {
+const Deck = ({deck, onDeckClick}) => {
   const draw = () => {
-    onDeckClick('hello there')
+    onDeckClick(deck.length)
   }
   return (
-    <div className='deck-inner' onClick={onDeckClick}><span>Click to draw</span></div>
+    <div className='deck-inner' onClick={draw}><span>Click to draw</span></div>
   )
 }
 
 Deck.propTypes = {
+  deck: PropTypes.array.isRequired,
   onDeckClick: PropTypes.func.isRequired
 }
 

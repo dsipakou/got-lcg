@@ -1,2 +1,8 @@
-[{"id":1, "name":"first_card"},
-{"id":2, "name":"second_card"}]
+[
+  {"id": 1, "revealed": true, "name": "Lannister", "type": "CHARACTER"},
+  {"id": 2, "revealed": false, "name": "Stark", "type": "CHARACTER"},
+  {"id": 3, "revealed": true, "name": "Winterfell", "type": "LOCATION"},
+  {"id": 4, "revealed": true, "name": "Wall", "type": "LOCATION"},
+  {"id": 5, "revealed": true, "name": "Greyjoy", "type": "CHARACTER"},
+  {"id": 6, "revealed": true, "name": "Tirrel", "type": "CHARACTER"}
+]

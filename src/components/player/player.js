@@ -8,13 +8,13 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import './player.scss';
 
-const Player = ({ cards, locations, onDeckClick, onPlayCard, onAddLocation }) => {
+const Player = ({ deck, cards, locations, onDeckClick, onPlayCard, onAddLocation }) => {
   return(
     <div className='player'>
       <Character onPlayCard={onPlayCard} />
       <Location cards={locations} onPlayCard={onPlayCard} onAddLocation={onAddLocation}/>
       <div className='cards-zone'>
-        <Deck onDeckClick={onDeckClick} />
+        <Deck deck={deck} onDeckClick={onDeckClick} />
         <Hand cards={cards} />
       </div>
     </div>
@@ -22,6 +22,7 @@ const Player = ({ cards, locations, onDeckClick, onPlayCard, onAddLocation }) =>
 }
 
 Player.propTypes = {
+  deck: PropTypes.array.isRequired,
   cards: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   onDeckClick: PropTypes.func.isRequired,

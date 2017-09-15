@@ -11,9 +11,11 @@ export const playCard = (card) => {
 
 let cardId = 0;
 
-export const drawCard = () => {
+export const drawCard = (length) => {
+  let index = Math.floor((Math.random() * length) + 1);
   return {
     type: DRAW_CARD,
-    id: cardId++
+    id: cardId++,
+    index: index
   }
 }
