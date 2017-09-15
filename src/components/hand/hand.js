@@ -8,7 +8,6 @@ import './hand.scss';
 class Hand extends Component {
   constructor(props) {
     super(props);
-
   }
 
   componentDidMount() {

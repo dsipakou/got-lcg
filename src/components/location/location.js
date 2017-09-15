@@ -6,6 +6,8 @@ import './location.scss';
 
 const boardTarget = {
   drop(props, monitor) {
+    console.log(props)
+    props.onPlayCard(monitor.getItem())
     const { name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
   },
@@ -54,6 +56,7 @@ class Location extends Component {
 Location.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
+  onPlayCard: PropTypes.func.isRequired
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Location)

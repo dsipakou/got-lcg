@@ -7,7 +7,7 @@ const Deck = ({onDeckClick}) => {
     onDeckClick('hello there')
   }
   return (
-    <div className='deck-inner' onClick={onDeckClick}>Deck here</div>
+    <div className='deck-inner' onClick={onDeckClick}><span>Click to draw</span></div>
   )
 }
 

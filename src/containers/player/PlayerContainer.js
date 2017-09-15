@@ -1,23 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Player from '../../components/player/player'
 import { playCard, drawCard } from '../../redux/actions/card'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-class PlayerContainer extends Component {
-  render() {
-    const { cards, drawCard } = this.props
-    console.log(drawCard)
-    return (
-      <Player cards={cards} onDeckClick={drawCard} />
-    )
-  }
-}
-
-const PlayerContainer11 = (cards, drawCard) => {
+const PlayerContainer = ({cards, drawCard, playCard}) => {
   return (
-    <Player cards={cards} onDeckClick={drawCard} />
+    <Player cards={cards} onDeckClick={drawCard} onPlayCard={playCard} />
   )
 }
 
@@ -31,8 +21,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log(drawCard)
-  return bindActionCreators({ drawCard }, dispatch)
+  return bindActionCreators({ drawCard, playCard }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer)
