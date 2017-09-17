@@ -1,12 +1,13 @@
-import { PLAY_CARD, LOG_CARD, DRAW_CARD } from '../actions/card';
+import { PLAY_CARD, LOG_CARD, ADD_CARD_TO_HAND } from '../actions/hand';
 import cards from '../../data/cards.json';
 
 function handReducer(state = [], action) {
   switch (action.type) {
-    case DRAW_CARD:
+
+    case ADD_CARD_TO_HAND:
       return [
         ...state,
-        {id: action.id, revealed: true, name: action.name, type: action.type}
+        action.payload
       ]
     case PLAY_CARD:
       const index = action.card.index;

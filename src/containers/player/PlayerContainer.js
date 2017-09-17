@@ -1,14 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Player from '../../components/player/player'
-import { playCard, drawCard } from '../../redux/actions/card'
+import { CARD_LOCATION } from '../../redux/actions/deck';
+import { playCard } from '../../redux/actions/hand'
+import { drawCard } from '../../redux/actions/deck'
 import { addLocation } from '../../redux/actions/location';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const PlayerContainer = ({deck, hand, locations, drawCard, playCard, addLocation}) => {
+  const handCards = deck.filter((item) => {return item.location === CARD_LOCATION.HAND });
   return (
-    <Player deck={deck} cards={hand} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
+    <Player deck={deck} cards={handCards} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
   )
 }
 

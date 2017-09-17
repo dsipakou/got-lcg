@@ -9,6 +9,7 @@ import { DragDropContext } from 'react-dnd';
 import './player.scss';
 
 const Player = ({ deck, cards, locations, onDeckClick, onPlayCard, onAddLocation }) => {
+  console.log(cards);
   return(
     <div className='player'>
       <Character onPlayCard={onPlayCard} />
