@@ -9,8 +9,7 @@ const boardTarget = {
     return (monitor.getItem().type === 'LOCATION');
   },
   drop(props, monitor) {
-    props.onPlayCard(monitor.getItem());
-    props.onAddLocation(monitor.getItem());
+    props.onPlayLocation(monitor.getItem());
     const { name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
   },

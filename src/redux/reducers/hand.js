@@ -1,4 +1,4 @@
-import { PLAY_CARD, LOG_CARD, ADD_CARD_TO_HAND } from '../actions/hand';
+import { ADD_CARD_TO_HAND, REMOVE_CARD_FROM_HAND } from '../actions/hand';
 import cards from '../../data/cards.json';
 
 function handReducer(state = [], action) {
@@ -9,15 +9,13 @@ function handReducer(state = [], action) {
         ...state,
         action.payload
       ]
-    case PLAY_CARD:
-      const index = action.card.index;
-      const length = state.length;
+
+    case REMOVE_CARD_FROM_HAND:
+      const length = state.length
       return [
-        ...state.slice(0, index),
-        ...state.slice(index + 1, length),
-      ];
-    case LOG_CARD:
-      return state;
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1, length)
+      ]
     default:
       return state;
   }

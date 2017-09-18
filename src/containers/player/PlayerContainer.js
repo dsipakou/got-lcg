@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 const PlayerContainer = ({deck, hand, locations, drawCard, playCard, addLocation}) => {
   const handCards = deck.filter((item) => {return item.location === CARD_LOCATION.HAND });
   return (
-    <Player deck={deck} cards={hand} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
+    <Player deck={deck} cards={hand} locations={locations} onDeckClick={drawCard} onPlayLocation={playLocation} />
   )
 }
 
@@ -20,7 +20,7 @@ PlayerContainer.propTypes = {
   hand: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   drawCard: PropTypes.func.isRequired,
-  playCard: PropTypes.func.isRequired,
+  playLocation: PropTypes.func.isRequired,
   addLocation: PropTypes.func.isRequired
 }
 
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ drawCard, playCard, addLocation }, dispatch)
+  return bindActionCreators({ drawCard, playLocation }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer)
