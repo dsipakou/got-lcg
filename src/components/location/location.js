@@ -10,7 +10,7 @@ const boardTarget = {
   },
   drop(props, monitor) {
     props.onPlayLocation(monitor.getItem());
-    const { name, index, type } = monitor.getItem();
+    const { id, name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
   },
 };
@@ -58,8 +58,7 @@ Location.propTypes = {
   cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  onPlayCard: PropTypes.func.isRequired,
-  onAddLocation: PropTypes.func.isRequired
+  onPlayLocation: PropTypes.func.isRequired
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Location)

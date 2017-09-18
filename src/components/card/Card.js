@@ -7,6 +7,7 @@ import './card.scss';
 const cardSource = {
   beginDrag(props) {
     return {
+      id: props.id,
       name: props.name,
       key: props.id,
       index: props.index,

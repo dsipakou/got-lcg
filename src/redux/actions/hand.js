@@ -1,8 +1,10 @@
+import { addLocation } from './location'
+
 export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
 export const REMOVE_CARD_FROM_HAND = 'REMOVE_CARD_FROM_HAND'
 export const PLAY_LOCATION = 'PLAY_LOCATION'
 export const LOG_CARD = 'LOG_CARD'
-import { addLocation } from './location'
+
 
 export const addCardToHand = (payload) => {
   return {
@@ -19,7 +21,7 @@ export const removeCardFromHand = (index) => {
 }
 
 export const playLocation = (payload) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(addLocation(payload))
     dispatch(removeCardFromHand(payload.index))
   }

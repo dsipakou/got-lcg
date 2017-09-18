@@ -56,7 +56,6 @@ class Character extends Component {
 Character.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  onPlayCard: PropTypes.func.isRequired
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Character)
