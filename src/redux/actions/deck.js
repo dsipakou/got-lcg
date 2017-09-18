@@ -17,8 +17,20 @@ export const getCard = (index) => {
 
 let cardId = 0;
 
-export const drawCard = () => {
+export const removeDeckCard = (uid) => {
   return {
-    type: DRAW_CARD
+    type: DRAW_CARD,
+    uid
+  }
+}
+
+export function drawCard() {
+  return (dispatch, getState) => {
+    const deck = getState().deckReducer;
+    if (deck.length > 0) {
+      const lastCard = deck[deck.length - 1];
+      dispatch(addCardToHand(lastCard));
+      dispatch(removeDeckCard(lastCard.uid));
+    }
   }
 }

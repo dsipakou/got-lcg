@@ -11,7 +11,7 @@ import { bindActionCreators } from 'redux'
 const PlayerContainer = ({deck, hand, locations, drawCard, playCard, addLocation}) => {
   const handCards = deck.filter((item) => {return item.location === CARD_LOCATION.HAND });
   return (
-    <Player deck={deck} cards={handCards} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
+    <Player deck={deck} cards={hand} locations={locations} onDeckClick={drawCard} onPlayCard={playCard} onAddLocation={addLocation} />
   )
 }
 
