@@ -10,7 +10,6 @@ const boardTarget = {
   },
   drop(props, monitor) {
     props.onPlayLocation(monitor.getItem());
-    const { id, name, index, type } = monitor.getItem();
     console.log(monitor.getItem())
   },
 };

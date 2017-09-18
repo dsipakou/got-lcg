@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
+import Card from '../card/card';
 import './character.scss';
 
 const boardTarget = {
@@ -9,6 +10,7 @@ const boardTarget = {
   },
   drop(props, monitor) {
     console.log(monitor.getItem());
+    props.onPlayCharacter(monitor.getItem());
   },
 };
 
@@ -36,26 +38,25 @@ class Character extends Component {
     )
   }
   render() {
-    const { isOver, currentItem, connectDropTarget } = this.props;
+    const { isOver, cards, currentItem, connectDropTarget } = this.props;
     let canDrop = currentItem != null && currentItem.type === 'CHARACTER';
     return connectDropTarget(
       <div className='character-inner' >
-        <div style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%'
-        }}>
           {isOver && canDrop && this.renderOverlay('yellow')}
           {!isOver && canDrop && this.renderOverlay('green')}
-        </div>
+          { cards.map((card, index) => (
+            <Card {...card} index={index} key={card.id} revealed={true} name={card.name}/>
+          )) }
       </div>
     );
   }
 }
 
 Character.propTypes = {
+  cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
+  onPlayCharacter: PropTypes.func.isRequired
 }
 
 export default DropTarget('CARD', boardTarget, collect)(Character)
