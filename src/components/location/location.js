@@ -34,6 +34,7 @@ class Location extends Component {
   handleClick(e, data) {
     console.log(data);
   }
+
   render() {
     const { isOver, cards, currentItem, connectDropTarget } = this.props;
     let canDrop = currentItem != null && currentItem.type === 'LOCATION';
@@ -42,12 +43,16 @@ class Location extends Component {
         {isOver && canDrop && this.renderOverlay('yellow')}
         {!isOver && canDrop && this.renderOverlay('green')}
         { cards.map((card, index) => (
-          <ContextMenuTrigger id={card.id}>
+          <ContextMenuTrigger id='card_context_menu'>
             <Card {...card} index={index} key={card.id} revealed={true} name={card.name}/>
           </ContextMenuTrigger>
-          <ContextMenu id={card.id} />
-          </ContextMenu>
+
         )) }
+        <ContextMenu id='card_context_menu' >
+          <MenuItem onClick={this.handleClick} data={{ action: 'hello boy'}}>Kneel</MenuItem>
+          <MenuItem divider/>
+          <MenuItem>Undo</MenuItem>
+        </ContextMenu>
       </div>
     );
   }
