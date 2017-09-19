@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Hand from '../hand/hand';
 import Location from '../location/location';
 import Character from '../character/character';
+import Event from '../event/Event';
 import Deck from '../deck/Deck';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
@@ -11,8 +12,15 @@ import './player.scss';
 const Player = ({ deck, hand, locations, characters, onDeckClick, onPlayLocation, onPlayCharacter }) => {
   return(
     <div className='player'>
-      <Character cards={characters} onPlayCharacter={onPlayCharacter} />
-      <Location cards={locations} onPlayLocation={onPlayLocation} />
+      <div className='play-zone'>
+        <div className='events'>
+          <Event />
+        </div>
+        <div className='permanent-cards'>
+          <Character cards={characters} onPlayCharacter={onPlayCharacter} />
+          <Location cards={locations} onPlayLocation={onPlayLocation} />
+        </div>
+      </div>
       <div className='cards-zone'>
         <Deck deck={deck} onDeckClick={onDeckClick} />
         <Hand cards={hand} />
