@@ -26,16 +26,7 @@ function collect(connect, monitor) {
 class Location extends Component {
   renderOverlay(color) {
     return (
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: '100%',
-        zIndex: 1,
-        opacity: 0.5,
-        backgroundColor: color
-      }} >LOCATIONS</div>
+      <div className='drag-overlay' style={{backgroundColor: color}}>Put location here</div>
     )
   }
   render() {

@@ -20,6 +20,8 @@ const Player = ({ deck, hand, locations, characters, onDeckClick, onPlayLocation
           <Character cards={characters} onPlayCharacter={onPlayCharacter} />
           <Location cards={locations} onPlayLocation={onPlayLocation} />
         </div>
+        <div className='help-zone'>
+        </div>
       </div>
       <div className='cards-zone'>
         <Deck deck={deck} onDeckClick={onDeckClick} />
