@@ -32,9 +32,15 @@ nav.react-contextmenu {
 }
 
 .react-contextmenu-item--divider {
+  cursor: default;
   border: none;
   height: 1px;
   background: rgba(0, 0, 0, 0.10);
   margin: 6px 1px 5px;
   padding: 0;
+  &:hover {
+    background: white;
+    border: none;
+    cursor: default;
+  }
 }
