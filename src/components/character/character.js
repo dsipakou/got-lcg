@@ -6,11 +6,10 @@ import './character.scss';
 
 const boardTarget = {
   canDrop(props, monitor){
-    return (monitor.getItem().type === 'CHARACTER');
+    return (monitor.getItem().card.type === 'CHARACTER');
   },
   drop(props, monitor) {
-    console.log(monitor.getItem());
-    props.onPlayCharacter(monitor.getItem());
+    props.onPlayCharacter(monitor.getItem().card);
   },
 };
 
@@ -22,15 +21,17 @@ function collect(connect, monitor) {
   };
 }
 
+// Component
+
 class Character extends Component {
   renderOverlay(color) {
     return (
-      <div className="drag-overlay" style={{ backgroundColor: color }} >Put character here</div>
+      <div className="drag-overlay" style={{ backgroundColor: color }}>Character zone</div>
     )
   }
   render() {
     const { isOver, cards, currentItem, connectDropTarget } = this.props;
-    let canDrop = currentItem != null && currentItem.type === 'CHARACTER';
+    let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER';
     return connectDropTarget(
       <div className='character-inner' >
           {isOver && canDrop && this.renderOverlay('yellow')}

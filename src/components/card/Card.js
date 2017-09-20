@@ -7,13 +7,7 @@ import './card.scss';
 const cardSource = {
   beginDrag(props) {
     return {
-      uid: props.uid,
-      id: props.id,
-      name: props.name,
-      key: props.id,
-      index: props.index,
-      type: props.type,
-      kneel: props.kneel
+      card: props
     };
   }
 };
@@ -25,7 +19,8 @@ function collect(connect, monitor) {
   };
 }
 
-const Card = ({name, kneel, url, revealed, isDragging, connectDragSource}) => {
+const Card = ({name, kneel, image_url, revealed, isDragging, connectDragSource}) => {
+  console.log('card', image_url)
   let cardTitle = null;
   if (revealed) {
     cardTitle = <h3>{name || 'No name'}</h3>
@@ -35,7 +30,7 @@ const Card = ({name, kneel, url, revealed, isDragging, connectDragSource}) => {
 
   return connectDragSource(
     <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <img src={url} />
+      <img src={image_url} />
     </div>
   )
 }
@@ -44,6 +39,7 @@ Card.propTypes = {
   uid: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
+  image_url: PropTypes.string,
   name: PropTypes.string,
   kneel: PropTypes.bool,
   type: PropTypes.string,

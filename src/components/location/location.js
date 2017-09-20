@@ -7,16 +7,14 @@ import './location.scss';
 
 const boardTarget = {
   canDrop(props, monitor) {
-    return (monitor.getItem().type === 'LOCATION');
+    return (monitor.getItem().card.type === 'LOCATION');
   },
   drop(props, monitor) {
-    props.onPlayLocation(monitor.getItem());
-    console.log(monitor.getItem())
+    props.onPlayLocation(monitor.getItem().card);
   },
 };
 
 function collect(connect, monitor) {
-
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
@@ -25,31 +23,32 @@ function collect(connect, monitor) {
 }
 
 function collect_props(props) {
-
   return {
     index: props.index
   }
 }
 
+// Component
+
 const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem, connectDropTarget}) => {
   const renderOverlay = (color) => {
     return (
-      <div className='drag-overlay' style={{backgroundColor: color}}>Put location here</div>
+      <div className='drag-overlay' style={{backgroundColor: color}}>Location zone</div>
     )
   }
 
   const kneelLocation = (e, data) => {
     onKneelLocation(data.index)
   }
-
-  let canDrop = currentItem != null && currentItem.type === 'LOCATION';
+  console.log(currentItem)
+  let canDrop = currentItem != null && currentItem.card.type === 'LOCATION';
   return connectDropTarget(
     <div className='location-inner'>
       {isOver && canDrop && renderOverlay('yellow')}
       {!isOver && canDrop && renderOverlay('green')}
       { cards.map((card, index) => (
         <ContextMenuTrigger id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
-          <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} name={card.name}/>
+          <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} name={card.name} image_url={card.image_url}/>
         </ContextMenuTrigger>
       )) }
 
