@@ -1,9 +1,9 @@
 [
-  {"id": 1, "revealed": true, "name": "Lannister", "type": "CHARACTER"},
-  {"id": 2, "revealed": false, "name": "Stark", "type": "CHARACTER"},
-  {"id": 3, "revealed": true, "name": "Winterfell", "type": "LOCATION"},
-  {"id": 4, "revealed": true, "name": "Wall", "type": "LOCATION"},
-  {"id": 5, "revealed": true, "name": "Greyjoy", "type": "CHARACTER"},
-  {"id": 6, "revealed": true, "name": "Tirrel", "type": "CHARACTER"},
-  {"id": 7, "revealed": true, "name": "Martell", "type": "CHARACTER"}
+  {"id": 1, "name": "Maester Cressen", "type": "CHARACTER", "url": "https://thronesdb.com/bundles/cards/01046.png"},
+  {"id": 2, "name": "Melisandre", "type": "CHARACTER", "url": "https://thronesdb.com/bundles/cards/01047.png"},
+  {"id": 3, "name": "Dragonstone Port", "type": "LOCATION", "url": "https://thronesdb.com/bundles/cards/01059.png"},
+  {"id": 4, "name": "Chamber of the Painted Table", "type": "LOCATION", "url": "https://thronesdb.com/bundles/cards/01060.png"},
+  {"id": 5, "name": "The Red Keep", "type": "LOCATION", "url": "https://thronesdb.com/bundles/cards/01061.png"},
+  {"id": 6, "name": "Aeron Damphair", "type": "CHARACTER", "url": "https://thronesdb.com/bundles/cards/01065.png"},
+  {"id": 7, "name": "Alannys Greyjoy", "type": "CHARACTER", "url": "https://thronesdb.com/bundles/cards/01066.png"}
 ]
