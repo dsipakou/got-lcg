@@ -13,6 +13,7 @@ const cardSource = {
       key: props.id,
       index: props.index,
       type: props.type,
+      kneel: props.kneel
     };
   }
 };
@@ -24,8 +25,7 @@ function collect(connect, monitor) {
   };
 }
 
-const Card = ({name, revealed, isDragging, connectDragSource}) => {
-
+const Card = ({name, kneel, revealed, isDragging, connectDragSource}) => {
   let cardTitle = null;
   if (revealed) {
     cardTitle = <h3>{name || 'No name'}</h3>
@@ -34,7 +34,7 @@ const Card = ({name, revealed, isDragging, connectDragSource}) => {
   }
 
   return connectDragSource(
-    <div className='card' style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1 }}>
       {cardTitle}
     </div>
   )
@@ -45,7 +45,9 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string,
+  kneel: PropTypes.bool,
   type: PropTypes.string,
+  kneel: PropTypes.bool,
   revealed: PropTypes.bool.isRequired,
   action: PropTypes.func,
   isDragging: PropTypes.bool.isRequired,

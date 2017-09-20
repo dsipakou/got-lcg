@@ -10,17 +10,13 @@ class Hand extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   render() {
     const { cards, playCard } = this.props;
     console.log(cards)
     return (
       <div className='hand'>
         { cards.map((card, index) => (
-          <Card {...card} index={index} key={card.id} revealed={card.revealed} name={card.name}/>
+          <Card {...card} index={index} key={card.id} revealed={card.revealed} name={card.name} kneel={card.kneel} />
         )) }
       </div>
     );
