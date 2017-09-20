@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Player from '../../components/player/player'
 import { playLocation, playCharacter } from '../../redux/actions/hand'
-import { kneelLocation } from '../../redux/actions/location';
+import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { drawCard } from '../../redux/actions/deck'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 const PlayerContainer = ({deck, hand, locations, characters, drawCard, playLocation, kneelLocation, playCharacter}) => {
   return (
-    <Player deck={deck} hand={hand} locations={locations} characters={characters} onDeckClick={drawCard} onPlayLocation={playLocation} onKneelLocation={kneelLocation} onPlayCharacter={playCharacter} />
+    <Player deck={deck} hand={hand} locations={locations} characters={characters} onDeckClick={drawCard} onPlayLocation={playLocation} onKneelLocation={kneelLocation} onStandLocation={standLocation} onPlayCharacter={playCharacter} />
   )
 }
 
@@ -21,6 +21,7 @@ PlayerContainer.propTypes = {
   drawCard: PropTypes.func.isRequired,
   playLocation: PropTypes.func.isRequired,
   kneelLocation: PropTypes.func.isRequired,
+  standLocation: PropTypes.func.isRequired,
   playCharacter: PropTypes.func.isRequired
 }
 
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ drawCard, playLocation, kneelLocation, playCharacter }, dispatch)
+  return bindActionCreators({ drawCard, playLocation, kneelLocation, standLocation, playCharacter }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer)

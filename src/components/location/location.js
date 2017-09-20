@@ -31,14 +31,14 @@ function collect_props(props) {
   }
 }
 
-const Location = ({isOver, cards, onKneelLocation, currentItem, connectDropTarget}) => {
+const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem, connectDropTarget}) => {
   const renderOverlay = (color) => {
     return (
       <div className='drag-overlay' style={{backgroundColor: color}}>Put location here</div>
     )
   }
 
-  const handleClick = (e, data) => {
+  const kneelLocation = (e, data) => {
     onKneelLocation(data.index)
   }
 
@@ -51,10 +51,10 @@ const Location = ({isOver, cards, onKneelLocation, currentItem, connectDropTarge
         <ContextMenuTrigger id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
           <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} name={card.name}/>
         </ContextMenuTrigger>
-
       )) }
+
       <ContextMenu id='card_context_menu' >
-        <MenuItem onClick={handleClick}>Kneel</MenuItem>
+        <MenuItem onClick={kneelLocation}>Kneel</MenuItem>
         <MenuItem divider/>
         <MenuItem>Undo</MenuItem>
       </ContextMenu>
@@ -68,6 +68,7 @@ Location.propTypes = {
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   onPlayLocation: PropTypes.func.isRequired,
+  onStandLocation: PropTypes.func.isRequired,
   onKneelLocation: PropTypes.func.isRequired
 }
 
