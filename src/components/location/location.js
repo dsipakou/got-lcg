@@ -24,6 +24,13 @@ function collect(connect, monitor) {
   };
 }
 
+function collect_props(props) {
+
+  return {
+    card: props.card
+  }
+}
+
 class Location extends Component {
   renderOverlay(color) {
     return (
@@ -43,7 +50,7 @@ class Location extends Component {
         {isOver && canDrop && this.renderOverlay('yellow')}
         {!isOver && canDrop && this.renderOverlay('green')}
         { cards.map((card, index) => (
-          <ContextMenuTrigger id='card_context_menu'>
+          <ContextMenuTrigger id='card_context_menu' collect={collect_props} card={card}>
             <Card {...card} index={index} key={card.id} revealed={true} name={card.name}/>
           </ContextMenuTrigger>
 

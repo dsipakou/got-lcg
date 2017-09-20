@@ -7,6 +7,7 @@ import './card.scss';
 const cardSource = {
   beginDrag(props) {
     return {
+      uid: props.uid,
       id: props.id,
       name: props.name,
       key: props.id,
@@ -40,6 +41,7 @@ const Card = ({name, revealed, isDragging, connectDragSource}) => {
 }
 
 Card.propTypes = {
+  uid: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   name: PropTypes.string,
