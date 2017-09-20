@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import Card from '../card/card';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import './character.scss';
 
 const boardTarget = {
@@ -21,27 +22,44 @@ function collect(connect, monitor) {
   };
 }
 
+const collect_props = (props) => {
+  return {
+    index: props.index
+  }
+}
+
 // Component
 
-class Character extends Component {
-  renderOverlay(color) {
+const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentItem, connectDropTarget}) => {
+  const renderOverlay = (color) => {
     return (
       <div className="drag-overlay" style={{ backgroundColor: color }}>Character zone</div>
     )
   }
-  render() {
-    const { isOver, cards, currentItem, connectDropTarget } = this.props;
-    let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER';
-    return connectDropTarget(
-      <div className='character-inner' >
-          {isOver && canDrop && this.renderOverlay('yellow')}
-          {!isOver && canDrop && this.renderOverlay('green')}
-          { cards.map((card, index) => (
-            <Card {...card} index={index} key={card.id} revealed={true} name={card.name}/>
-          )) }
-      </div>
-    );
+
+  const kneelCharacter = (data) => {
+    console.log('kneel', data)
+
+    onKneelCharacter(data.index)
   }
+  let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER';
+  return connectDropTarget(
+    <div className='character-inner' >
+        {isOver && canDrop && renderOverlay('yellow')}
+        {!isOver && canDrop && renderOverlay('green')}
+        { cards.map((card, index) => (
+          <ContextMenuTrigger id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
+            <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
+          </ContextMenuTrigger>
+        )) }
+        <ContextMenu id='character_context_menu' >
+          <MenuItem onClick={kneelCharacter}>Kneel</MenuItem>
+          <MenuItem divider/>
+          <MenuItem>Undo</MenuItem>
+        </ContextMenu>
+    </div>
+  );
+
 }
 
 Character.propTypes = {

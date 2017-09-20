@@ -14,7 +14,6 @@ function locationReducer(state = [], action) {
             kneel: {$set: true}
           }
         })
-
     case STAND_LOCATION:
       return update(state, {
         [action.index]: {

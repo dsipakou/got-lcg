@@ -40,7 +40,6 @@ const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem,
   const kneelLocation = (e, data) => {
     onKneelLocation(data.index)
   }
-  console.log(currentItem)
   let canDrop = currentItem != null && currentItem.card.type === 'LOCATION';
   return connectDropTarget(
     <div className='location-inner'>
@@ -48,7 +47,7 @@ const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem,
       {!isOver && canDrop && renderOverlay('green')}
       { cards.map((card, index) => (
         <ContextMenuTrigger id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
-          <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} name={card.name} image_url={card.image_url}/>
+          <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
         </ContextMenuTrigger>
       )) }
 

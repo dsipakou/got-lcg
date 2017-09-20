@@ -20,7 +20,6 @@ function collect(connect, monitor) {
 }
 
 const Card = ({name, kneel, image_url, revealed, isDragging, connectDragSource}) => {
-  console.log('card', image_url)
   let cardTitle = null;
   if (revealed) {
     cardTitle = <h3>{name || 'No name'}</h3>
