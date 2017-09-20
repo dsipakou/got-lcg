@@ -37,9 +37,8 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
     )
   }
 
-  const kneelCharacter = (data) => {
+  const kneelCharacter = (e, data) => {
     console.log('kneel', data)
-
     onKneelCharacter(data.index)
   }
   let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER';

@@ -28,7 +28,7 @@ const Card = ({name, kneel, image_url, revealed, isDragging, connectDragSource})
   }
 
   return connectDragSource(
-    <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1}}>
       <img src={image_url} />
     </div>
   )
