@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/card';
+import DragableCard from '../../containers/dragablecard/DragableCard'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './hand.scss';
