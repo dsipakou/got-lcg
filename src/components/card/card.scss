@@ -11,6 +11,7 @@
   transform: translateY(0px);
   padding: 1px;
   &:hover {
+    transition-delay: 0.5s;
     transform: scale(2) translateY(-25px);
     z-index: 1;
   }
