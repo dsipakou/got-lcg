@@ -25,7 +25,7 @@ function collect(connect, monitor) {
   };
 }
 
-const Card = ({name, kneel, revealed, isDragging, connectDragSource}) => {
+const Card = ({name, kneel, url, revealed, isDragging, connectDragSource}) => {
   let cardTitle = null;
   if (revealed) {
     cardTitle = <h3>{name || 'No name'}</h3>
@@ -35,7 +35,7 @@ const Card = ({name, kneel, revealed, isDragging, connectDragSource}) => {
 
   return connectDragSource(
     <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1 }}>
-      {cardTitle}
+      <img src={url} />
     </div>
   )
 }

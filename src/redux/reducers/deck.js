@@ -5,7 +5,7 @@ import { DRAW_CARD } from '../actions/deck';
 import cards from '../../data/cards.json';
 
 let uid = 0;
-const arr = cards.map(card => {return { "uid": uid++, "kneel": false,  ...card }})
+const arr = cards.map(card => {return { "uid": uid++, "kneel": false, "revealed": true,  ...card }})
 const initialState = arrayShuffle(arr);
 
 function deckReducer(state = initialState, action) {
