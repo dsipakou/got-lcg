@@ -68,4 +68,4 @@ Character.propTypes = {
   onPlayCharacter: PropTypes.func.isRequired
 }
 
-export default DropTarget('CARD', boardTarget, collect)(Character)
+export default DropTarget('CHARACTER', boardTarget, collect)(Character)

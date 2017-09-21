@@ -17,17 +17,28 @@ const cardSource = {
 const collect = (connect, monitor) => {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   };
 }
 
-const DragableCard = ({uid, id, name, kneel, type, image_url, revealed, isDragging, connectDragSource}) => {
-  CARD_TYPE = type;
-  console.log(CARD_TYPE);
-  return connectDragSource(
-    <div>
-      <Card uid={uid} id={id} kneel={kneel} name={name} image_url={image_url} revealed={revealed} isDragging={isDragging} />
-    </div>
+const cardType = (props) => {
+  console.log('props', props)
+  return props.type
+}
+
+const DragableCard = ({uid, id, name, kneel, type, image_url, revealed, isDragging, connectDragSource, connectDragPreview }) => {
+
+  return connectDragPreview (
+    <div>Hello
+    {
+      connectDragSource(
+        <div>
+          <Card uid={uid} id={id} kneel={kneel} name={name} image_url={image_url} revealed={revealed} isDragging={isDragging} />
+        </div>
+      )}
+    </div>,
+    { dropEffect: 'copy' }
   )
 }
 
@@ -43,7 +54,8 @@ DragableCard.propTypes = {
   revealed: PropTypes.bool.isRequired,
   action: PropTypes.func,
   isDragging: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired
+  connectDragSource: PropTypes.func.isRequired,
+  connectDragPreview: PropTypes.func.isRequired
 };
-console.log('CARD_TYPE')
-export default DragSource(CARD_TYPE, cardSource, collect)(DragableCard);
+
+export default DragSource(cardType, cardSource, collect)(DragableCard);

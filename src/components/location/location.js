@@ -70,4 +70,4 @@ Location.propTypes = {
   onKneelLocation: PropTypes.func.isRequired
 }
 
-export default DropTarget('CARD', boardTarget, collect)(Location)
+export default DropTarget('LOCATION', boardTarget, collect)(Location)
