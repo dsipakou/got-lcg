@@ -1,13 +1,19 @@
 import { ADD_CARD_TO_HAND, REMOVE_CARD_FROM_HAND } from '../actions/hand';
 import cards from '../../data/cards.json';
+import update from 'react-addons-update';
 
 function handReducer(state = [], action) {
   switch (action.type) {
 
     case ADD_CARD_TO_HAND:
+      const card = update(action, {
+        payload: {
+          cardlocation: {$set: 'HAND'}
+        }
+      }).payload
       return [
         ...state,
-        action.payload
+        card
       ]
 
     case REMOVE_CARD_FROM_HAND:

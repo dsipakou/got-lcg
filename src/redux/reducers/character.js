@@ -4,9 +4,14 @@ import update from 'react-addons-update'
 function characterReducer(state = [], action) {
   switch (action.type) {
     case ADD_CHARACTER:
+      const card = update(action, {
+        payload: {
+          cardlocation: {$set: 'CHARACTER'}
+        }
+      }).payload
       return [
         ...state,
-        action.payload
+        card
       ]
     case KNEEL_CHARACTER:
       return update(state, {

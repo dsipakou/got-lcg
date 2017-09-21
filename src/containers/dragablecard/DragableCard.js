@@ -23,20 +23,14 @@ const collect = (connect, monitor) => {
 }
 
 const cardType = (props) => {
-  console.log('props', props)
   return props.type
 }
 
-const DragableCard = ({uid, id, name, kneel, type, image_url, revealed, isDragging, connectDragSource, connectDragPreview }) => {
+const DragableCard = ({uid, id, name, kneel, type, cardlocation, image_url, revealed, isDragging, connectDragSource, connectDragPreview }) => {
 
-  return connectDragPreview (
-    <div>Hello
-    {
-      connectDragSource(
-        <div>
-          <Card uid={uid} id={id} kneel={kneel} name={name} image_url={image_url} revealed={revealed} isDragging={isDragging} />
-        </div>
-      )}
+  return connectDragSource(
+    <div>
+      <Card uid={uid} id={id} kneel={kneel} name={name} cardlocation={cardlocation} image_url={image_url} revealed={revealed} isDragging={isDragging} />
     </div>,
     { dropEffect: 'copy' }
   )
@@ -50,6 +44,7 @@ DragableCard.propTypes = {
   name: PropTypes.string,
   kneel: PropTypes.bool,
   type: PropTypes.string,
+  cardlocation: PropTypes.string.isRequired,
   kneel: PropTypes.bool,
   revealed: PropTypes.bool.isRequired,
   action: PropTypes.func,

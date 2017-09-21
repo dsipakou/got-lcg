@@ -7,7 +7,7 @@ import './location.scss';
 
 const boardTarget = {
   canDrop(props, monitor) {
-    return (monitor.getItem().card.type === 'LOCATION');
+    return (monitor.getItem().card.type === 'LOCATION' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
     props.onPlayLocation(monitor.getItem().card);
@@ -40,7 +40,7 @@ const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem,
   const kneelLocation = (e, data) => {
     onKneelLocation(data.index)
   }
-  let canDrop = currentItem != null && currentItem.card.type === 'LOCATION';
+  let canDrop = currentItem != null && currentItem.card.type === 'LOCATION' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='location-inner'>
       {isOver && canDrop && renderOverlay('yellow')}

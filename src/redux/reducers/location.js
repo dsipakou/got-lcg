@@ -4,9 +4,14 @@ import update from 'react-addons-update';
 function locationReducer(state = [], action) {
   switch (action.type) {
     case ADD_LOCATION:
+      const card = update(action, {
+        payload: {
+          cardlocation: {$set: 'LOCATION'}
+        }
+      }).payload
       return [
         ...state,
-        action.card
+        card
       ]
     case KNEEL_LOCATION:
       return update(state, {

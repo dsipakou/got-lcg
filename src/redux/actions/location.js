@@ -3,10 +3,10 @@ export const KNEEL_LOCATION = 'KNEEL_LOCATION';
 export const STAND_LOCATION = 'STAND_LOCATION';
 export const REMOVE_LOCATION = 'REMOVE_LOCATION';
 
-export const addLocation = (card) => {
+export const addLocation = (payload) => {
   return {
     type: ADD_LOCATION,
-    card
+    payload
   }
 }
 

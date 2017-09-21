@@ -7,7 +7,7 @@ import './character.scss';
 
 const boardTarget = {
   canDrop(props, monitor){
-    return (monitor.getItem().card.type === 'CHARACTER');
+    return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
     props.onPlayCharacter(monitor.getItem().card);
@@ -41,7 +41,7 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
     console.log('kneel', data)
     onKneelCharacter(data.index)
   }
-  let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER';
+  let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='character-inner' >
         {isOver && canDrop && renderOverlay('yellow')}

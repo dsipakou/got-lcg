@@ -17,6 +17,7 @@ Card.propTypes = {
   name: PropTypes.string,
   kneel: PropTypes.bool,
   type: PropTypes.string,
+  cardlocation: PropTypes.string.isRequired,
   kneel: PropTypes.bool,
   revealed: PropTypes.bool.isRequired,
   action: PropTypes.func,
