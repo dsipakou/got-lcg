@@ -1,6 +1,7 @@
 import { addCardToHand } from './hand';
 
 export const DRAW_CARD = 'DRAW_CARD'
+const START_HAND_SIZE = 4
 
 let cardId = 0;
 
@@ -19,5 +20,11 @@ export const drawCard = () => {
       dispatch(addCardToHand(lastCard));
       dispatch(removeDeckCard(lastCard.uid));
     }
+  }
+}
+
+export const getStartHand = () =>{
+  for (var i = 0; i < START_HAND_SIZE; i++) {
+    drawCard();
   }
 }
