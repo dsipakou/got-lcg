@@ -47,7 +47,7 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
         {isOver && canDrop && renderOverlay('yellow')}
         {!isOver && canDrop && renderOverlay('green')}
         { cards.map((card, index) => (
-          <ContextMenuTrigger id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
+          <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
             <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
           </ContextMenuTrigger>
         )) }
