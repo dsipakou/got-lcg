@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../components/card/Card';
 import { DragSource } from 'react-dnd';
+import { connect } from 'react-redux';
+import Card from '../../components/card/Card';
+
+let CARD_TYPE = 'CARD';
 
 const cardSource = {
   beginDrag(props) {
@@ -18,9 +21,13 @@ const collect = (connect, monitor) => {
   };
 }
 
-const DragableCard = (kneel, image_url, revealed, isDragging, connectDragSource) => {
+const DragableCard = ({uid, id, name, kneel, type, image_url, revealed, isDragging, connectDragSource}) => {
+  CARD_TYPE = type;
+  console.log(CARD_TYPE);
   return connectDragSource(
-    <Card kneel={kneel} image_url={image_url} revealed={revealed} idDraggin={isDragging}/>
+    <div>
+      <Card uid={uid} id={id} kneel={kneel} name={name} image_url={image_url} revealed={revealed} isDragging={isDragging} />
+    </div>
   )
 }
 
@@ -37,6 +44,6 @@ DragableCard.propTypes = {
   action: PropTypes.func,
   isDragging: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired
-}
-
-export default DragSource('CARD', cardSource, collect)(DragableCard)
+};
+console.log('CARD_TYPE')
+export default DragSource(CARD_TYPE, cardSource, collect)(DragableCard);

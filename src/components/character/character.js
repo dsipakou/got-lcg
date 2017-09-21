@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
-import Card from '../card/card';
+import DragableCard from '../../containers/dragablecard/DragableCard';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import './character.scss';
 
@@ -48,7 +48,7 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
         {!isOver && canDrop && renderOverlay('green')}
         { cards.map((card, index) => (
           <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
-            <Card {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
+            <DragableCard {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
           </ContextMenuTrigger>
         )) }
         <ContextMenu id='character_context_menu' >
