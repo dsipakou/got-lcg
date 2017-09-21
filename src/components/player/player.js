@@ -9,19 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import './player.scss';
 
-const Player = ({
-  deck,
-  hand,
-  locations,
-  characters,
-  onDeckClick,
-  onPlayLocation,
-  onKneelLocation,
-  onStandLocation,
-  onPlayCharacter,
-  onKneelCharacter,
-  onStandCharacter
-}) => {
+const Player = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions }) => {
   return(
     <div className='player'>
       <div className='play-zone'>
@@ -29,14 +17,14 @@ const Player = ({
           <Event />
         </div>
         <div className='permanent-cards'>
-          <Character cards={characters} onPlayCharacter={onPlayCharacter} onKneelCharacter={onKneelCharacter} onStandCharacter={onStandCharacter} />
-          <Location cards={locations} onPlayLocation={onPlayLocation} onKneelLocation={onKneelLocation} onStandLocation={onStandLocation} />
+          <Character cards={characters} actions={characterActions} />
+          <Location cards={locations} actions={locationActions} />
         </div>
         <div className='help-zone'>
         </div>
       </div>
       <div className='cards-zone'>
-        <Deck deck={deck} onDeckClick={onDeckClick} />
+        <Deck deck={deck} actions={deckActions} />
         <Hand cards={hand} />
       </div>
     </div>
@@ -48,13 +36,19 @@ Player.propTypes = {
   hand: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
-  onDeckClick: PropTypes.func.isRequired,
-  onPlayLocation: PropTypes.func.isRequired,
-  onKneelLocation: PropTypes.func.isRequired,
-  onStandLocation: PropTypes.func.isRequired,
-  onPlayCharacter: PropTypes.func.isRequired,
-  onKneelCharacter: PropTypes.func.isRequired,
-  onStandCharacter: PropTypes.func.isRequired
+  deckActions: PropTypes.shape({
+    drawCard: PropTypes.func.isRequired,
+  }),
+  locationActions: PropTypes.shape({
+    playLocation: PropTypes.func.isRequired,
+    kneelLocation: PropTypes.func.isRequired,
+    standLocation: PropTypes.func.isRequired,
+  }),
+  characterActions: PropTypes.shape({
+    playCharacter: PropTypes.func.isRequired,
+    kneelCharacter: PropTypes.func.isRequired,
+    standCharacter: PropTypes.func.isRequired,
+  })
 }
 
 export default DragDropContext(HTML5Backend)(Player);

@@ -10,7 +10,7 @@ const boardTarget = {
     return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
-    props.onPlayCharacter(monitor.getItem().card);
+    props.actions.playCharacter(monitor.getItem().card);
   },
 };
 
@@ -30,7 +30,7 @@ const collect_props = (props) => {
 
 // Component
 
-const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentItem, connectDropTarget}) => {
+const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) => {
   const renderOverlay = (color) => {
     return (
       <div className="drag-overlay" style={{ backgroundColor: color }}>Character zone</div>
@@ -38,8 +38,7 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
   }
 
   const kneelCharacter = (e, data) => {
-    console.log('kneel', data)
-    onKneelCharacter(data.index)
+    actions.kneelCharacter(data.index)
   }
   let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
@@ -48,7 +47,7 @@ const Character = ({isOver, cards, onKneelCharacter, onStandCharacter, currentIt
         {!isOver && canDrop && renderOverlay('green')}
         { cards.map((card, index) => (
           <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
-            <DragableCard {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
+            <DragableCard {...card} index={index} key={card.uid} revealed={true} />
           </ContextMenuTrigger>
         )) }
         <ContextMenu id='character_context_menu' >
@@ -65,7 +64,11 @@ Character.propTypes = {
   cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  onPlayCharacter: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    playCharacter: PropTypes.func.isRequired,
+    kneelCharacter: PropTypes.func.isRequired,
+    standCharacter: PropTypes.func.isRequired,
+  })
 }
 
 export default DropTarget('CHARACTER', boardTarget, collect)(Character)

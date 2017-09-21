@@ -10,7 +10,7 @@ const boardTarget = {
     return (monitor.getItem().card.type === 'LOCATION' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
-    props.onPlayLocation(monitor.getItem().card);
+    props.actions.playLocation(monitor.getItem().card);
   },
 };
 
@@ -30,7 +30,7 @@ function collect_props(props) {
 
 // Component
 
-const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem, connectDropTarget}) => {
+const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
   const renderOverlay = (color) => {
     return (
       <div className='drag-overlay' style={{backgroundColor: color}}>Location zone</div>
@@ -38,7 +38,7 @@ const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem,
   }
 
   const kneelLocation = (e, data) => {
-    onKneelLocation(data.index)
+    actions.kneelLocation(data.index)
   }
   let canDrop = currentItem != null && currentItem.card.type === 'LOCATION' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
@@ -47,7 +47,7 @@ const Location = ({isOver, cards, onKneelLocation, onStandLocation, currentItem,
       {!isOver && canDrop && renderOverlay('green')}
       { cards.map((card, index) => (
         <ContextMenuTrigger holdToDisplay={-1} id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
-          <DragableCard {...card} kneel={card.kneel} index={index} key={card.uid} revealed={true} />
+          <DragableCard {...card} index={index} key={card.uid} revealed={true} />
         </ContextMenuTrigger>
       )) }
 
@@ -65,9 +65,11 @@ Location.propTypes = {
   cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  onPlayLocation: PropTypes.func.isRequired,
-  onStandLocation: PropTypes.func.isRequired,
-  onKneelLocation: PropTypes.func.isRequired
+  actions: PropTypes.shape({
+    playLocation: PropTypes.func.isRequired,
+    kneelLocation: PropTypes.func.isRequired,
+    standLocation: PropTypes.func.isRequired,
+  })
 }
 
 export default DropTarget('LOCATION', boardTarget, collect)(Location)
