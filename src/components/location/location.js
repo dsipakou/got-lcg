@@ -40,6 +40,11 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
   const kneelLocation = (e, data) => {
     actions.kneelLocation(data.index)
   }
+
+  const standLocation = (e, data) => {
+    actions.standLocation(data.index)
+  }
+  
   let canDrop = currentItem != null && currentItem.card.type === 'LOCATION' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='location-inner'>
@@ -54,7 +59,7 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
       <ContextMenu id='card_context_menu' >
         <MenuItem onClick={kneelLocation}>Kneel</MenuItem>
         <MenuItem divider/>
-        <MenuItem>Undo</MenuItem>
+        <MenuItem onClick={standLocation}>Stand</MenuItem>
       </ContextMenu>
     </div>
   );

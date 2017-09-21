@@ -40,6 +40,11 @@ const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) =
   const kneelCharacter = (e, data) => {
     actions.kneelCharacter(data.index)
   }
+
+  const standCharacter = (e, data) => {
+    actions.standCharacter(data.index)
+  }
+  
   let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER' && currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='character-inner' >
@@ -53,7 +58,7 @@ const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) =
         <ContextMenu id='character_context_menu' >
           <MenuItem onClick={kneelCharacter}>Kneel</MenuItem>
           <MenuItem divider/>
-          <MenuItem>Undo</MenuItem>
+          <MenuItem onClick={standCharacter}>Stand</MenuItem>
         </ContextMenu>
     </div>
   );
