@@ -4,22 +4,43 @@ import './StartHand.scss';
 import Card from '../../components/card/Card';
 import Deck from '../../components/deck/Deck';
 
-const StartHand = ({ deck, hand, deckActions }) => {
-  return (
-    <div className='starthand-inner'>
-      <div className='starthand-header'>StartHand</div>
-      <div className='starthand-content'>
-        {
-          hand.map((card, index) => (
-            <Card {...card} index={index} key={card.uid} isDragging={false} />
-          ))
-        }
+class StartHand extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      canMulligan: true,
+    }
+  }
+
+  doMulligan(e) {
+    this.setState({mulliganed: false})
+    this.props.deckActions.getStartHand()
+  }
+  render () {
+    const { deck, hand, deckActions } = this.props
+    console.log(this.state.canMulligan)
+    return (
+      <div className='starthand-inner'>
+        <div className='starthand-header'>StartHand</div>
+        <div className='starthand-content'>
+          <div>
+          {
+            hand.map((card, index) => (
+              <Card {...card} index={index} key={card.uid} isDragging={false} />
+            ))
+          }
+          </div>
+          <div>
+          { this.state.canMulligan ? <button onClick={this.doMulligan.bind(this)}>Do mulligan</button> : null }
+          <button>Start Game</button>
+         </div>
+        </div>
+        <div className='starthand-footer'>
+          <Deck deck={deck} action={deckActions.getStartHand} />
+        </div>
       </div>
-      <div className='starthand-footer'>
-        <Deck deck={deck} action={deckActions.getStartHand} />
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 StartHand.propTypes = {
