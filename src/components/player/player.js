@@ -24,7 +24,7 @@ const Player = ({ deck, hand, locations, characters, deckActions, locationAction
         </div>
       </div>
       <div className='cards-zone'>
-        <Deck deck={deck} actions={deckActions} />
+        <Deck deck={deck} action={deckActions.drawCard} />
         <Hand cards={hand} />
       </div>
     </div>
@@ -37,7 +37,8 @@ Player.propTypes = {
   locations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({
-    drawCard: PropTypes.func.isRequired,
+    drawCard: PropTypes.func,
+    getStartHand: PropTypes.func
   }),
   locationActions: PropTypes.shape({
     playLocation: PropTypes.func.isRequired,

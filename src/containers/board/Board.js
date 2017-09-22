@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux'
 import './board.scss'
 
 const Board = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions }) => {
-  let starthand = false;
+  let starthand = true;
   if (starthand) {
     return (
       <div className='board'>

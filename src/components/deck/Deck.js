@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import './Deck.scss';
 
-const Deck = ({deck, actions}) => {
-  const draw = () => {
-    actions.drawCard(deck.length)
+const Deck = ({ deck, action }) => {
+  const doAction = () => {
+    action(deck.length)
   }
   return (
-    <div className='deck-inner' onClick={draw}><span>Click to draw</span>
+    <div className='deck-inner' onClick={doAction}><span>Click to draw</span>
       <div className='deck-spinner'></div>
     </div>
   )
@@ -15,9 +15,7 @@ const Deck = ({deck, actions}) => {
 
 Deck.propTypes = {
   deck: PropTypes.array.isRequired,
-  actions: PropTypes.shape({
-    drawCard: PropTypes.func.isRequired,
-  })
+  action: PropTypes.func
 }
 
 export default Deck;
