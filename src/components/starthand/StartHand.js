@@ -13,7 +13,9 @@ class StartHand extends Component {
   }
 
   doMulligan(e) {
-    this.setState({mulliganed: false})
+    this.setState({canMulligan: false})
+    console.log(this.props)
+    this.props.deckActions.doMulligan()
     this.props.deckActions.getStartHand()
   }
   render () {
@@ -23,7 +25,7 @@ class StartHand extends Component {
       <div className='starthand-inner'>
         <div className='starthand-header'>StartHand</div>
         <div className='starthand-content'>
-          <div>
+          <div className='starthand-cardlist'>
           {
             hand.map((card, index) => (
               <Card {...card} index={index} key={card.uid} isDragging={false} />
@@ -31,12 +33,12 @@ class StartHand extends Component {
           }
           </div>
           <div>
-          { this.state.canMulligan ? <button onClick={this.doMulligan.bind(this)}>Do mulligan</button> : null }
-          <button>Start Game</button>
+          { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan.bind(this)}>Do mulligan</button> : null }
+          { hand.length > 0 ? <button>Start Game</button> : null }
          </div>
         </div>
         <div className='starthand-footer'>
-          <Deck deck={deck} action={deckActions.getStartHand} />
+          <Deck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } />
         </div>
       </div>
     )
@@ -47,7 +49,8 @@ StartHand.propTypes = {
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array,
   deckActions: PropTypes.shape({
-    getStartHand: PropTypes.func
+    getStartHand: PropTypes.func,
+    doMulligan: PropTypes.func
   })
 }
 

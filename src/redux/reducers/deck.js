@@ -1,7 +1,7 @@
 import { addCardToHand } from '../actions/hand';
 import { getCard } from '../actions/deck';
 import arrayShuffle from 'array-shuffle';
-import { DRAW_CARD } from '../actions/deck';
+import { DRAW_CARD, MAKE_DECK } from '../actions/deck';
 import cards from '../../data/cards.json';
 
 let uid = 0;
@@ -16,6 +16,8 @@ function deckReducer(state = initialState, action) {
       } else {
         return state;
       }
+    case MAKE_DECK:
+      return arrayShuffle(arr)
     default:
       return state;
   }

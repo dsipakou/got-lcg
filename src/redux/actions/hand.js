@@ -5,6 +5,7 @@ export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
 export const REMOVE_CARD_FROM_HAND = 'REMOVE_CARD_FROM_HAND'
 export const PLAY_LOCATION = 'PLAY_LOCATION'
 export const LOG_CARD = 'LOG_CARD'
+export const FOLD_HAND = 'FOLD_HAND'
 
 
 export const addCardToHand = (payload) => {
@@ -18,6 +19,12 @@ export const removeCardFromHand = (index) => {
   return {
     type: REMOVE_CARD_FROM_HAND,
     index
+  }
+}
+
+export const foldHand = () => {
+  return {
+    type: FOLD_HAND
   }
 }
 

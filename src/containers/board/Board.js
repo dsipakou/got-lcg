@@ -6,7 +6,7 @@ import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
-import { drawCard, getStartHand } from '../../redux/actions/deck'
+import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './board.scss'
@@ -36,7 +36,8 @@ Board.propTypes = {
   characters: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({
     drawCard: PropTypes.func.isRequired,
-    getStartHand: PropTypes.func
+    getStartHand: PropTypes.func,
+    doMulligan: PropTypes.func
   }),
   locationActions: PropTypes.shape({
     playLocation: PropTypes.func.isRequired,
@@ -60,7 +61,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deckActions: bindActionCreators({
     drawCard,
-    getStartHand
+    getStartHand,
+    doMulligan
   }, dispatch),
   locationActions: bindActionCreators({
     playLocation,
