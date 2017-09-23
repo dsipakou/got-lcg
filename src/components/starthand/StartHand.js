@@ -32,10 +32,10 @@ class StartHand extends Component {
             ))
           }
           </div>
-          <div>
+          <div className='starthand-buttons'>
           { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan.bind(this)}>Do mulligan</button> : null }
           { hand.length > 0 ? <button>Start Game</button> : null }
-         </div>
+          </div>
         </div>
         <div className='starthand-footer'>
           <Deck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } />

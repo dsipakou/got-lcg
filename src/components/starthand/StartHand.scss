@@ -3,31 +3,39 @@
   flex-flow: column wrap;
   width: 100%;
   height: 100%;
-}
 
-.starthand-header {
-  display: flex;
-  width: 100%;
-  height: 25%;
-}
+  .starthand-header {
+    display: flex;
+    width: 100%;
+    height: 25%;
+  }
 
-.starthand-content {
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-  height: 50%;
-  justify-content: center;
-}
+  .starthand-content {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 50%;
+    justify-content: center;
 
-.starthand-cardlist {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
+    .starthand-cardlist {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
 
-.starthand-footer {
-  display: flex;
-  flex-flow: column wrap;
-  width: 100%;
-  height: 25%;
+    .starthand-buttons {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      margin-top: 40px;
+    }
+  }
+
+  .starthand-footer {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 25%;
+  }
+
 }
