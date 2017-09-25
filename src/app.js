@@ -7,6 +7,10 @@ import thunk from 'redux-thunk';
 import player from './redux/reducers/player';
 import './style/base.scss';
 
+const socket = require('socket.io-client')('http://localhost:3000')
+
+socket.on('connect', console.log('socket log here'));
+
 const store = createStore(
 	player,
 	compose(
