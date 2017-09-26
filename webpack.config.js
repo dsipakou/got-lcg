@@ -7,10 +7,7 @@ var APP_DIR = path.resolve(__dirname, '.');
 
 var config = {
   context: path.resolve(__dirname, '.'),
-  entry: [
-    './src/app.js',
-    'webpack-hot-middleware/client'
-  ],
+  entry: './src/app.js',
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
