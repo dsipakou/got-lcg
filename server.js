@@ -27,5 +27,6 @@ io.on('connection', (socket) => {
   socket.emit('news', {hello: 'world'});
   socket.on('action', (data) => {
     console.log(data);
+    socket.broadcast.emit('action', 'action broadcasted from server');
   });
 });

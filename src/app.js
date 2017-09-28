@@ -8,9 +8,8 @@ import player from './redux/reducers/player';
 const socket = require('socket.io-client')('http://localhost:3000');
 import './style/base.scss';
 
-socket.on('news', (data) => {
+socket.on('action', (data) => {
 	console.log(data);
-	socket.emit('other event', {my: 'data'})
 });
 
 const ioMiddleware = () => next => action => {
