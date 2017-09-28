@@ -7,18 +7,19 @@ import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
-import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck'
+import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck';
+import { newGame } from '../../redux/actions/game';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './board.scss'
 
-const Board = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions }) => {
+const Board = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions, gameActions }) => {
   let starthand = false;
   let lobby = true;
   if (lobby) {
     return (
       <div className='board'>
-        <Lobby/>
+        <Lobby newGame={gameActions.newGame}/>
       </div>
     )
   }
@@ -57,6 +58,9 @@ Board.propTypes = {
     playCharacter: PropTypes.func.isRequired,
     kneelCharacter: PropTypes.func.isRequired,
     standCharacter: PropTypes.func.isRequired,
+  }),
+  gameActions: PropTypes.shape({
+    newGame: PropTypes.func.isRequired,
   })
 }
 
@@ -65,6 +69,7 @@ const mapStateToProps = (state) => ({
   hand: state.handReducer,
   locations: state.locationReducer,
   characters: state.characterReducer,
+  game: state.gameReducer
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,6 +87,9 @@ const mapDispatchToProps = (dispatch) => ({
     playCharacter,
     standCharacter,
     kneelCharacter,
+  }, dispatch),
+  gameActions: bindActionCreators({
+    newGame,
   }, dispatch)
 })
 

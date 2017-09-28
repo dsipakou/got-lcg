@@ -13,10 +13,15 @@ socket.on('news', (data) => {
 	socket.emit('other event', {my: 'data'})
 });
 
+const ioMiddleware = () => next => action => {
+	console.log(action.type);
+	socket.emit('action', { action });
+}
+
 const store = createStore(
 	player,
 	compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, ioMiddleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ),
 );

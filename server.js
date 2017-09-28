@@ -1,7 +1,7 @@
 
 const app = require('express')();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('socket.io')(server );
 
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
@@ -25,7 +25,7 @@ server.listen(port);
 
 io.on('connection', (socket) => {
   socket.emit('news', {hello: 'world'});
-  socket.on('other event', (data) => {
+  socket.on('action', (data) => {
     console.log(data);
   });
 });
