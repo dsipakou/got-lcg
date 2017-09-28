@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Player from '../../components/player/player';
 import Opponent from '../opponent/opponent';
+import Lobby from '../../components/lobby/Lobby';
 import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
@@ -13,7 +14,15 @@ import './board.scss'
 
 const Board = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions }) => {
   let starthand = false;
-  if (starthand) {
+  let lobby = true;
+  if (lobby) {
+    return (
+      <div className='board'>
+        <Lobby/>
+      </div>
+    )
+  }
+  else if (starthand) {
     return (
       <div className='board'>
         <StartHand deck={deck} hand={hand} deckActions={deckActions}/>
