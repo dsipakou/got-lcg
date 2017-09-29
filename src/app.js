@@ -15,6 +15,7 @@ socket.on('action', (data) => {
 const ioMiddleware = () => next => action => {
 	console.log(action.type);
 	socket.emit('action', { action });
+	next(action);
 }
 
 const store = createStore(
