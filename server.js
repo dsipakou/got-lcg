@@ -1,7 +1,7 @@
 
 const app = require('express')();
 const server = require('http').Server(app);
-const io = require('socket.io')(server );
+const io = require('socket.io')(server);
 
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
@@ -24,9 +24,11 @@ app.use(webpackHotMiddleware(compiler));
 server.listen(port);
 
 io.on('connection', (socket) => {
-  socket.emit('news', {hello: 'world'});
   socket.on('action', (data) => {
     console.log(data);
-    socket.broadcast.emit('action', 'action broadcasted from server');
+    if (data.action.type === "ADD_LOCATION") {
+      console.log(data);
+      socket.broadcast.emit('add location', data);
+    }
   });
 });

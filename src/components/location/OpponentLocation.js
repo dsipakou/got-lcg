@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import Card from '../../components/card/Card';
 import './location.scss';
 
-const OpponentLocation = ({cards}) => {
+const OpponentLocation = ({socket, cards, actions}) => {
+  socket.on('add location', (data) => {
+    console.log(data);
+    actions.addOpponentLocation(data.action.payload);
+  })
+
   return (
     <div className='location-inner'>
       {cards.map((card, index) => (
@@ -14,7 +19,8 @@ const OpponentLocation = ({cards}) => {
 }
 
 OpponentLocation.propTypes = {
-  cards: PropTypes.array.isRequired
+  cards: PropTypes.array.isRequired,
+  actions: PropTypes.object
 }
 
 export default OpponentLocation;

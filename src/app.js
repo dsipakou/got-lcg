@@ -8,9 +8,6 @@ import player from './redux/reducers/player';
 const socket = require('socket.io-client')('http://localhost:3000');
 import './style/base.scss';
 
-socket.on('action', (data) => {
-	console.log(data);
-});
 
 const ioMiddleware = () => next => action => {
 	console.log(action.type);
@@ -28,7 +25,7 @@ const store = createStore(
 
 render(
   <Provider store={store}>
-    <Board/>
+    <Board socket={socket}/>
   </Provider>,
   document.getElementById('app')
 );
