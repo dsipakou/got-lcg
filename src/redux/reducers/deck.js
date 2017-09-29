@@ -1,11 +1,12 @@
 import { addCardToHand } from '../actions/hand';
 import { getCard } from '../actions/deck';
 import arrayShuffle from 'array-shuffle';
+import uuid from 'uuid';
 import { DRAW_CARD, MAKE_DECK } from '../actions/deck';
 import cards from '../../data/cards.json';
 
 let uid = 0;
-const arr = cards.map(card => {return { "uid": uid++, "kneel": false, "revealed": true, "cardlocation": "DECK", ...card }})
+const arr = cards.map(card => {return { "uid": uuid.v4(), "kneel": false, "revealed": true, "cardlocation": "DECK", ...card }})
 const initialState = arrayShuffle(arr);
 
 function deckReducer(state = initialState, action) {
