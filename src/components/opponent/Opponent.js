@@ -1,16 +1,11 @@
 import React from 'react';
-import Location from '../location/location';
-import Character from '../character/character';
+import OpponentLocation from '../location/OpponentLocation';
 import './Opponent.scss';
 
 const Opponent = ({characters, locations, characterActions, locationActions}) => {
   return (
     <div className='opponent-inner'>
-      <div className='play-zone'>
-        <div className='permanent-cards'>
-           asdfasfasfsa
-        </div>
-      </div>
+       <OpponentLocation cards={locations} />
     </div>
   )
 }

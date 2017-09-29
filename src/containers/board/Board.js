@@ -32,7 +32,7 @@ const Board = ({ deck, hand, locations, characters, deckActions, locationActions
   } else {
     return (
       <div className='board'>
-        <Opponent />
+        <Opponent locations={locations} />
         <Player deck={deck} hand={hand} locations={locations} characters={characters} deckActions={deckActions} locationActions={locationActions} characterActions={characterActions} />
       </div>
     )

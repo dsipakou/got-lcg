@@ -12,13 +12,21 @@
   padding: 1px;
   &:hover {
     transition-delay: 0.5s;
-    transform: scale(2) translateY(-25px);
+    transform: scale(2) translateY(-35px);
     z-index: 1;
   }
 }
 
 .card-kneeled {
   transform: rotate(-90deg);
+}
+
+.card-opponent {
+  cursor: default;
+  &:hover {
+    transform: scale(2) translateY(35px);
+    z-index: 1;
+  }
 }
 
 .card > img {
