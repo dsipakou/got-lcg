@@ -11,7 +11,7 @@ import './player.scss';
 
 const Player = ({ deck, hand, locations, characters, deckActions, locationActions, characterActions }) => {
   return(
-    <div className='player'>
+    <div className='player-inner'>
       <div className='play-zone'>
         <div className='events'>
           <Event />
