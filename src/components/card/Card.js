@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 import './card.scss';
 
-const Card = ({name, kneel, image_url, revealed, isDragging }) => {
+const Card = ({name, kneel, opponent, image_url, revealed, isDragging }) => {
+  let cardClass = classNames({
+    'card': true,
+    'card-kneeled': kneel,
+    'card-opponent': opponent
+  })
   return (
-    <div className={kneel ? 'card card-kneeled' : 'card'} style={{ opacity: isDragging ? 0.5 : 1}}>
+    <div className={cardClass} style={{ opacity: isDragging ? 0.5 : 1}}>
       <img src={image_url} />
     </div>
   )
@@ -12,7 +18,6 @@ const Card = ({name, kneel, image_url, revealed, isDragging }) => {
 
 Card.propTypes = {
   uid: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
   image_url: PropTypes.string,
   name: PropTypes.string,
   kneel: PropTypes.bool,
@@ -20,8 +25,9 @@ Card.propTypes = {
   cardlocation: PropTypes.string.isRequired,
   kneel: PropTypes.bool,
   revealed: PropTypes.bool.isRequired,
+  opponent: PropTypes.bool,
   action: PropTypes.func,
-  isDragging: PropTypes.bool.isRequired,
+  isDragging: PropTypes.bool,
 };
 
 export default Card
