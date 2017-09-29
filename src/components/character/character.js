@@ -7,6 +7,9 @@ import './character.scss';
 
 const boardTarget = {
   canDrop(props, monitor){
+    if (typeof monitor.getItem().card === "undefined") {
+      return false;
+    }
     return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
@@ -44,8 +47,12 @@ const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) =
   const standCharacter = (e, data) => {
     actions.standCharacter(data.index)
   }
-  
-  let canDrop = currentItem != null && currentItem.card.type === 'CHARACTER' && currentItem.card.cardlocation !== currentItem.card.type;
+
+  let canDrop =
+    currentItem != null &&
+    typeof currentItem.card !== "undefined" &&
+    currentItem.card.type === 'CHARACTER' &&
+    currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='character-inner' >
         {isOver && canDrop && renderOverlay('yellow')}

@@ -7,6 +7,9 @@ import './location.scss';
 
 const boardTarget = {
   canDrop(props, monitor) {
+    if (typeof monitor.getItem().card === "undefined") {
+      return false;
+    }
     return (monitor.getItem().card.type === 'LOCATION' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
@@ -44,8 +47,12 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
   const standLocation = (e, data) => {
     actions.standLocation(data.index)
   }
-  
-  let canDrop = currentItem != null && currentItem.card.type === 'LOCATION' && currentItem.card.cardlocation !== currentItem.card.type;
+
+  let canDrop =
+  currentItem != null &&
+  typeof currentItem.card !== "undefined" &&
+  currentItem.card.type === 'LOCATION' &&
+  currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='location-inner'>
       {isOver && canDrop && renderOverlay('yellow')}
