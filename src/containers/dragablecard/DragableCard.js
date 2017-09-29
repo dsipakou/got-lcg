@@ -37,7 +37,7 @@ const DragableCard = ({uid, id, name, kneel, type, cardlocation, image_url, reve
 }
 
 DragableCard.propTypes = {
-  uid: PropTypes.number.isRequired,
+  uid: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   image_url: PropTypes.string,

@@ -11,7 +11,7 @@ const Card = ({name, kneel, image_url, revealed, isDragging }) => {
 }
 
 Card.propTypes = {
-  uid: PropTypes.number.isRequired,
+  uid: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   image_url: PropTypes.string,
   name: PropTypes.string,
