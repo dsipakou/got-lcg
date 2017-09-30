@@ -8,13 +8,22 @@ import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { addOpponentLocation } from '../../redux/actions/opponentLocation';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
+import { addOpponentCharacter } from '../../redux/actions/opponentCharacter';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck';
 import { newGame } from '../../redux/actions/game';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './board.scss'
 
-const Board = ({ socket, deck, hand, locations, opponentLocations, characters, deckActions, locationActions, opponentLocationActions, characterActions, gameActions }) => {
+const Board = ({
+  socket,
+  deck,
+  hand,
+  locations, opponentLocations, locationActions, opponentLocationActions,
+  characters, opponentCharacters, characterActions, opponentCharacterActions,
+  deckActions,
+  gameActions
+}) => {
   let starthand = false;
   let lobby = false;
   if (lobby) {
@@ -33,8 +42,22 @@ const Board = ({ socket, deck, hand, locations, opponentLocations, characters, d
   } else {
     return (
       <div className='board'>
-        <Opponent socket={socket} locations={opponentLocations} actions={opponentLocationActions} />
-        <Player deck={deck} hand={hand} locations={locations} characters={characters} deckActions={deckActions} locationActions={locationActions} characterActions={characterActions} />
+        <Opponent
+          socket={socket}
+          locations={opponentLocations}
+          locationActions={opponentLocationActions}
+          characters={opponentCharacters}
+          characterActions={opponentCharacterActions}
+        />
+        <Player
+          deck={deck}
+          hand={hand}
+          locations={locations}
+          characters={characters}
+          deckActions={deckActions}
+          locationActions={locationActions}
+          characterActions={characterActions}
+        />
       </div>
     )
   }
@@ -47,6 +70,7 @@ Board.propTypes = {
   locations: PropTypes.array.isRequired,
   opponentLocations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
+  opponentCharacters: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({
     drawCard: PropTypes.func.isRequired,
     getStartHand: PropTypes.func,
@@ -65,6 +89,9 @@ Board.propTypes = {
     kneelCharacter: PropTypes.func.isRequired,
     standCharacter: PropTypes.func.isRequired,
   }),
+  opponentCharacterActions: PropTypes.shape({
+    addOpponentCharacter: PropTypes.func.isRequired,
+  }),
   gameActions: PropTypes.shape({
     newGame: PropTypes.func.isRequired,
   })
@@ -76,6 +103,7 @@ const mapStateToProps = (state) => ({
   locations: state.locationReducer,
   opponentLocations: state.opponentLocationReducer,
   characters: state.characterReducer,
+  opponentCharacters: state.opponentCharacterReducer,
   game: state.gameReducer
 })
 
@@ -97,6 +125,9 @@ const mapDispatchToProps = (dispatch) => ({
     playCharacter,
     standCharacter,
     kneelCharacter,
+  }, dispatch),
+  opponentCharacterActions: bindActionCreators({
+    addOpponentCharacter,
   }, dispatch),
   gameActions: bindActionCreators({
     newGame,

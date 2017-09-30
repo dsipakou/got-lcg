@@ -27,8 +27,9 @@ io.on('connection', (socket) => {
   socket.on('action', (data) => {
     console.log(data);
     if (data.action.type === "ADD_LOCATION") {
-      console.log(data);
       socket.broadcast.emit('add location', data);
+    } else if (data.action.type === "ADD_CHARACTER") {
+      socket.broadcast.emit('add character', data);
     }
   });
 });

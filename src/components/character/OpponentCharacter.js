@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../../components/card/Card';
-import './location.scss';
+import Card from '../card/Card';
 
-const OpponentLocation = ({socket, cards, actions}) => {
-  socket.on('add location', (data) => {
-    actions.addOpponentLocation(data.action.payload);
+const OpponentCharacter = ({socket, cards, actions}) => {
+  socket.on('add character', (data) => {
+    actions.addOpponentCharacter(data.action.payload);
   })
-
   return (
-    <div className='location-inner'>
+    <div className='character-inner'>
       {cards.map((card, index) => (
         <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
       ))}
@@ -17,10 +15,10 @@ const OpponentLocation = ({socket, cards, actions}) => {
   )
 }
 
-OpponentLocation.propTypes = {
+OpponentCharacter.propTypes = {
   socket: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired,
   actions: PropTypes.object
 }
 
-export default OpponentLocation;
+export default OpponentCharacter;

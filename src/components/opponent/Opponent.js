@@ -1,14 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import OpponentLocation from '../location/OpponentLocation';
+import OpponentCharacter from '../character/OpponentCharacter';
 import './Opponent.scss';
 
-const Opponent = ({socket, actions, characters, locations, characterActions }) => {
+const Opponent = ({
+  socket,
+  actions,
+  locations,
+  locationActions,
+  characters,
+  characterActions,
+}) => {
 
-  console.log(actions);
   return (
     <div className='opponent-inner'>
-       <OpponentLocation socket={socket} cards={locations} actions={actions} />
+      <OpponentCharacter socket={socket} cards={characters} actions={characterActions} />
+      <OpponentLocation socket={socket} cards={locations} actions={locationActions} />
     </div>
   )
 }
@@ -17,7 +25,9 @@ Opponent.propTypes = {
   socket: PropTypes.object.isRequired,
   actions: PropTypes.object,
   characters: PropTypes.array.isRequired,
+  characterActions: PropTypes.object.isRequired,
   locations: PropTypes.array.isRequired,
+  locationActions: PropTypes.object.isRequired,
 }
 
 export default Opponent;

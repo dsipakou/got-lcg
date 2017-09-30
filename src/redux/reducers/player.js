@@ -4,6 +4,7 @@ import handReducer from './hand';
 import locationReducer from './location';
 import opponentLocationReducer from './opponentLocations';
 import characterReducer from './character';
+import opponentCharacterReducer from './opponentCharacters';
 import gameReducer from './game';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   locationReducer,
   opponentLocationReducer,
   characterReducer,
+  opponentCharacterReducer,
   gameReducer
 })
