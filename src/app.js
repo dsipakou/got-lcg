@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM, {render} from 'react-dom';
 import Board from './containers/board/Board';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import player from './redux/reducers/player';
@@ -24,8 +25,10 @@ const store = createStore(
 );
 
 render(
-  <Provider store={store}>
-    <Board socket={socket}/>
-  </Provider>,
+	<BrowserRouter>
+	  <Provider store={store}>
+	    <Board socket={socket}/>
+	  </Provider>
+	</BrowserRouter>,
   document.getElementById('app')
 );
