@@ -1,20 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../components/card/Card';
 import './location.scss';
 
-const OpponentLocation = ({socket, cards, actions}) => {
-  socket.on('add location', (data) => {
-    actions.addOpponentLocation(data.action.payload);
-  })
+class OpponentLocation extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <div className='location-inner'>
-      {cards.map((card, index) => (
-        <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
-      ))}
-    </div>
-  )
+  componentDidMount() {
+    const { socket, actions } = this.props;
+    socket.on('add location', data =>
+      actions.addOpponentLocation(data.action.payload)
+    );
+    socket.on('kneel location', data =>
+      actions.kneelOpponentLocation(data.action.index)
+    );
+  }
+
+  render() {
+    const { cards } = this.props;
+    return (
+      <div className='location-inner'>
+        {cards.map((card, index) => (
+          <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
+        ))}
+      </div>
+    )
+  }
 }
 
 OpponentLocation.propTypes = {

@@ -25,11 +25,22 @@ server.listen(port);
 
 io.on('connection', (socket) => {
   socket.on('action', (data) => {
-    console.log(data);
-    if (data.action.type === "ADD_LOCATION") {
-      socket.broadcast.emit('add location', data);
-    } else if (data.action.type === "ADD_CHARACTER") {
-      socket.broadcast.emit('add character', data);
+    console.log(data)
+    switch (data.action.type) {
+      case "ADD_LOCATION":
+        socket.broadcast.emit('add location', data);
+        break;
+      case "KNEEL_LOCATION":
+        socket.broadcast.emit('kneel location', data);
+        break;
+      case "ADD_CHARACTER":
+        socket.broadcast.emit('add character', data);
+        break;
+      case "KNEEL_CHARACTER":
+        socket.broadcast.emit('kneel character', data);
+        break;
+      default:
+        break;
     }
   });
 });
