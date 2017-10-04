@@ -4,6 +4,7 @@ import Player from '../../components/player/player';
 import Opponent from '../../components/opponent/Opponent';
 import Lobby from '../../components/lobby/Lobby';
 import StartHand from '../../components/starthand/StartHand';
+import Navigation from '../../components/navigation/Navigation';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { addOpponentLocation, kneelOpponentLocation } from '../../redux/actions/opponentLocation';
@@ -42,6 +43,7 @@ const Board = ({
   } else {
     return (
       <div className='board'>
+        <Navigation />
         <Opponent
           socket={socket}
           locations={opponentLocations}
