@@ -13,8 +13,13 @@ class OpponentLocation extends Component {
     socket.on('add location', data =>
       actions.addOpponentLocation(data.action.payload)
     );
+
     socket.on('kneel location', data =>
       actions.kneelOpponentLocation(data.action.index)
+    );
+
+    socket.on('stand location', data =>
+      actions.standOpponentLocation(data.action.index)
     );
   }
 

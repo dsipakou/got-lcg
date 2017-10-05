@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Player from '../../components/player/player';
 import Opponent from '../../components/opponent/Opponent';
 import Lobby from '../../components/lobby/Lobby';
-import StartHand from '../../components/starthand/StartHand';
 import Navigation from '../../components/navigation/Navigation';
+import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
-import { addOpponentLocation, kneelOpponentLocation } from '../../redux/actions/opponentLocation';
+import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } from '../../redux/actions/opponentLocation';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
-import { addOpponentCharacter, kneelOpponentCharacter } from '../../redux/actions/opponentCharacter';
+import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponentCharacter';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck';
 import { newGame } from '../../redux/actions/game';
 import { connect } from 'react-redux'
@@ -86,6 +86,7 @@ Board.propTypes = {
   opponentLocationActions: PropTypes.shape({
     addOpponentLocation: PropTypes.func.isRequired,
     kneelOpponentLocation: PropTypes.func.isRequired,
+    standOpponentLocation: PropTypes.func.isRequired,
   }),
   characterActions: PropTypes.shape({
     playCharacter: PropTypes.func.isRequired,
@@ -95,6 +96,7 @@ Board.propTypes = {
   opponentCharacterActions: PropTypes.shape({
     addOpponentCharacter: PropTypes.func.isRequired,
     kneelOpponentCharacter: PropTypes.func.isRequired,
+    standOpponentCharacter: PropTypes.func.isRequired,
   }),
   gameActions: PropTypes.shape({
     newGame: PropTypes.func.isRequired,
@@ -125,6 +127,7 @@ const mapDispatchToProps = (dispatch) => ({
   opponentLocationActions: bindActionCreators({
     addOpponentLocation,
     kneelOpponentLocation,
+    standOpponentLocation,
   }, dispatch),
   characterActions: bindActionCreators({
     playCharacter,
@@ -134,6 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
   opponentCharacterActions: bindActionCreators({
     addOpponentCharacter,
     kneelOpponentCharacter,
+    standOpponentCharacter,
   }, dispatch),
   gameActions: bindActionCreators({
     newGame,

@@ -12,6 +12,10 @@ class OpponentCharacter extends Component {
     socket.on('kneel character', data =>
       actions.kneelOpponentCharacter(data.action.index)
     );
+
+    socket.on('stand character', data =>
+      actions.standOpponentCharacter(data.action.index)
+    );
   }
 
   render() {
