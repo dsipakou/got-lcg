@@ -26,15 +26,7 @@ const Board = ({
   gameActions
 }) => {
   let starthand = false;
-  let lobby = false;
-  if (lobby) {
-    return (
-      <div className='board'>
-        <Lobby newGame={gameActions.newGame}/>
-      </div>
-    )
-  }
-  else if (starthand) {
+  if (starthand) {
     return (
       <div className='board'>
         <StartHand deck={deck} hand={hand} deckActions={deckActions}/>
