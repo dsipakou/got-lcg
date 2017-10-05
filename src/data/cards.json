@@ -1,6 +1,7 @@
 [
   {"id": 28, "set": "CORE", "name": "Littlefinger", "faction": "NEUTRAL", "cost": 5, "STR": 4, "type": "CHARACTER", "chalenges": ["INTIGUE", "POWER"], "traits": ["Ally", "Lord", "Small Counsil"], "image_url": "https://thronesdb.com/bundles/cards/01028.png"},
   {"id": 29, "set": "CORE", "name": "Varys", "faction": "NEUTRAL", "cost": 6, "STR": 3, "type": "CHARACTER", "chalenges": ["INTIGUE"], "traits": ["Lord", "Small Counsil", "Spy"], "image_url": "https://thronesdb.com/bundles/cards/01029.png"},
+  {"id": 41, "set": "CORE", "name": "Put to the Sword", "faction": "NEUTRAL", "cost": 2, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01041.png"},
   {"id": 1, "name": "Maester Cressen", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01046.png"},
   {"id": 2, "name": "Melisandre", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01047.png"},
   {"id": 3, "name": "Dragonstone Port", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01059.png"},
