@@ -43,7 +43,6 @@ const Board = ({
   } else {
     return (
       <div className='board'>
-        <Navigation />
         <Opponent
           socket={socket}
           locations={opponentLocations}

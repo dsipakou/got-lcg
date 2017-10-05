@@ -1,5 +1,11 @@
 .main-navigation {
-  height: 10px;
+  height: 30px;
   width: 100%;
-  flex: 1 100%;
+  background: grey;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  a {
+    margin: 5px;
+  }
 }
