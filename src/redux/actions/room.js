@@ -1,8 +1,7 @@
 export const NEW_ROOM = 'NEW_ROOM';
 
-export const newRoom = (payload) => {
+export const newRoom = () => {
   return {
-    type: NEW_ROOM,
-    payload
+    type: NEW_ROOM
   }
 }

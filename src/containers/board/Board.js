@@ -20,6 +20,7 @@ const Board = ({
   socket,
   deck,
   hand,
+  room,
   locations, opponentLocations, locationActions, opponentLocationActions,
   characters, opponentCharacters, characterActions, opponentCharacterActions,
   deckActions,
@@ -101,7 +102,8 @@ const mapStateToProps = (state) => ({
   opponentLocations: state.opponentLocationReducer,
   characters: state.characterReducer,
   opponentCharacters: state.opponentCharacterReducer,
-  game: state.gameReducer
+  game: state.gameReducer,
+  room: state.roomReducer,
 })
 
 const mapDispatchToProps = (dispatch) => ({

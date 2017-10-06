@@ -19,11 +19,11 @@ class Lobby extends Component {
   }
 
   render() {
-    const { roomActions } = this.props;
+    const { socket, roomActions } = this.props;
     if (this.state.loggedin) {
-      console.log(typeof roomActions.newRoom)
+      console.log('roomactions' + roomActions)
       return (
-        <Room {...roomActions} />
+        <Room socket={socket} actions={roomActions} />
       )
     } else {
       return (

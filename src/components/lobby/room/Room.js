@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Room = (newRoom) => {
-  console.log(newRoom);
+const Room = ({socket, actions}) => {
 
-  const createRoom = (data) => {
-    console.log(typeof newRoom);
-    newRoom.newRoom(data);
+  const createRoom = () => {
+    actions.newRoom();
   }
   return (
     <div>
@@ -16,7 +14,9 @@ const Room = (newRoom) => {
 }
 
 Room.propTypes = {
-  newRoom: PropTypes.func.isRequired,
+  actions: PropTypes.shape({
+    newRoom: PropTypes.func.isRequired,
+  })
 }
 
 export default Room;

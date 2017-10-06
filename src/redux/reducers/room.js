@@ -7,8 +7,7 @@ function roomReducer(state = [], action) {
       return [
         ...state,
         {
-          id: uuid.v4(),
-          name: action.payload.name
+          id: uuid.v4()
         }
       ]
     default:
