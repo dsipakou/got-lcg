@@ -19,11 +19,11 @@ class Lobby extends Component {
   }
 
   render() {
-    const { socket, roomActions } = this.props;
+    const { socket, roomActions, rooms } = this.props;
     if (this.state.loggedin) {
       console.log('roomactions' + roomActions)
       return (
-        <Room socket={socket} actions={roomActions} />
+        <Room socket={socket} actions={roomActions} rooms={rooms} />
       )
     } else {
       return (
@@ -37,11 +37,12 @@ Lobby.propTypes = {
   socket: PropTypes.object.isRequired,
   roomActions: PropTypes.shape({
     newRoom: PropTypes.func.isRequired
-  })
+  }),
+  rooms: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => ({
-  room: state.roomReducer,
+  rooms: state.roomReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
