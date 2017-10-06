@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Player from '../../components/player/player';
 import Opponent from '../../components/opponent/Opponent';
-import Lobby from '../../components/lobby/Lobby';
+import Lobby from '../../containers/lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter } from '../../redux/actions/hand'
@@ -12,8 +12,8 @@ import { kneelCharacter, standCharacter } from '../../redux/actions/character';
 import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponentCharacter';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck';
 import { newGame } from '../../redux/actions/game';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './board.scss'
 
 const Board = ({

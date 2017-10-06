@@ -6,6 +6,7 @@ import opponentLocationReducer from './opponentLocations';
 import characterReducer from './character';
 import opponentCharacterReducer from './opponentCharacters';
 import gameReducer from './game';
+import roomReducer from './room';
 
 export default combineReducers({
   deckReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   opponentLocationReducer,
   characterReducer,
   opponentCharacterReducer,
-  gameReducer
+  gameReducer,
+  roomReducer
 })

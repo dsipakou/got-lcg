@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM, {render} from 'react-dom';
 import Board from './containers/board/Board';
-import Lobby from './components/lobby/Lobby';
+import Lobby from './containers/lobby/Lobby';
 import Layout from './components/Layout';
 import { Provider } from 'react-redux';
 import { browserHistory, BrowserRouter, Route, Switch, Link } from 'react-router-dom';
@@ -24,7 +24,8 @@ const connectSocket = (component) => {
 const store = createStore(
 	player,
 	compose(
-    applyMiddleware(thunk, ioMiddleware)
+    applyMiddleware(thunk, ioMiddleware),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ),
 );
 
@@ -34,7 +35,7 @@ render(
 			<Layout>
 				<Switch>
 					<Route exact path="/" component={connectSocket(Board)} />
-					<Route path="/lobby" component={Lobby} />
+					<Route path="/lobby" component={connectSocket(Lobby)} />
 				</Switch>
 			</Layout>
 		</BrowserRouter>
