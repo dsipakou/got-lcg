@@ -49,10 +49,10 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
   }
 
   let canDrop =
-  currentItem != null &&
-  typeof currentItem.card !== "undefined" &&
-  currentItem.card.type === 'LOCATION' &&
-  currentItem.card.cardlocation !== currentItem.card.type;
+    currentItem != null &&
+    typeof currentItem.card !== "undefined" &&
+    currentItem.card.type === 'LOCATION' &&
+    currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='location-inner'>
       {isOver && canDrop && renderOverlay('yellow')}
