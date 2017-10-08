@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
+import DragableCard from '../../containers/dragablecard/DragableCard';
 
 const boardTarget = {
   canDrop(props, monitor) {
@@ -10,7 +11,7 @@ const boardTarget = {
     return (monitor.getItem().card.type === "EVENT" && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
-    props.action.playEvent(monitor.getItem().card);
+    props.actions.playEvent(monitor.getItem().card);
   },
 }
 
@@ -39,6 +40,8 @@ const Event = ({isOver, card, actions, currentItem, connectDropTarget}) => {
     <div>
       {isOver && canDrop && renderOverlay('yellow')}
       {!isOver && canDrop && renderOverlay('green')}
+      { typeof card.id !== "undefined" && <DragableCard {...card} key={card.id} /> }
+
     </div>
   )
 }

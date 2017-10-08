@@ -5,7 +5,7 @@ import Opponent from '../../components/opponent/Opponent';
 import Lobby from '../../containers/lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../../components/starthand/StartHand';
-import { playLocation, playCharacter } from '../../redux/actions/hand'
+import { playLocation, playCharacter, playEvent } from '../../redux/actions/hand'
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } from '../../redux/actions/opponentLocation';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
@@ -23,6 +23,7 @@ const Board = ({
   room,
   locations, opponentLocations, locationActions, opponentLocationActions,
   characters, opponentCharacters, characterActions, opponentCharacterActions,
+  event, eventActions,
   deckActions,
   gameActions
 }) => {
@@ -48,9 +49,11 @@ const Board = ({
           hand={hand}
           locations={locations}
           characters={characters}
+          event={event}
           deckActions={deckActions}
           locationActions={locationActions}
           characterActions={characterActions}
+          eventActions={eventActions}
         />
       </div>
     )
@@ -65,6 +68,7 @@ Board.propTypes = {
   opponentLocations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
   opponentCharacters: PropTypes.array.isRequired,
+  event: PropTypes.object.isRequired,
   deckActions: PropTypes.shape({
     drawCard: PropTypes.func.isRequired,
     getStartHand: PropTypes.func,
@@ -90,6 +94,9 @@ Board.propTypes = {
     kneelOpponentCharacter: PropTypes.func.isRequired,
     standOpponentCharacter: PropTypes.func.isRequired,
   }),
+  eventActions: PropTypes.shape({
+    playEvent: PropTypes.func.isRequired,
+  }),
   gameActions: PropTypes.shape({
     newGame: PropTypes.func.isRequired,
   })
@@ -102,6 +109,7 @@ const mapStateToProps = (state) => ({
   opponentLocations: state.opponentLocationReducer,
   characters: state.characterReducer,
   opponentCharacters: state.opponentCharacterReducer,
+  event: state.eventReducer,
   game: state.gameReducer,
   room: state.roomReducer,
 })
@@ -131,6 +139,9 @@ const mapDispatchToProps = (dispatch) => ({
     addOpponentCharacter,
     kneelOpponentCharacter,
     standOpponentCharacter,
+  }, dispatch),
+  eventActions: bindActionCreators({
+    playEvent,
   }, dispatch),
   gameActions: bindActionCreators({
     newGame,
