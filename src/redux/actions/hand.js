@@ -1,6 +1,7 @@
 import { addLocation } from './location'
 import { addCharacter } from './character'
 import { addEvent } from './event'
+import { addCardToDiscard } from './discardPile';
 
 export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
 export const REMOVE_CARD_FROM_HAND = 'REMOVE_CARD_FROM_HAND'
@@ -31,21 +32,25 @@ export const foldHand = () => {
 
 export const playLocation = (payload) => {
   return dispatch => {
-    dispatch(addLocation(payload))
-    dispatch(removeCardFromHand(payload.index))
+    dispatch(addLocation(payload));
+    dispatch(removeCardFromHand(payload.index));
   }
 }
 
 export const playCharacter = (payload) => {
   return dispatch => {
-    dispatch(addCharacter(payload))
-    dispatch(removeCardFromHand(payload.index))
+    dispatch(addCharacter(payload));
+    dispatch(removeCardFromHand(payload.index));
   }
 }
 
 export const playEvent = (payload) => {
-  return dispatch => {
-    dispatch(addEvent(payload))
-    dispatch(removeCardFromHand(payload.index))
+  return (dispatch, getState) => {
+    const event = getState().eventReducer;
+    if (typeof event.id !== 'undefined') {
+      dispatch(addCardToDiscard(event));
+    }
+    dispatch(addEvent(payload));
+    dispatch(removeCardFromHand(payload.index));
   }
 }
