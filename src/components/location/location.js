@@ -59,7 +59,7 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
       {!isOver && canDrop && renderOverlay('green')}
       { cards.map((card, index) => (
         <ContextMenuTrigger holdToDisplay={-1} id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
-          <DragableCard {...card} index={index} key={card.uid} revealed={true} />
+          <DragableCard {...card} index={index} key={card.uid} />
         </ContextMenuTrigger>
       )) }
 

@@ -28,7 +28,7 @@ class StartHand extends Component {
           <div className='starthand-cardlist'>
           {
             hand.map((card, index) => (
-              <Card {...card} index={index} key={card.uid} isDragging={false} />
+              <Card {...card} index={index} key={card.uid} />
             ))
           }
           </div>
