@@ -8,6 +8,7 @@ import characterReducer from './character';
 import opponentCharacterReducer from './opponentCharacters';
 import gameReducer from './game';
 import roomReducer from './room';
+import discardReducer from './discardPile';
 
 export default combineReducers({
   deckReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   gameReducer,
   roomReducer,
   eventReducer,
+  discardReducer,
 })
