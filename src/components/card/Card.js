@@ -30,4 +30,9 @@ Card.propTypes = {
   isDragging: PropTypes.bool,
 };
 
+Card.defaultProps = {
+  isDraggins: false,
+  revealed: true,
+}
+
 export default Card
