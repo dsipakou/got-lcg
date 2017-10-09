@@ -1,12 +1,19 @@
 .deck-inner {
+  &.empty-deck {
+    cursor: default;
+    border-width: 2px;
+    border-style: dashed;
+    color: black;
+    background-color: transparent;
+  }
   cursor: pointer;
   border-radius: 10px;
   transition: transform 0.2s;
   position: relative;
   margin-right: 100px;
   margin-left: 20px;
-  width: 80px;
-  height: 120px;
+  width: 90px;
+  height: 135px;
   background: white;
   color: white;
   box-shadow: 0 0 16px rgba(0,0,0,.25);
@@ -15,9 +22,10 @@
     z-index: 1;
     color: black;
   }
+
 }
 
-.deck-inner:hover .deck-spinner {
+.deck-inner:hover:not(.empty-deck) .deck-spinner {
   width: 100%;
   height: 100%;
   opacity: 0.1;
