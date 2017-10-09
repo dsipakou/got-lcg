@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import './card.scss';
 
-const Card = ({name, kneel, opponent, image_url, revealed, isDragging }) => {
+const Card = ({name, kneel, plot, opponent, image_url, revealed, isDragging }) => {
   let cardClass = classNames({
     'card': true,
     'card-kneeled': kneel,
-    'card-opponent': opponent
+    'card-opponent': opponent,
+    'plot': plot,
   })
   return (
     <div className={cardClass} style={{ opacity: isDragging ? 0.5 : 1}}>
@@ -24,6 +25,7 @@ Card.propTypes = {
   type: PropTypes.string,
   cardlocation: PropTypes.string.isRequired,
   kneel: PropTypes.bool,
+  plot: PropTypes.bool,
   revealed: PropTypes.bool.isRequired,
   opponent: PropTypes.bool,
   action: PropTypes.func,
@@ -34,6 +36,7 @@ Card.defaultProps = {
   isDraggins: false,
   revealed: true,
   kneel: false,
+  plot: false,
 }
 
 export default Card

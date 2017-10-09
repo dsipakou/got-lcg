@@ -1,4 +1,16 @@
 .card {
+  &.plot {
+    width: 135px;
+    height: 90px;
+    img {
+      width: 135px;
+      height: 90px;
+    }
+  }
+  img {
+    width: 90px;
+    height: 135px;
+  }
   cursor: pointer;
   border-radius: 3px;
   transition: transform 0.2s;
@@ -27,9 +39,4 @@
     transform: scale(2) translateY(35px);
     z-index: 1;
   }
-}
-
-.card > img {
-  width: 90px;
-  height: 135px;
 }
