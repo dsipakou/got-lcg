@@ -38,7 +38,7 @@ const DragableCard = ({uid, id, name, kneel, type, cardlocation, image_url, reve
 
 DragableCard.propTypes = {
   uid: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   image_url: PropTypes.string,
   name: PropTypes.string,
@@ -52,5 +52,10 @@ DragableCard.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired
 };
+
+DragableCard.defaultTypes = {
+  kneel: false,
+  revealed: true,
+}
 
 export default DragSource(cardType, cardSource, collect)(DragableCard);
