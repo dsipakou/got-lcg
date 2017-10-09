@@ -1,14 +1,15 @@
 [
-  {"id": 28, "set": "CORE", "name": "Littlefinger", "faction": "NEUTRAL", "cost": 5, "STR": 4, "type": "CHARACTER", "chalenges": ["INTIGUE", "POWER"], "traits": ["Ally", "Lord", "Small Counsil"], "image_url": "https://thronesdb.com/bundles/cards/01028.png"},
-  {"id": 29, "set": "CORE", "name": "Varys", "faction": "NEUTRAL", "cost": 6, "STR": 3, "type": "CHARACTER", "chalenges": ["INTIGUE"], "traits": ["Lord", "Small Counsil", "Spy"], "image_url": "https://thronesdb.com/bundles/cards/01029.png"},
-  {"id": 41, "set": "CORE", "name": "Put to the Sword", "faction": "NEUTRAL", "cost": 2, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01041.png"},
-  {"id": 42, "set": "CORE", "name": "Put to the Torch", "faction": "NEUTRAL", "cost": 1, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01042.png"},
-  {"id": 43, "set": "CORE", "name": "Superior Claim", "faction": "NEUTRAL", "cost": 0, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01043.png"},
-  {"id": 1, "name": "Maester Cressen", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01046.png"},
-  {"id": 2, "name": "Melisandre", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01047.png"},
-  {"id": 3, "name": "Dragonstone Port", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01059.png"},
-  {"id": 4, "name": "Chamber of the Painted Table", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01060.png"},
-  {"id": 5, "name": "The Red Keep", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01061.png"},
-  {"id": 6, "name": "Aeron Damphair", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01065.png"},
-  {"id": 7, "name": "Alannys Greyjoy", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01066.png"}
+  {"id": "01001", "set": "CORE", "name": "A Clash of Kings", "faction": "NEUTRAL", "type": "PLOT", "traits": "Noble", "image_url": "https://thronesdb.com/bundles/cards/01001.png"},
+  {"id": "01028", "set": "CORE", "name": "Littlefinger", "faction": "NEUTRAL", "cost": 5, "STR": 4, "type": "CHARACTER", "chalenges": ["INTIGUE", "POWER"], "traits": ["Ally", "Lord", "Small Counsil"], "image_url": "https://thronesdb.com/bundles/cards/01028.png"},
+  {"id": "01029", "set": "CORE", "name": "Varys", "faction": "NEUTRAL", "cost": 6, "STR": 3, "type": "CHARACTER", "chalenges": ["INTIGUE"], "traits": ["Lord", "Small Counsil", "Spy"], "image_url": "https://thronesdb.com/bundles/cards/01029.png"},
+  {"id": "01041", "set": "CORE", "name": "Put to the Sword", "faction": "NEUTRAL", "cost": 2, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01041.png"},
+  {"id": "01042", "set": "CORE", "name": "Put to the Torch", "faction": "NEUTRAL", "cost": 1, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01042.png"},
+  {"id": "01043", "set": "CORE", "name": "Superior Claim", "faction": "NEUTRAL", "cost": 0, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01043.png"},
+  {"id": "01046", "name": "Maester Cressen", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01046.png"},
+  {"id": "01047", "name": "Melisandre", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01047.png"},
+  {"id": "01059", "name": "Dragonstone Port", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01059.png"},
+  {"id": "01060", "name": "Chamber of the Painted Table", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01060.png"},
+  {"id": "01061", "name": "The Red Keep", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01061.png"},
+  {"id": "01065", "name": "Aeron Damphair", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01065.png"},
+  {"id": "01066", "name": "Alannys Greyjoy", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01066.png"}
 ]
