@@ -5,8 +5,12 @@ import uuid from 'uuid';
 import { DRAW_CARD, MAKE_DECK } from '../actions/deck';
 import cards from '../../data/cards.json';
 
-let uid = 0;
-const arr = cards.map(card => {return { "uid": uuid.v4(), "kneel": false, "revealed": true, "cardlocation": "DECK", ...card }})
+const arr = cards.filter((card) => {
+  if (card.type !== 'PLOT') {
+    return card;
+  }
+}).map(card => { return { "uid": uuid.v4(), "cardlocation": "DECK", ...card }});
+
 const initialState = arrayShuffle(arr);
 
 function deckReducer(state = initialState, action) {
