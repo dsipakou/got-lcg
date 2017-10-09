@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import './Deck.scss';
 
-const Deck = ({ deck, action }) => {
+const Deck = ({ deck, text, action }) => {
   const doAction = () => {
     action(deck.length)
   }
@@ -15,6 +15,7 @@ const Deck = ({ deck, action }) => {
 
   return (
     <div className={deckClass} onClick={doAction}>
+      <span>{text}</span>
       <div className='deck-spinner'></div>
     </div>
   )
@@ -22,6 +23,7 @@ const Deck = ({ deck, action }) => {
 
 Deck.propTypes = {
   deck: PropTypes.array.isRequired,
+  text: PropTypes.string,
   action: PropTypes.func
 }
 

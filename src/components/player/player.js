@@ -38,10 +38,10 @@ const Player = ({
         </div>
       </div>
       <div className='cards-zone'>
-        <Deck deck={deck} action={deckActions.drawCard} />
+        <Deck deck={deck} text="Click to draw" action={deckActions.drawCard} />
         <Hand cards={hand} />
-        <DiscardPile cards={discardPile} />
-        <Plot cards={plotCards} />
+        <DiscardPile cards={discardPile} text="Discard Pile" />
+        <Plot cards={plotCards} text="Plot Pile" />
       </div>
     </div>
   );

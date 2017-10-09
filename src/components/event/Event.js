@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import DragableCard from '../../containers/dragablecard/DragableCard';
+import './Event.scss';
 
 const boardTarget = {
   canDrop(props, monitor) {
@@ -37,7 +38,7 @@ const Event = ({isOver, card, actions, currentItem, connectDropTarget}) => {
     currentItem.card.type === "EVENT" &&
     currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
-    <div>
+    <div className='event-inner'>
       {isOver && canDrop && renderOverlay('yellow')}
       {!isOver && canDrop && renderOverlay('green')}
       { typeof card.id !== "undefined" && <DragableCard {...card} key={card.id} /> }

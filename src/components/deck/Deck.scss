@@ -5,13 +5,20 @@
     border-style: dashed;
     color: black;
     background-color: transparent;
+    box-shadow: 0;
   }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
   cursor: pointer;
   border-radius: 10px;
   transition: transform 0.2s;
   position: relative;
   margin-right: 100px;
   margin-left: 20px;
+  padding: 5px;
   width: 90px;
   height: 135px;
   background: white;
@@ -22,7 +29,6 @@
     z-index: 1;
     color: black;
   }
-
 }
 
 .deck-inner:hover:not(.empty-deck) .deck-spinner {

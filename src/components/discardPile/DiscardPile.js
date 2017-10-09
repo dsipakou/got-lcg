@@ -5,7 +5,7 @@ import Deck from '../../components/deck/Deck';
 const DiscardPile = ({cards}) => {
   return (
     <div>
-      <Deck deck={cards} />
+      <Deck deck={cards} text="Discard Pile" />
     </div>
   )
 }
