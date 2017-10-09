@@ -6,6 +6,7 @@ import Character from '../character/character';
 import Event from '../event/Event';
 import Deck from '../deck/Deck';
 import DiscardPile from '../discardPile/DiscardPile';
+import Plot from './plot/Plot';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import './player.scss';
@@ -14,6 +15,7 @@ const Player = ({
   deck,
   hand,
   discardPile,
+  plotCards,
   locations,
   characters,
   event,
@@ -39,6 +41,7 @@ const Player = ({
         <Deck deck={deck} action={deckActions.drawCard} />
         <Hand cards={hand} />
         <DiscardPile cards={discardPile} />
+        <Plot cards={plotCards} />
       </div>
     </div>
   );
@@ -48,6 +51,7 @@ Player.propTypes = {
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   discardPile: PropTypes.array.isRequired,
+  plotCards: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
   event: PropTypes.object.isRequired,

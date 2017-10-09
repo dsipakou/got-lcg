@@ -21,6 +21,7 @@ const Board = ({
   deck,
   hand,
   discardPile,
+  plotCards,
   room,
   locations, opponentLocations, locationActions, opponentLocationActions,
   characters, opponentCharacters, characterActions, opponentCharacterActions,
@@ -49,6 +50,7 @@ const Board = ({
           deck={deck}
           hand={hand}
           discardPile={discardPile}
+          plotCards={plotCards}
           locations={locations}
           characters={characters}
           event={event}
@@ -67,6 +69,7 @@ Board.propTypes = {
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   discardPile: PropTypes.array.isRequired,
+  plotCards: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   opponentLocations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
@@ -109,6 +112,7 @@ const mapStateToProps = (state) => ({
   deck: state.deckReducer,
   hand: state.handReducer,
   discardPile: state.discardReducer,
+  plotCards: state.plotDeckReducer,
   locations: state.locationReducer,
   opponentLocations: state.opponentLocationReducer,
   characters: state.characterReducer,
