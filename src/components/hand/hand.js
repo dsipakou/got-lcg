@@ -9,7 +9,7 @@ const Hand =({ cards, playCard }) => {
   return (
     <div className='hand'>
       { cards.map((card, index) => (
-        <DragableCard {...card} index={index} key={card.id} revealed={card.revealed} name={card.name} kneel={card.kneel} />
+        <DragableCard {...card} index={index} key={card.id} />
       )) }
     </div>
   );

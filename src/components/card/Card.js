@@ -11,7 +11,7 @@ const Card = ({name, kneel, opponent, image_url, revealed, isDragging }) => {
   })
   return (
     <div className={cardClass} style={{ opacity: isDragging ? 0.5 : 1}}>
-      <img src={image_url} />
+      { revealed && <img src={image_url} /> }
     </div>
   )
 }
@@ -33,6 +33,7 @@ Card.propTypes = {
 Card.defaultProps = {
   isDraggins: false,
   revealed: true,
+  kneel: false,
 }
 
 export default Card
