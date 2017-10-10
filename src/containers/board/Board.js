@@ -6,6 +6,7 @@ import Lobby from '../../containers/lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../../components/starthand/StartHand';
 import { playLocation, playCharacter, playEvent } from '../../redux/actions/hand'
+import { discardEvent } from '../../redux/actions/event';
 import { kneelLocation, standLocation } from '../../redux/actions/location';
 import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } from '../../redux/actions/opponentLocation';
 import { kneelCharacter, standCharacter } from '../../redux/actions/character';
@@ -102,6 +103,7 @@ Board.propTypes = {
   }),
   eventActions: PropTypes.shape({
     playEvent: PropTypes.func.isRequired,
+    discardEvent: PropTypes.func.isRequired,
   }),
   gameActions: PropTypes.shape({
     newGame: PropTypes.func.isRequired,
@@ -150,6 +152,7 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
   eventActions: bindActionCreators({
     playEvent,
+    discardEvent,
   }, dispatch),
   gameActions: bindActionCreators({
     newGame,

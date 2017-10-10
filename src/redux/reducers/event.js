@@ -1,4 +1,4 @@
-import { ADD_EVENT } from '../actions/event';
+import { ADD_EVENT, DELETE_EVENT } from '../actions/event';
 import update from 'react-addons-update';
 
 function eventReducer(state = {}, action) {
@@ -10,6 +10,8 @@ function eventReducer(state = {}, action) {
         }
       }).payload
       return card;
+    case DELETE_EVENT:
+      return {}
     default:
       return state;
   }
