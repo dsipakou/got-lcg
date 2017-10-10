@@ -2,6 +2,7 @@ import { addLocation } from './location'
 import { addCharacter } from './character'
 import { addEvent } from './event'
 import { addCardToDiscard } from './discardPile';
+import { discardEvent } from './event';
 
 export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
 export const REMOVE_CARD_FROM_HAND = 'REMOVE_CARD_FROM_HAND'
@@ -47,8 +48,8 @@ export const playCharacter = (payload) => {
 export const playEvent = (payload) => {
   return (dispatch, getState) => {
     const event = getState().eventReducer;
-    if (typeof event.id !== 'undefined') {
-      dispatch(addCardToDiscard(event));
+    if (typeof event.uid !== 'undefined') {
+      dispatch(discardEvent(event));
     }
     dispatch(addEvent(payload));
     dispatch(removeCardFromHand(payload.index));
