@@ -28,7 +28,7 @@ function collect(connect, monitor) {
 const Event = ({isOver, card, actions, currentItem, connectDropTarget}) => {
   const renderOverlay = (color) => {
     return(
-      <div className='drag-overlay' style={{backgroundColor: color}}>Event zone</div>
+      <div className='drag-overlay' style={{backgroundColor: color}}>Events</div>
     )
   }
 

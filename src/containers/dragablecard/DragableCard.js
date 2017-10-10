@@ -30,7 +30,7 @@ const DragableCard = ({uid, id, name, kneel, type, cardlocation, image_url, reve
 
   return connectDragSource(
     <div>
-      <Card uid={uid} id={id} kneel={kneel} name={name} cardlocation={cardlocation} image_url={image_url} revealed={revealed} isDragging={isDragging} />
+      <Card uid={uid} id={id} kneel={kneel} name={name} cardlocation={cardlocation} revealed={revealed} image_url={image_url} isDragging={isDragging} />
     </div>,
     { dropEffect: 'copy' }
   )
@@ -53,7 +53,7 @@ DragableCard.propTypes = {
   connectDragPreview: PropTypes.func.isRequired
 };
 
-DragableCard.defaultTypes = {
+DragableCard.defaultProps = {
   kneel: false,
   revealed: true,
 }
