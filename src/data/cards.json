@@ -1,5 +1,6 @@
 [
   {"id": "01001", "set": "CORE", "name": "A Clash of Kings", "faction": "NEUTRAL", "type": "PLOT", "traits": "Noble", "image_url": "https://thronesdb.com/bundles/cards/01001.png"},
+  {"id": "01002", "set": "CORE", "name": "A Feast for Crows", "faction": "NEUTRAL", "type": "PLOT", "traits": "Edict", "image_url": "https://thronesdb.com/bundles/cards/01002.png"},
   {"id": "01028", "set": "CORE", "name": "Littlefinger", "faction": "NEUTRAL", "cost": 5, "STR": 4, "type": "CHARACTER", "chalenges": ["INTIGUE", "POWER"], "traits": ["Ally", "Lord", "Small Counsil"], "image_url": "https://thronesdb.com/bundles/cards/01028.png"},
   {"id": "01029", "set": "CORE", "name": "Varys", "faction": "NEUTRAL", "cost": 6, "STR": 3, "type": "CHARACTER", "chalenges": ["INTIGUE"], "traits": ["Lord", "Small Counsil", "Spy"], "image_url": "https://thronesdb.com/bundles/cards/01029.png"},
   {"id": "01041", "set": "CORE", "name": "Put to the Sword", "faction": "NEUTRAL", "cost": 2, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01041.png"},
