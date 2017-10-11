@@ -34,9 +34,9 @@ function collect_props(props) {
 // Component
 
 const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
-  const renderOverlay = (color) => {
+  const renderOverlay = (bgcolor, color) => {
     return (
-      <div className='drag-overlay' style={{backgroundColor: color}}>Location zone</div>
+      <div className='drag-overlay' style={{backgroundColor: bgcolor, color: color}}>Location zone</div>
     )
   }
 
@@ -55,8 +55,8 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
     currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='location-inner'>
-      {isOver && canDrop && renderOverlay('yellow')}
-      {!isOver && canDrop && renderOverlay('green')}
+    {isOver && canDrop && renderOverlay('yellow', 'black')}
+    {!isOver && canDrop && renderOverlay('green', 'white')}
       { cards.map((card, index) => (
         <ContextMenuTrigger holdToDisplay={-1} id='card_context_menu' collect={collect_props} key={card.uid} index={index}>
           <DragableCard {...card} index={index} key={card.uid} />

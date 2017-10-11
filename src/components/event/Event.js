@@ -26,9 +26,9 @@ function collect(connect, monitor) {
 
 
 const Event = ({isOver, card, actions, currentItem, connectDropTarget}) => {
-  const renderOverlay = (color) => {
+  const renderOverlay = (bgcolor, color) => {
     return(
-      <div className='drag-overlay' style={{backgroundColor: color}}>Events</div>
+      <div className='drag-overlay' style={{backgroundColor: bgcolor, color: color}}>Event zone</div>
     )
   }
 
@@ -39,8 +39,8 @@ const Event = ({isOver, card, actions, currentItem, connectDropTarget}) => {
     currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='event-inner'>
-      {isOver && canDrop && renderOverlay('yellow')}
-      {!isOver && canDrop && renderOverlay('green')}
+      {isOver && canDrop && renderOverlay('yellow', 'black')}
+      {!isOver && canDrop && renderOverlay('green', 'white')}
       { typeof card.id !== "undefined" && <DragableCard {...card} key={card.id} /> }
 
     </div>
