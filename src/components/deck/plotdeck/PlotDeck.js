@@ -1,7 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Deck from '../Deck';
-import ReactModal from 'react-modal';
+import Card from '../../card/Card';
+import Modal from 'react-modal';
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    height                : '50%',
+    width                 : '90%',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    display               : 'flex',
+    flexFlow              : 'row wrap',
+    alignItems            : 'center',
+    justifyContent        : 'center',
+  }
+};
+
+
 
 class PlotDeck extends Component {
   constructor() {
@@ -26,11 +46,15 @@ class PlotDeck extends Component {
     return (
       <div onClick={this.openModal}>
         <Deck deck={cards} text="Plot Pile" />
-        <ReactModal
+        <Modal style={customStyles}
+          shouldCloseOnOverlayClick={true}
           isOpen={this.state.showModal}
           contectLabel="Hello modal">
           <button onClick={this.closeModal}>Close modal</button>
-        </ReactModal>
+          {cards.map((card, index) => (
+            <Card {...card} index={index} key={card.uid} plot={true} />
+          ))}
+        </Modal>
       </div>
     )
   }
