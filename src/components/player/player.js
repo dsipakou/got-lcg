@@ -4,9 +4,9 @@ import Hand from '../hand/hand';
 import Location from '../location/location';
 import Character from '../character/character';
 import Event from '../event/Event';
-import Deck from '../deck/Deck';
-import DiscardPile from '../discardPile/DiscardPile';
-import Plot from './plot/Plot';
+import MainDeck from '../deck/maindeck/MainDeck';
+import DiscardPile from '../deck/discardPile/DiscardPile';
+import PlotDeck from '../deck/plotdeck/PlotDeck';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import './player.scss';
@@ -38,10 +38,10 @@ const Player = ({
         </div>
       </div>
       <div className='cards-zone'>
-        <Deck deck={deck} text="Click to draw" action={deckActions.drawCard} />
+        <MainDeck deck={deck} action={deckActions.drawCard} />
         <Hand cards={hand} />
-        <DiscardPile cards={discardPile} text="Discard Pile" />
-        <Plot cards={plotCards} text="Plot Pile" />
+        <DiscardPile cards={discardPile} />
+        <PlotDeck cards={plotCards} />
       </div>
     </div>
   );

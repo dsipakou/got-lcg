@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Deck from '../../deck/Deck';
+import Deck from '../Deck';
 import ReactModal from 'react-modal';
 
-class Plot extends Component {
+class PlotDeck extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,8 +24,8 @@ class Plot extends Component {
   render () {
     const { cards } = this.props
     return (
-      <div>
-        <Deck deck={cards} onClick={this.openModal} text="Plot Pile" />
+      <div onClick={this.openModal}>
+        <Deck deck={cards} text="Plot Pile" />
         <ReactModal
           isOpen={this.state.showModal}
           contectLabel="Hello modal">
@@ -37,8 +37,8 @@ class Plot extends Component {
 
 }
 
-Plot.propTypes = {
+PlotDeck.propTypes = {
   cards: PropTypes.array.isRequired,
 }
 
-export default Plot;
+export default PlotDeck;

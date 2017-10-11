@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Deck from '../../components/deck/Deck';
+import Deck from '../Deck';
 
 class DiscardPile extends Component {
   render() {
