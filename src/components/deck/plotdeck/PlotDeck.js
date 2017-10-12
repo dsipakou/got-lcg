@@ -10,7 +10,7 @@ const customStyles = {
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
-    height                : '50%',
+    height                : '40%',
     width                 : '90%',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
@@ -18,6 +18,7 @@ const customStyles = {
     flexFlow              : 'row wrap',
     alignItems            : 'center',
     justifyContent        : 'center',
+    background            : 'papayawhip',
   }
 };
 
@@ -47,13 +48,14 @@ class PlotDeck extends Component {
       <div onClick={this.openModal}>
         <Deck deck={cards} text="Plot Pile" />
         <Modal style={customStyles}
-          shouldCloseOnOverlayClick={true}
-          isOpen={this.state.showModal}
-          contectLabel="Hello modal">
-          <button onClick={this.closeModal}>Close modal</button>
+          onRequestClose={this.closeModal}
+          isOpen={this.state.showModal}>
           {cards.map((card, index) => (
             <Card {...card} index={index} key={card.uid} plot={true} />
           ))}
+          <div>
+            <button onClick={this.closeModal}>Close modal</button>
+          </div>
         </Modal>
       </div>
     )

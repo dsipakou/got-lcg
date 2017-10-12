@@ -6,6 +6,11 @@
       width: 135px;
       height: 90px;
     }
+    &:hover {
+      transition-delay: 0.5s;
+      transform: scale(2.3);
+      z-index: 1;
+    }
   }
   img {
     width: 90px;
@@ -24,7 +29,7 @@
   padding: 1px;
   &:hover {
     transition-delay: 0.5s;
-    transform: scale(2) translateY(-35px);
+    transform: scale(2.3) translateY(-35px);
     z-index: 1;
   }
 }
