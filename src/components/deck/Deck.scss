@@ -12,6 +12,20 @@
     span {
       transform: rotate(-90deg);
     }
+    img {
+      transform: rotate(-90deg);
+      width: 135px;
+      height: 90px;
+    }
+    &.revealed {
+      padding: 1px;
+      border-radius: 3px;
+      &:hover {
+        transition-delay: 0.5s;
+        transform: rotate(92deg) scale(2.3) translateX(-15px) translateY(35px);
+        z-index: 1;
+      }
+    }
   }
   display: flex;
   flex-direction: row;

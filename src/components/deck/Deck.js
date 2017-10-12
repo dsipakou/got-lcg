@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import './Deck.scss';
 
-const Deck = ({ deck, text, plot }) => {
+const Deck = ({ deck, text, plot, revealed }) => {
+
+  const emptyDeck = deck.length == 0;
 
   let deckClass = classNames({
     'deck-inner': true,
-    'empty-deck': deck.length == 0,
+    'empty-deck': emptyDeck,
     'plot': plot,
+    'revealed': revealed,
   });
+
+  const topCard = !emptyDeck ? deck[deck.length - 1] : 0
 
   return (
     <div className={deckClass}>
-      <span>{text}</span>
+      { revealed && !emptyDeck && <img src={topCard.image_url} />}
+      { (!revealed || emptyDeck) && <span>{text}</span>}
       <div className='deck-spinner'></div>
     </div>
   )
@@ -23,10 +29,12 @@ Deck.propTypes = {
   deck: PropTypes.array.isRequired,
   text: PropTypes.string,
   plot: PropTypes.bool,
+  revealed: PropTypes.bool,
 }
 
 Deck.defaultTypes = {
   plot: false,
+  revealed: false,
 }
 
 export default Deck;
