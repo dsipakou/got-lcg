@@ -1,8 +1,8 @@
-import { PLAY_PLOT } from '../../actions/player/plot';
+import { ADD_PLOT } from '../../actions/player/plot';
 
 function plotReducer(state = [], action) {
   switch (action.type) {
-    case PLAY_PLOT:
+    case ADD_PLOT:
       return [
         ...state,
         action.payload

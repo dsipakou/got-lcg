@@ -23,6 +23,7 @@ const Player = ({
   locationActions,
   characterActions,
   eventActions,
+  plotActions,
 }) => {
   return(
     <div className='player-inner'>
@@ -41,7 +42,7 @@ const Player = ({
         <MainDeck deck={deck} action={deckActions.drawCard} />
         <Hand cards={hand} />
         <DiscardPile cards={discardPile} />
-        <PlotDeck cards={plotCards} />
+        <PlotDeck cards={plotCards} actions={plotActions} />
       </div>
     </div>
   );
@@ -71,6 +72,9 @@ Player.propTypes = {
   }),
   eventActions: PropTypes.shape({
     playEvent: PropTypes.func.isRequired,
+  }),
+  plotActions: PropTypes.shape({
+    playPlot: PropTypes.func.isRequired,
   })
 }
 

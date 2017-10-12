@@ -12,6 +12,7 @@ import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } fro
 import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
 import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponent/opponentCharacter';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
+import { playPlot } from '../../redux/actions/player/plot';
 import { newGame } from '../../redux/actions/general/game';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -28,7 +29,8 @@ const Board = ({
   characters, opponentCharacters, characterActions, opponentCharacterActions,
   event, eventActions,
   deckActions,
-  gameActions
+  gameActions,
+  plotActions,
 }) => {
   let starthand = false;
   if (starthand) {
@@ -59,6 +61,7 @@ const Board = ({
           locationActions={locationActions}
           characterActions={characterActions}
           eventActions={eventActions}
+          plotActions={plotActions}
         />
       </div>
     )
@@ -107,6 +110,9 @@ Board.propTypes = {
   }),
   gameActions: PropTypes.shape({
     newGame: PropTypes.func.isRequired,
+  }),
+  plotActions: PropTypes.shape({
+    playPlot: PropTypes.func.isRequired,
   })
 }
 
@@ -156,7 +162,10 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
   gameActions: bindActionCreators({
     newGame,
-  }, dispatch)
+  }, dispatch),
+  plotActions: bindActionCreators({
+    playPlot,
+  }, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
