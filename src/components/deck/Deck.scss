@@ -7,6 +7,12 @@
     background-color: transparent;
     box-shadow: 0 0 0;
   }
+  &.plot {
+    transform: rotate(92deg);
+    span {
+      transform: rotate(-90deg);
+    }
+  }
   display: flex;
   flex-direction: row;
   align-items: center;

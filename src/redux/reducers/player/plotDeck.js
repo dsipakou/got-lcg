@@ -1,7 +1,7 @@
-import { DRAW_PLOT } from '../actions/plotDeck';
+import { DRAW_PLOT } from '../../actions/player/plotDeck';
 import arrayShuffle from 'array-shuffle';
 import uuid from 'uuid';
-import cards from '../../data/cards.json';
+import cards from '../../../data/cards.json';
 
 const arr = cards.filter((card) => {
   if (card.type === 'PLOT') {

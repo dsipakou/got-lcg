@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import './Deck.scss';
 
-const Deck = ({ deck, text }) => {
+const Deck = ({ deck, text, plot }) => {
 
   let deckClass = classNames({
     'deck-inner': true,
-    'empty-deck': deck.length == 0
+    'empty-deck': deck.length == 0,
+    'plot': plot,
   });
 
   return (
@@ -21,6 +22,11 @@ const Deck = ({ deck, text }) => {
 Deck.propTypes = {
   deck: PropTypes.array.isRequired,
   text: PropTypes.string,
+  plot: PropTypes.bool,
+}
+
+Deck.defaultTypes = {
+  plot: false,
 }
 
 export default Deck;

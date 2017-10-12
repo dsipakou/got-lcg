@@ -22,7 +22,7 @@ export const makeDeck = () => {
 
 export const drawCard = () => {
   return (dispatch, getState) => {
-    const deck = getState().deckReducer;
+    const deck = getState().player.deckReducer;
     if (deck.length > 0) {
       const lastCard = deck[deck.length - 1];
       dispatch(addCardToHand(lastCard));
@@ -34,7 +34,7 @@ export const drawCard = () => {
 export const getStartHand = () => {
   return (dispatch, getState) => {
     for (var i = 0; i < START_HAND_SIZE; i++) {
-      const deck = getState().deckReducer;
+      const deck = getState().player.deckReducer;
       if (deck.length > 0) {
         const lastCard = deck[deck.length - 1];
         dispatch(addCardToHand(lastCard));

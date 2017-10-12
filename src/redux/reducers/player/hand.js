@@ -1,5 +1,5 @@
-import { ADD_CARD_TO_HAND, REMOVE_CARD_FROM_HAND, FOLD_HAND  } from '../actions/hand';
-import cards from '../../data/cards.json';
+import { ADD_CARD_TO_HAND, REMOVE_CARD_FROM_HAND, FOLD_HAND  } from '../../actions/player/hand';
+import cards from '../../../data/cards.json';
 import update from 'react-addons-update';
 
 function handReducer(state = [], action) {

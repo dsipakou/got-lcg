@@ -5,14 +5,14 @@ import Opponent from '../../components/opponent/Opponent';
 import Lobby from '../../containers/lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../../components/starthand/StartHand';
-import { playLocation, playCharacter, playEvent } from '../../redux/actions/hand'
-import { discardEvent } from '../../redux/actions/event';
-import { kneelLocation, standLocation } from '../../redux/actions/location';
-import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } from '../../redux/actions/opponentLocation';
-import { kneelCharacter, standCharacter } from '../../redux/actions/character';
-import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponentCharacter';
-import { drawCard, getStartHand, doMulligan } from '../../redux/actions/deck';
-import { newGame } from '../../redux/actions/game';
+import { playLocation, playCharacter, playEvent } from '../../redux/actions/player/hand'
+import { discardEvent } from '../../redux/actions/player/event';
+import { kneelLocation, standLocation } from '../../redux/actions/player/location';
+import { addOpponentLocation, kneelOpponentLocation, standOpponentLocation } from '../../redux/actions/opponent/opponentLocation';
+import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
+import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponent/opponentCharacter';
+import { drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
+import { newGame } from '../../redux/actions/general/game';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './board.scss'
@@ -111,17 +111,17 @@ Board.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  deck: state.deckReducer,
-  hand: state.handReducer,
-  discardPile: state.discardReducer,
-  plotCards: state.plotDeckReducer,
-  locations: state.locationReducer,
-  opponentLocations: state.opponentLocationReducer,
-  characters: state.characterReducer,
-  opponentCharacters: state.opponentCharacterReducer,
-  event: state.eventReducer,
-  game: state.gameReducer,
-  room: state.roomReducer,
+  deck: state.player.deckReducer,
+  hand: state.player.handReducer,
+  discardPile: state.player.discardReducer,
+  plotCards: state.player.plotDeckReducer,
+  locations: state.player.locationReducer,
+  opponentLocations: state.opponent.opponentLocationReducer,
+  characters: state.player.characterReducer,
+  opponentCharacters: state.opponent.opponentCharacterReducer,
+  event: state.player.eventReducer,
+  game: state.general.gameReducer,
+  room: state.general.roomReducer,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -47,7 +47,7 @@ export const playCharacter = (payload) => {
 
 export const playEvent = (payload) => {
   return (dispatch, getState) => {
-    const event = getState().eventReducer;
+    const event = getState().player.eventReducer;
     if (typeof event.uid !== 'undefined') {
       dispatch(discardEvent(event));
     }

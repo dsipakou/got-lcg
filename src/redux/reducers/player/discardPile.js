@@ -1,4 +1,4 @@
-import { ADD_CARD_TO_DISCARD } from '../actions/discardPile';
+import { ADD_CARD_TO_DISCARD } from '../../actions/player/discardPile';
 import update from 'react-addons-update';
 
 function discardReducer(state = [], action) {

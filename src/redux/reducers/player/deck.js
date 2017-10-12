@@ -1,9 +1,9 @@
-import { addCardToHand } from '../actions/hand';
-import { getCard } from '../actions/deck';
+import { addCardToHand } from '../../actions/player/hand';
+import { getCard } from '../../actions/player/deck';
 import arrayShuffle from 'array-shuffle';
 import uuid from 'uuid';
-import { DRAW_CARD, MAKE_DECK } from '../actions/deck';
-import cards from '../../data/cards.json';
+import { DRAW_CARD, MAKE_DECK } from '../../actions/player/deck';
+import cards from '../../../data/cards.json';
 
 const arr = cards.filter((card) => {
   if (card.type !== 'PLOT') {

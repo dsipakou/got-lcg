@@ -1,4 +1,4 @@
-import { ADD_EVENT, DELETE_EVENT } from '../actions/event';
+import { ADD_EVENT, DELETE_EVENT } from '../../actions/player/event';
 import update from 'react-addons-update';
 
 function eventReducer(state = {}, action) {

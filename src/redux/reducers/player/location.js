@@ -1,9 +1,9 @@
-import {ADD_OPPONENT_LOCATION, KNEEL_OPPONENT_LOCATION, STAND_OPPONENT_LOCATION, REMOVE_OPPONENT_LOCATION} from '../actions/opponentLocation';
+import {ADD_LOCATION, KNEEL_LOCATION, STAND_LOCATION, REMOVE_LOCATION} from '../../actions/player/location';
 import update from 'react-addons-update';
 
-function opponentLocationReducer(state = [], action) {
+function locationReducer(state = [], action) {
   switch (action.type) {
-    case ADD_OPPONENT_LOCATION:
+    case ADD_LOCATION:
       const card = update(action, {
         payload: {
           cardlocation: {$set: 'LOCATION'}
@@ -13,13 +13,13 @@ function opponentLocationReducer(state = [], action) {
         ...state,
         card
       ]
-    case KNEEL_OPPONENT_LOCATION:
+    case KNEEL_LOCATION:
       return update(state, {
           [action.index]: {
             kneel: {$set: true}
           }
         })
-    case STAND_OPPONENT_LOCATION:
+    case STAND_LOCATION:
       return update(state, {
         [action.index]: {
           kneel: {$set: false}
@@ -30,4 +30,4 @@ function opponentLocationReducer(state = [], action) {
   }
 }
 
-export default opponentLocationReducer;
+export default locationReducer;

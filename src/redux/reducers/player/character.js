@@ -1,33 +1,33 @@
-import {ADD_LOCATION, KNEEL_LOCATION, STAND_LOCATION, REMOVE_LOCATION} from '../actions/location';
-import update from 'react-addons-update';
+import { ADD_CHARACTER, KNEEL_CHARACTER, STAND_CHARACTER, REMOVE_CHARACTER } from '../../actions/player/character';
+import update from 'react-addons-update'
 
-function locationReducer(state = [], action) {
+function characterReducer(state = [], action) {
   switch (action.type) {
-    case ADD_LOCATION:
+    case ADD_CHARACTER:
       const card = update(action, {
         payload: {
-          cardlocation: {$set: 'LOCATION'}
+          cardlocation: {$set: 'CHARACTER'}
         }
       }).payload
       return [
         ...state,
         card
       ]
-    case KNEEL_LOCATION:
+    case KNEEL_CHARACTER:
       return update(state, {
           [action.index]: {
             kneel: {$set: true}
           }
         })
-    case STAND_LOCATION:
+    case STAND_CHARACTER:
       return update(state, {
         [action.index]: {
           kneel: {$set: false}
         }
       })
     default:
-      return state;
+      return state
   }
 }
 
-export default locationReducer;
+export default characterReducer;

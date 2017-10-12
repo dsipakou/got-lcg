@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { browserHistory, BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import player from './redux/reducers/player';
+import combiner from './redux/reducers/combiner';
 const socket = require('socket.io-client')('http://localhost:3000');
 import './style/base.scss';
 
@@ -22,7 +22,7 @@ const connectSocket = (component) => {
 	return props => React.createElement(component, {socket: socket, ...props})
 }
 const store = createStore(
-	player,
+	combiner,
 	compose(
     applyMiddleware(thunk, ioMiddleware),
 		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

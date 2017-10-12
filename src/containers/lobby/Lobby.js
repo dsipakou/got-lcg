@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import LoginForm from '../../components/lobby/loginform/LoginForm';
-import { newRoom } from '../../redux/actions/room';
+import { newRoom } from '../../redux/actions/general/room';
 import Room from '../../components/lobby/room/Room';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

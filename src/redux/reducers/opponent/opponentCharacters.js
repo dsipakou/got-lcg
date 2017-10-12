@@ -1,4 +1,4 @@
-import { ADD_OPPONENT_CHARACTER, KNEEL_OPPONENT_CHARACTER, STAND_OPPONENT_CHARACTER, REMOVE_OPPONENT_CHARACTER } from '../actions/opponentCharacter';
+import { ADD_OPPONENT_CHARACTER, KNEEL_OPPONENT_CHARACTER, STAND_OPPONENT_CHARACTER, REMOVE_OPPONENT_CHARACTER } from '../../actions/opponent/opponentCharacter';
 import update from 'react-addons-update'
 
 function opponentCharacterReducer(state = [], action) {

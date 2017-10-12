@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const MainDeck = ({ deck, action }) => {
   const drawCard = () => {
-    action(deck.length)
+    action()
   }
 
   return (

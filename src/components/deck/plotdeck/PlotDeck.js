@@ -46,7 +46,7 @@ class PlotDeck extends Component {
     const { cards } = this.props
     return (
       <div onClick={this.openModal}>
-        <Deck deck={cards} text="Plot Pile" />
+        <Deck deck={cards} text="Plot Pile" plot={true} />
         <Modal style={customStyles}
           onRequestClose={this.closeModal}
           isOpen={this.state.showModal}>

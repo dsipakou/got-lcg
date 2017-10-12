@@ -1,4 +1,4 @@
-import { NEW_ROOM } from '../actions/room';
+import { NEW_ROOM } from '../../actions/general/room';
 import uuid from 'uuid';
 
 function roomReducer(state = [], action) {

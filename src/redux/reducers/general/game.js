@@ -1,4 +1,4 @@
-import { NEW_GAME } from '../actions/game';
+import { NEW_GAME } from '../../actions/general/game';
 
 function gameReducer(state = [], action) {
   switch(action.type) {
