@@ -54,6 +54,7 @@ const Board = ({
           plotInPlay={opponentPlotInPlay}
           plotActions={opponentPlotActions}
         />
+        <hr />
         <Player
           deck={deck}
           hand={hand}
