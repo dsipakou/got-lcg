@@ -44,6 +44,9 @@ io.on('connection', (socket) => {
       case "STAND_CHARACTER":
         socket.broadcast.emit('stand character', data);
         break;
+      case "ADD_PLOT":
+        socket.broadcast.emit('play plot', data);
+        break;
       default:
         break;
     }
