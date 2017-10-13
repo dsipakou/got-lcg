@@ -7,7 +7,7 @@ const arr = cards.filter((card) => {
   if (card.type === 'PLOT') {
     return card;
   }
-}).map(card => { return { "uid": uuid.v4(), "cardlocation": "DECK", ...card }});
+}).map(card => { return { "uid": uuid.v4(), "cardlocation": "PLOTDECK", ...card }});
 
 const initialState = arrayShuffle(arr)
 
