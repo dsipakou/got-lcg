@@ -13,6 +13,7 @@ import { kneelCharacter, standCharacter } from '../../redux/actions/player/chara
 import { addOpponentCharacter, kneelOpponentCharacter, standOpponentCharacter } from '../../redux/actions/opponent/opponentCharacter';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
 import { playPlot } from '../../redux/actions/player/plot';
+import { addOpponentPlot } from '../../redux/actions/opponent/opponentPlot';
 import { newGame } from '../../redux/actions/general/game';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,6 +32,8 @@ const Board = ({
   deckActions,
   gameActions,
   plotActions,
+  opponentPlotInPlay,
+  opponentPlotActions,
 }) => {
   let starthand = false;
   if (starthand) {
@@ -48,6 +51,8 @@ const Board = ({
           locationActions={opponentLocationActions}
           characters={opponentCharacters}
           characterActions={opponentCharacterActions}
+          plotInPlay={opponentPlotInPlay}
+          plotActions={opponentPlotActions}
         />
         <Player
           deck={deck}
@@ -76,6 +81,7 @@ Board.propTypes = {
   discardPile: PropTypes.array.isRequired,
   plotDeck: PropTypes.array.isRequired,
   plotInPlay: PropTypes.array.isRequired,
+  opponentPlotInPlay: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   opponentLocations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
@@ -115,6 +121,9 @@ Board.propTypes = {
   }),
   plotActions: PropTypes.shape({
     playPlot: PropTypes.func.isRequired,
+  }),
+  opponentPlotActions: PropTypes.shape({
+    addOpponentPlot: PropTypes.func.isRequired,
   })
 }
 
@@ -124,6 +133,7 @@ const mapStateToProps = (state) => ({
   discardPile: state.player.discardReducer,
   plotDeck: state.player.plotDeckReducer,
   plotInPlay: state.player.plotReducer,
+  opponentPlotInPlay: state.opponent.opponentPlotReducer,
   locations: state.player.locationReducer,
   opponentLocations: state.opponent.opponentLocationReducer,
   characters: state.player.characterReducer,
@@ -168,6 +178,9 @@ const mapDispatchToProps = (dispatch) => ({
   }, dispatch),
   plotActions: bindActionCreators({
     playPlot,
+  }, dispatch),
+  opponentPlotActions: bindActionCreators({
+    addOpponentPlot,
   }, dispatch),
 })
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Deck from '../deck/Deck';
 
 class OpponentPlot extends Component {
   componentDidMount() {
@@ -10,10 +11,14 @@ class OpponentPlot extends Component {
   }
 
   render() {
+    const { cards } = this.props;
     return (
       <div>
-
+          <h2>Opponents plot</h2>
+          <Deck deck={cards} plot={true} revealed={true} />
       </div>
     )
   }
 }
+
+export default OpponentPlot;
