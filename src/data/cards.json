@@ -1,16 +1,164 @@
 [
-  {"id": "01001", "set": "CORE", "name": "A Clash of Kings", "faction": "NEUTRAL", "type": "PLOT", "traits": "Noble", "gold": 4, "initiative": 9, "claim": 1, "image_url": "https://thronesdb.com/bundles/cards/01001.png"},
-  {"id": "01002", "set": "CORE", "name": "A Feast for Crows", "faction": "NEUTRAL", "type": "PLOT", "traits": "Edict", "gold": 6, "initiative": 1, "claim": 1, "image_url": "https://thronesdb.com/bundles/cards/01002.png"},
-  {"id": "01028", "set": "CORE", "name": "Littlefinger", "faction": "NEUTRAL", "cost": 5, "STR": 4, "type": "CHARACTER", "chalenges": ["INTIGUE", "POWER"], "traits": ["Ally", "Lord", "Small Counsil"], "image_url": "https://thronesdb.com/bundles/cards/01028.png"},
-  {"id": "01029", "set": "CORE", "name": "Varys", "faction": "NEUTRAL", "cost": 6, "STR": 3, "type": "CHARACTER", "chalenges": ["INTIGUE"], "traits": ["Lord", "Small Counsil", "Spy"], "image_url": "https://thronesdb.com/bundles/cards/01029.png"},
-  {"id": "01041", "set": "CORE", "name": "Put to the Sword", "faction": "NEUTRAL", "cost": 2, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01041.png"},
-  {"id": "01042", "set": "CORE", "name": "Put to the Torch", "faction": "NEUTRAL", "cost": 1, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01042.png"},
-  {"id": "01043", "set": "CORE", "name": "Superior Claim", "faction": "NEUTRAL", "cost": 0, "type": "EVENT", "image_url": "https://thronesdb.com/bundles/cards/01043.png"},
-  {"id": "01046", "name": "Maester Cressen", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01046.png"},
-  {"id": "01047", "name": "Melisandre", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01047.png"},
-  {"id": "01059", "name": "Dragonstone Port", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01059.png"},
-  {"id": "01060", "name": "Chamber of the Painted Table", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01060.png"},
-  {"id": "01061", "name": "The Red Keep", "type": "LOCATION", "image_url": "https://thronesdb.com/bundles/cards/01061.png"},
-  {"id": "01065", "name": "Aeron Damphair", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01065.png"},
-  {"id": "01066", "name": "Alannys Greyjoy", "type": "CHARACTER", "image_url": "https://thronesdb.com/bundles/cards/01066.png"}
+  {
+    "id": "01001",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "A Clash of Kings",
+    "faction": "NEUTRAL",
+    "traits": "Noble",
+    "gold": 4,
+    "initiative": 9,
+    "claim": 1,
+    "image_url": "https://thronesdb.com/bundles/cards/01001.png"
+  },
+  {
+    "id": "01002",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "A Feast for Crows",
+    "faction": "NEUTRAL",
+    "traits": "Edict",
+    "gold": 6,
+    "initiative": 1,
+    "claim": 1,
+    "image_url": "https://thronesdb.com/bundles/cards/01002.png"
+  },
+  {
+    "id": "01028",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Littlefinger",
+    "faction": "NEUTRAL",
+    "cost": 5,
+    "str": 4,
+    "chalenges": ["INTIGUE", "POWER"],
+    "traits": ["Ally", "Lord", "Small Counsil"],
+    "image_url": "https://thronesdb.com/bundles/cards/01028.png"
+  },
+  {
+    "id": "01029",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Varys",
+    "faction": "NEUTRAL",
+    "cost": 6,
+    "str": 3,
+    "chalenges": ["INTIGUE"],
+    "traits": ["Lord", "Small Counsil", "Spy"],
+    "image_url": "https://thronesdb.com/bundles/cards/01029.png"
+  },
+  {
+    "id": "01041",
+    "set": "CORE",
+    "type": "EVENT",
+    "name": "Put to the Sword",
+    "faction": "NEUTRAL",
+    "cost": 2,
+    "image_url": "https://thronesdb.com/bundles/cards/01041.png"
+  },
+  {
+    "id": "01042",
+    "set": "CORE",
+    "type": "EVENT",
+    "name": "Put to the Torch",
+    "faction": "NEUTRAL",
+    "cost": 1,
+    "image_url": "https://thronesdb.com/bundles/cards/01042.png"
+  },
+  {
+    "id": "01043",
+    "set": "CORE",
+    "type": "EVENT",
+    "name": "Superior Claim",
+    "faction": "NEUTRAL",
+    "cost": 0,
+    "image_url": "https://thronesdb.com/bundles/cards/01043.png"
+  },
+  {
+    "id": "01046",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Maester Cressen",
+    "faction": "BARATHEON",
+    "cost": 3,
+    "str": 3,
+    "traits": ["Maester"],
+    "chalenges": ["POWER"],
+    "image_url": "https://thronesdb.com/bundles/cards/01046.png"
+  },
+  {
+    "id": "01047",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Melisandre",
+    "faction": "BARATHEON",
+    "cost": 5,
+    "str": 4,
+    "traits": ["Lady", "Rhllor"],
+    "chalenges": ["INTIGUE", "POWER"],
+    "image_url": "https://thronesdb.com/bundles/cards/01047.png"
+  },
+  {
+    "id": "01048",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Robert Baratheon",
+    "faction": "BARATHEON",
+    "cost": 7,
+    "str": 5,
+    "traits": ["King", "Lord"],
+    "chalenges": ["MILITARY", "POWER"],
+    "image_url": "https://thronesdb.com/bundles/cards/01048.png"
+  }
+  {
+    "id": "01059",
+    "set": "CORE",
+    "type": "LOCATION",
+    "name": "Dragonstone Port",
+    "faction": "BARATHEON",
+    "cost": 0,
+    "traits": ["Dragonstone"],
+    "keywords": ["Limited"],
+    "image_url": "https://thronesdb.com/bundles/cards/01059.png"
+  },
+  {
+    "id": "01060",
+    "set": "CORE",
+    "type": "LOCATION",
+    "name": "Chamber of the Painted Table",
+    "faction": "BARATHEON",
+    "cost": 2,
+    "traits": ["Dragonstone"],
+    "image_url": "https://thronesdb.com/bundles/cards/01060.png"
+  },
+  {
+    "id": "01061",
+    "set": "CORE",
+    "type": "LOCATION",
+    "name": "The Red Keep",
+    "faction": "BARATHEON",
+    "cost": 3,
+    "traits": ["Kinds Landing"],
+    "image_url": "https://thronesdb.com/bundles/cards/01061.png"
+  },
+  {
+    "id": "01065",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Aeron Damphair",
+    "faction": "GREYJOY",
+    "cost": 3,
+    "traits": ["Drowned God", "Ironborn", "Lord"],
+    "image_url": "https://thronesdb.com/bundles/cards/01065.png"
+  },
+  {
+    "id": "01066",
+    "set": "CORE",
+    "type": "CHARACTER",
+    "name": "Alannys Greyjoy",
+    "faction": "GREYJOY",
+    "cost": 3,
+    "traits": ["House Harlaw", "Lady"],
+    "image_url": "https://thronesdb.com/bundles/cards/01066.png"
+  }
 ]
