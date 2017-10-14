@@ -33,29 +33,35 @@ export const foldHand = () => {
 }
 
 export const playLocation = (payload) => {
-  return dispatch => {
-    dispatch(addLocation(payload));
-    dispatch(removeCardFromHand(payload.index));
-    dispatch(spendGold(payload.cost));
+  return (dispatch, getState) => {
+    if (getState().player.propertiesReducer.gold >= payload.cost) {
+      dispatch(addLocation(payload));
+      dispatch(removeCardFromHand(payload.index));
+      dispatch(spendGold(payload.cost));
+    }
   }
 }
 
 export const playCharacter = (payload) => {
-  return dispatch => {
-    dispatch(addCharacter(payload));
-    dispatch(removeCardFromHand(payload.index));
-    dispatch(spendGold(payload.cost));
+  return (dispatch, getState) => {
+    if (getState().player.propertiesReducer.gold >= payload.cost) {
+      dispatch(addCharacter(payload));
+      dispatch(removeCardFromHand(payload.index));
+      dispatch(spendGold(payload.cost));
+    }
   }
 }
 
 export const playEvent = (payload) => {
   return (dispatch, getState) => {
     const event = getState().player.eventReducer;
-    if (typeof event.uid !== 'undefined') {
-      dispatch(discardEvent(event));
+    if (getState().player.propertiesReducer.gold >= payload.cost) {
+      if (typeof event.uid !== 'undefined') {
+        dispatch(discardEvent(event));
+      }
+      dispatch(addEvent(payload));
+      dispatch(removeCardFromHand(payload.index));
+      dispatch(spendGold(payload.cost));
     }
-    dispatch(addEvent(payload));
-    dispatch(removeCardFromHand(payload.index));
-    dispatch(spendGold(payload.cost));
   }
 }
