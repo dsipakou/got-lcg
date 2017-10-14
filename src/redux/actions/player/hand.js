@@ -3,6 +3,7 @@ import { addCharacter } from './character'
 import { addEvent } from './event'
 import { addCardToDiscard } from './discardPile';
 import { discardEvent } from './event';
+import { spendGold } from './properties';
 
 export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
 export const REMOVE_CARD_FROM_HAND = 'REMOVE_CARD_FROM_HAND'
@@ -35,6 +36,7 @@ export const playLocation = (payload) => {
   return dispatch => {
     dispatch(addLocation(payload));
     dispatch(removeCardFromHand(payload.index));
+    dispatch(spendGold(payload.cost));
   }
 }
 
@@ -42,6 +44,7 @@ export const playCharacter = (payload) => {
   return dispatch => {
     dispatch(addCharacter(payload));
     dispatch(removeCardFromHand(payload.index));
+    dispatch(spendGold(payload.cost));
   }
 }
 
@@ -53,5 +56,6 @@ export const playEvent = (payload) => {
     }
     dispatch(addEvent(payload));
     dispatch(removeCardFromHand(payload.index));
+    dispatch(spendGold(payload.cost));
   }
 }
