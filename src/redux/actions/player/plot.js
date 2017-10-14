@@ -1,5 +1,5 @@
 import { removePlotFromDeck } from './plotDeck';
-import { getGold, getInitiative, getClaim } from './properties';
+import { setGold, setInitiative, setClaim } from './properties';
 
 export const ADD_PLOT = 'ADD_PLOT';
 export const PLAY_PLOT = 'PLAY_PLOT';
@@ -17,8 +17,8 @@ export const playPlot = (index) => {
     const { gold, initiative, claim } = card;
     dispatch(addPlot(card))
     dispatch(removePlotFromDeck(card.uid))
-    dispatch(getGold(gold))
-    dispatch(getInitiative(initiative))
-    dispatch(getClaim(claim))
+    dispatch(setGold(gold))
+    dispatch(setInitiative(initiative))
+    dispatch(setClaim(claim))
   }
 }

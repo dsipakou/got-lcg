@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import { GET_GOLD, GET_INITIATIVE, GET_CLAIM, SPEND_GOLD } from '../../actions/player/properties';
+import { SET_GOLD, SET_INITIATIVE, SET_CLAIM, SPEND_GOLD } from '../../actions/player/properties';
 
 const propertiesReducer = (state = {
   gold: 0,
@@ -7,11 +7,11 @@ const propertiesReducer = (state = {
   claim: 0
 }, action) => {
   switch (action.type) {
-    case GET_GOLD:
+    case SET_GOLD:
       return {...state, gold: action.payload}
-    case GET_INITIATIVE:
+    case SET_INITIATIVE:
       return {...state, initiative: action.payload}
-    case GET_CLAIM:
+    case SET_CLAIM:
       return {...state, claim: action.payload}
     case SPEND_GOLD:
       return {...state, gold: state.gold - action.payload}

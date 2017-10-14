@@ -1,25 +1,25 @@
-export const GET_GOLD = 'GET_GOLD';
-export const GET_INITIATIVE = 'GET_INITIATIVE';
-export const GET_CLAIM = 'GET_CLAIM';
+export const SET_GOLD = 'SET_GOLD';
+export const SET_INITIATIVE = 'SET_INITIATIVE';
+export const SET_CLAIM = 'SET_CLAIM';
 export const SPEND_GOLD = 'SPEND_GOLD';
 
-export const getGold = (payload) => {
+export const setGold = (payload) => {
   return {
-    type: GET_GOLD,
+    type: SET_GOLD,
     payload
   }
 }
 
-export const getInitiative = (payload) => {
+export const setInitiative = (payload) => {
   return {
-    type: GET_INITIATIVE,
+    type: SET_INITIATIVE,
     payload
   }
 }
 
-export const getClaim = (payload) => {
+export const setClaim = (payload) => {
   return {
-    type: GET_CLAIM,
+    type: SET_CLAIM,
     payload,
   }
 }
