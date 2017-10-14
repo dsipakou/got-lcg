@@ -109,7 +109,7 @@
     "traits": ["King", "Lord"],
     "chalenges": ["MILITARY", "POWER"],
     "image_url": "https://thronesdb.com/bundles/cards/01048.png"
-  }
+  },
   {
     "id": "01059",
     "set": "CORE",
@@ -149,6 +149,7 @@
     "faction": "GREYJOY",
     "cost": 3,
     "traits": ["Drowned God", "Ironborn", "Lord"],
+    "chalenges": ["POWER"],
     "image_url": "https://thronesdb.com/bundles/cards/01065.png"
   },
   {
@@ -159,6 +160,7 @@
     "faction": "GREYJOY",
     "cost": 3,
     "traits": ["House Harlaw", "Lady"],
+    "chalenges": ["INTIGUE", "POWER"],
     "image_url": "https://thronesdb.com/bundles/cards/01066.png"
   }
 ]

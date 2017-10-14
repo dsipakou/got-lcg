@@ -8,6 +8,7 @@ import MainDeck from '../deck/maindeck/MainDeck';
 import DiscardPile from '../deck/discardPile/DiscardPile';
 import PlotDeck from '../deck/plotdeck/PlotDeck';
 import Plot from '../plot/Plot';
+import Gold from './gold/Gold';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import './player.scss';
@@ -20,6 +21,7 @@ const Player = ({
   locations,
   characters,
   event,
+  gold,
   deckActions,
   locationActions,
   characterActions,
@@ -37,6 +39,7 @@ const Player = ({
           <Location cards={locations} actions={locationActions} />
         </div>
         <div className='help-zone'>
+          <Gold gold={gold} />
           <Plot cards={plotInPlay} />
         </div>
       </div>
@@ -59,6 +62,7 @@ Player.propTypes = {
   locations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
   event: PropTypes.object.isRequired,
+  gold: PropTypes.number.isRequired,
   deckActions: PropTypes.shape({
     drawCard: PropTypes.func,
     getStartHand: PropTypes.func
