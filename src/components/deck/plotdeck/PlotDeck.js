@@ -73,6 +73,7 @@ class PlotDeck extends Component {
 
 PlotDeck.propTypes = {
   cards: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired,
 }
 
 export default PlotDeck;

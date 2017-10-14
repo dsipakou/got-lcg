@@ -21,7 +21,7 @@ class Room extends Component {
         { !this.state.roomCreated &&
         <button onClick={ this.createRoom.bind(this) }>Create new room</button> }
         <ul>
-        { rooms.map((room, index) => (<li><button id={room.id}>Join room</button></li>)) }
+        { rooms.map((room, index) => (<li><button key={room.id}>Join room</button></li>)) }
         </ul>
       </div>
     )

@@ -21,7 +21,6 @@ class Lobby extends Component {
   render() {
     const { socket, roomActions, rooms } = this.props;
     if (this.state.loggedin) {
-      console.log('roomactions' + roomActions)
       return (
         <Room socket={socket} actions={roomActions} rooms={rooms} />
       )
@@ -42,7 +41,7 @@ Lobby.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  rooms: state.roomReducer,
+  rooms: state.general.roomReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
