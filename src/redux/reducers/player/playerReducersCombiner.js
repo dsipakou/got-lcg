@@ -7,6 +7,7 @@ import characterReducer from './character';
 import discardReducer from './discardPile';
 import plotDeckReducer from './plotDeck';
 import plotReducer from './plot';
+import propertiesReducer from './properties';
 
 export default combineReducers({
   deckReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   discardReducer,
   plotDeckReducer,
   plotReducer,
+  propertiesReducer,
 })
