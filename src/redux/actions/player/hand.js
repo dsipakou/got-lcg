@@ -38,7 +38,9 @@ export const playLocation = (payload) => {
       dispatch(addLocation(payload));
       dispatch(removeCardFromHand(payload.index));
       dispatch(spendGold(payload.cost));
+      return true;
     }
+    return false;
   }
 }
 
@@ -48,7 +50,9 @@ export const playCharacter = (payload) => {
       dispatch(addCharacter(payload));
       dispatch(removeCardFromHand(payload.index));
       dispatch(spendGold(payload.cost));
+      return true;
     }
+    return false;
   }
 }
 
@@ -62,6 +66,8 @@ export const playEvent = (payload) => {
       dispatch(addEvent(payload));
       dispatch(removeCardFromHand(payload.index));
       dispatch(spendGold(payload.cost));
+      return true;
     }
+    return false;
   }
 }

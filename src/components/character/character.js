@@ -13,7 +13,8 @@ const boardTarget = {
     return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
-    props.actions.playCharacter(monitor.getItem().card);
+    const res = props.actions.playCharacter(monitor.getItem().card);
+    console.log(res);
   },
 };
 
