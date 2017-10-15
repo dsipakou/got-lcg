@@ -5,6 +5,8 @@ import DragableCard from '../../containers/dragablecard/DragableCard';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import './character.scss';
 
+let enoughGold = true;
+
 const boardTarget = {
   canDrop(props, monitor){
     if (typeof monitor.getItem().card === "undefined") {
@@ -13,8 +15,7 @@ const boardTarget = {
     return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
   },
   drop(props, monitor) {
-    const res = props.actions.playCharacter(monitor.getItem().card);
-    console.log(res);
+    enoughGold = props.actions.playCharacter(monitor.getItem().card);
   },
 };
 
@@ -56,6 +57,7 @@ const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) =
     currentItem.card.cardlocation !== currentItem.card.type;
   return connectDropTarget(
     <div className='character-inner' >
+      {!enoughGold && <span>Not enough gold</span>}
         {isOver && canDrop && renderOverlay('yellow', 'black')}
         {!isOver && canDrop && renderOverlay('green', 'white')}
         { cards.map((card, index) => (
