@@ -32,6 +32,10 @@
     transform: scale(2.3) translateY(-35px);
     z-index: 1;
   }
+  &:active {
+    transition-delay: 0s;
+    transform: scale(1);
+  }
 }
 
 .card-kneeled {
