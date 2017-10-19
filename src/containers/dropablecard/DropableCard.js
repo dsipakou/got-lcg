@@ -45,4 +45,4 @@ DropableCard.propTypes = {
   isOver: PropTypes.bool.isRequired,
 }
 
-export default DropTarget('EVENT', cardTarget, collect)(DropableCard);
+export default DropTarget('ATTACHMENT', cardTarget, collect)(DropableCard);

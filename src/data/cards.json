@@ -48,6 +48,16 @@
     "image_url": "https://thronesdb.com/bundles/cards/01029.png"
   },
   {
+    "id": "01032",
+    "set": "CORE",
+    "type": "ATTACHMENT",
+    "name": "Seal of the Hand",
+    "faction": "NEUTRAL",
+    "cost": 3,
+    "traits": ["Item"],
+    "image_url": "https://thronesdb.com/bundles/cards/01032.png"
+  },
+  {
     "id": "01041",
     "set": "CORE",
     "type": "EVENT",
