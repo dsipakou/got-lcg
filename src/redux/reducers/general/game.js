@@ -1,14 +1,6 @@
-export default {
-  state: { name: 'new game' },
-  transitions: {
-    'new game': {
-      'marshal': 'marshaling'
-    },
-    'marshaling': {
-      'challenge': 'challenging'
-    },
-    'challenging': {
-      'marshal': 'marshaling'
-    }
+export default function gameReducer(state = [], action) {
+  switch (action.type) {
+    default:
+      return state;
   }
-};
+}
