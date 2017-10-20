@@ -1,14 +1,17 @@
 export default {
-  state: { name: 'new game' },
+  state: { name: 'plot phase' },
   transitions: {
     'new game': {
-      'marshal': 'marshaling'
+      'goto plot': 'plot phase',
+    },
+    'plot phase': {
+      'goto marshal': 'marshaling'
     },
     'marshaling': {
-      'challenge': 'challenging'
+      'goto challenge': 'challenging'
     },
     'challenging': {
-      'marshal': 'marshaling'
+      'goto marshal': 'marshaling'
     }
   }
 };

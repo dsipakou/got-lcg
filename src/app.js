@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM, {render} from 'react-dom';
-import Board1 from './containers/board/Board1';
 import Board from './containers/board/Board';
 import Lobby from './containers/lobby/Lobby';
 import Layout from './components/Layout';
@@ -35,7 +34,7 @@ render(
 		<BrowserRouter>
 			<Layout>
 				<Switch>
-					<Route exact path="/" component={connectSocket(Board1)} />
+					<Route exact path="/" component={connectSocket(Board)} />
 					<Route path="/lobby" component={connectSocket(Lobby)} />
 				</Switch>
 			</Layout>
