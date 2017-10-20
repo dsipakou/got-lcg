@@ -25,14 +25,20 @@ const collect = (connect, monitor) => {
 const DropableCard = ({isOver, card, currentItem, connectDropTarget}) => {
   const renderOverlay = (bgColor, color) => {
     return(
-      <div className='drag-overlay' style={{backgroundColor: bgColor, color: color}}>Attachment</div>
+      <div className='drag-overlay' style={{backgroundColor: bgColor, color: color}}>Here</div>
     )
   }
 
+  let canDrop =
+    currentItem != null &&
+    typeof currentItem.card !== "undefined" &&
+    currentItem.card.type === 'ATTACHMENT' &&
+    currentItem.card.cardlocation !== currentItem.card.type;
+
   return connectDropTarget(
     <div className='dropableCard'>
-      {isOver && renderOverlay('yellow', 'black')}
-      {!isOver && renderOverlay('green', 'black')}
+      {isOver && canDrop && renderOverlay('yellow', 'black')}
+      {!isOver && canDrop && renderOverlay('green', 'black')}
       <DragableCard {...card} />
     </div>
   )
