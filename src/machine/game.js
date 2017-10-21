@@ -5,13 +5,25 @@ export default {
       'goto plot': 'plot phase',
     },
     'plot phase': {
-      'goto marshal': 'marshaling'
+      'goto draw': 'draw phase',
     },
-    'marshaling': {
-      'goto challenge': 'challenging'
+    'draw phase': {
+      'goto marshal': 'marshaling phase'
     },
-    'challenging': {
-      'goto marshal': 'marshaling'
+    'marshaling phase': {
+      'goto challenge': 'challenges phase'
+    },
+    'challenges phase': {
+      'goto dominance': 'dominance phase'
+    },
+    'dominance phase': {
+      'goto standing': 'standing phase'
+    },
+    'standing phase': {
+      'goto taxation': 'taxation phase'
+    },
+    'taxation phase': {
+      'goto plot': 'plot phase'
     }
   }
 };

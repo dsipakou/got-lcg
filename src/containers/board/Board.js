@@ -35,34 +35,67 @@ Board.propTypes = {
   gameflow: PropTypes.shape({
     name: PropTypes.string,
     states: PropTypes.shape({
-      newGamePhase: PropTypes.bool,
-      plotPahse: PropTypes.bool,
-      marshalingPhase: PropTypes.bool,
-      challengingPhase: PropTypes.bool,
+      isNewGame: PropTypes.bool.isRequired,
+      isPlotPhase: PropTypes.bool.isRequired,
+      isDrawPhase: PropTypes.bool.isRequired,
+      isMarshalingPhase: PropTypes.bool.isRequired,
+      isChallengesPhase: PropTypes.bool.isRequired,
+      isDominancePhase: PropTypes.bool.isRequired,
+      isStandingPhase: PropTypes.bool.isRequired,
+      isTaxationPhase: PropTypes.bool.isRequired,
     }),
     actions: PropTypes.shape({
-      gotoPlot: PropTypes.func,
-      gotoMarshal: PropTypes.func,
-      gotoChallenge: PropTypes.func,
+      gotoPlot: PropTypes.func.isRequired,
+      gotoDraw: PropTypes.func.isRequired,
+      gotoMarshal: PropTypes.func.isRequired,
+      gotoChallenge: PropTypes.func.isRequired,
+      gotoDominance: PropTypes.func.isRequired,
+      gotoStanding: PropTypes.func.isRequired,
+      gotoTaxation: PropTypes.func.isRequired,
     }),
   }),
 }
 
 export default connect(Board)
   .with('gameflow')
-  .map(({ state, isNewGame, isPlotPhase, isMarshaling, isChallenging, gotoPlot, gotoMarshal, gotoChallenge }) => ({
+  .map(({
+    state,
+    isNewGame,
+    isPlotPhase,
+    isDrawPhase,
+    isMarshalingPhase,
+    isChallengesPhase,
+    isDominancePhase,
+    isStandingPhase,
+    isTaxationPhase,
+    gotoPlot,
+    gotoDraw,
+    gotoMarshal,
+    gotoChallenge,
+    gotoDominance,
+    gotoStanding,
+    gotoTaxation
+  }) => ({
     gameflow: {
       name: state.name,
       states: {
-        newGamePhase: isNewGame(),
-        plotPhase: isPlotPhase(),
-        marshalingPhase: isMarshaling(),
-        challengingPhase: isChallenging(),
+        isNewGame: isNewGame(),
+        isPlotPhase: isPlotPhase(),
+        isDrawPhase: isDrawPhase(),
+        isMarshalingPhase: isMarshalingPhase(),
+        isChallengesPhase: isChallengesPhase(),
+        isDominancePhase: isDominancePhase(),
+        isStandingPhase: isStandingPhase(),
+        isTaxationPhase: isTaxationPhase(),
       },
       actions: {
         gotoPlot,
+        gotoDraw,
         gotoMarshal,
         gotoChallenge,
-      }
+        gotoDominance,
+        gotoStanding,
+        gotoTaxation,
+      },
     },
   }));
