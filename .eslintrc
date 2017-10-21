@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+  },
+  "rules": {
+    "react/prefer-stateless-function": 1,
+    "react/require-extension": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unused-prop-types": 0,
+    "react/no-find-dom-node": 1,
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack/webpack.config.js"
+      }
+    }
+  },
+}
