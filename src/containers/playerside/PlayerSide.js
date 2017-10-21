@@ -33,6 +33,7 @@ const PlayerSide = ({
   characterActions,
   eventActions,
   plotActions,
+  gameflow,
 }) => {
   return(
     <div className='player-inner'>
@@ -53,7 +54,7 @@ const PlayerSide = ({
         <MainDeck deck={deck} action={deckActions.drawCard} />
         <Hand cards={hand} />
         <DiscardPile cards={discardPile} />
-        <PlotDeck cards={plotDeck} actions={plotActions} />
+        <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
       </div>
     </div>
   );
@@ -88,7 +89,8 @@ PlayerSide.propTypes = {
   }),
   plotActions: PropTypes.shape({
     playPlot: PropTypes.func.isRequired,
-  })
+  }),
+  gameflow: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({

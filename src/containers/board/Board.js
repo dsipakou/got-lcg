@@ -13,7 +13,6 @@ import './Board.scss'
 Machine.create('gameflow', game);
 
 const Board = ({ socket, deck, hand, deckActions, gameflow }) => {
-  console.log(gameflow);
   let starthand = false;
   if (starthand) {
     return (
@@ -25,7 +24,7 @@ const Board = ({ socket, deck, hand, deckActions, gameflow }) => {
     return (
       <div className='board'>
         <OpponentSide socket={socket} />
-        <PlayerSide />
+        <PlayerSide gameflow={gameflow} />
       </div>
     )
   }
