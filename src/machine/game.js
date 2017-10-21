@@ -1,7 +1,10 @@
 export default {
-  state: { name: 'plot phase' },
+  state: { name: 'setup phase' },
   transitions: {
     'new game': {
+      'goto setup': 'setup phase',
+    },
+    'setup phase': {
       'goto plot': 'plot phase',
     },
     'plot phase': {

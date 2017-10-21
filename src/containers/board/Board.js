@@ -14,10 +14,10 @@ Machine.create('gameflow', game);
 
 const Board = ({ socket, deck, hand, deckActions, gameflow }) => {
   let starthand = false;
-  if (starthand) {
+  if (gameflow.states.isSetupPhase) {
     return (
       <div className='board'>
-        <StartHand />
+        <StartHand gameflow={gameflow}/>
       </div>
     )
   } else {
@@ -36,6 +36,7 @@ Board.propTypes = {
     name: PropTypes.string,
     states: PropTypes.shape({
       isNewGame: PropTypes.bool.isRequired,
+      isSetupPhase: PropTypes.bool.isRequired,
       isPlotPhase: PropTypes.bool.isRequired,
       isDrawPhase: PropTypes.bool.isRequired,
       isMarshalingPhase: PropTypes.bool.isRequired,
@@ -45,6 +46,7 @@ Board.propTypes = {
       isTaxationPhase: PropTypes.bool.isRequired,
     }),
     actions: PropTypes.shape({
+      gotoSetup: PropTypes.func.isRequired,
       gotoPlot: PropTypes.func.isRequired,
       gotoDraw: PropTypes.func.isRequired,
       gotoMarshal: PropTypes.func.isRequired,
@@ -61,6 +63,7 @@ export default connect(Board)
   .map(({
     state,
     isNewGame,
+    isSetupPhase,
     isPlotPhase,
     isDrawPhase,
     isMarshalingPhase,
@@ -68,6 +71,7 @@ export default connect(Board)
     isDominancePhase,
     isStandingPhase,
     isTaxationPhase,
+    gotoSetup,
     gotoPlot,
     gotoDraw,
     gotoMarshal,
@@ -80,6 +84,7 @@ export default connect(Board)
       name: state.name,
       states: {
         isNewGame: isNewGame(),
+        isSetupPhase: isSetupPhase(),
         isPlotPhase: isPlotPhase(),
         isDrawPhase: isDrawPhase(),
         isMarshalingPhase: isMarshalingPhase(),
@@ -89,6 +94,7 @@ export default connect(Board)
         isTaxationPhase: isTaxationPhase(),
       },
       actions: {
+        gotoSetup,
         gotoPlot,
         gotoDraw,
         gotoMarshal,

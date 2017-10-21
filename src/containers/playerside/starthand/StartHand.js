@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './StartHand.scss';
 import Card from '../../../components/card/Card';
-import Deck from '../../../components/deck/Deck';
+import MainDeck from '../../../components/deck/maindeck/MainDeck';
+import { getStartHand, doMulligan } from '../../../redux/actions/player/deck';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -12,6 +13,8 @@ class StartHand extends Component {
     this.state = {
       canMulligan: true,
     }
+    this.doMulligan = this.doMulligan.bind(this);
+    this.gotoPlotPhase = this.props.gameflow.actions.gotoPlot.bind(this);
   }
 
   doMulligan(e) {
@@ -20,7 +23,7 @@ class StartHand extends Component {
     this.props.deckActions.getStartHand()
   }
   render () {
-    const { deck, hand, deckActions } = this.props
+    const { deck, hand, deckActions, gameflow } = this.props
     console.log(this.state.canMulligan)
     return (
       <div className='starthand-inner'>
@@ -34,12 +37,12 @@ class StartHand extends Component {
           }
           </div>
           <div className='starthand-buttons'>
-          { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan.bind(this)}>Do mulligan</button> : null }
-          { hand.length > 0 ? <button>Start Game</button> : null }
+          { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan}>Do mulligan</button> : null }
+          { hand.length > 0 ? <button onClick={this.gotoPlotPhase}>Start Game</button> : null }
           </div>
         </div>
         <div className='starthand-footer'>
-          <Deck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } />
+          <MainDeck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } gameflow={gameflow} />
         </div>
       </div>
     )
@@ -48,11 +51,12 @@ class StartHand extends Component {
 
 StartHand.propTypes = {
   deck: PropTypes.array.isRequired,
-  hand: PropTypes.array,
+  hand: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({
-    getStartHand: PropTypes.func,
-    doMulligan: PropTypes.func
-  })
+    getStartHand: PropTypes.func.isRequired,
+    doMulligan: PropTypes.func.isRequired,
+  }),
+  gameflow: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -62,7 +66,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deckActions: bindActionCreators({
-    drawCard,
     getStartHand,
     doMulligan
   }, dispatch),

@@ -1,9 +1,9 @@
 import { addCardToHand, foldHand } from './hand';
 
-export const DRAW_CARD = 'DRAW_CARD'
-export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND'
-export const MAKE_DECK = 'MAKE_DECK'
-const START_HAND_SIZE = 4
+export const DRAW_CARD = 'DRAW_CARD';
+export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND';
+export const MAKE_DECK = 'MAKE_DECK';
+const START_HAND_SIZE = 7;
 
 let cardId = 0;
 
