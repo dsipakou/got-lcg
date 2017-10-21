@@ -47,12 +47,11 @@ class PlotDeck extends Component {
 
   play(event, data) {
     this.props.actions.playPlot(data.index);
-    this.props.gameflow.actions.gotoMarshal();
+    this.props.gameflow.actions.gotoDraw();
   }
 
   render () {
     const { cards, gameflow } = this.props
-    console.log(this.props.gameflow);
     return (
       <div onClick={this.openModal}>
         <Deck deck={cards} text="Plot Pile" plot={true} />
@@ -64,7 +63,7 @@ class PlotDeck extends Component {
               <Card {...card} index={index} key={card.uid} plot={true} />
             </ContextMenuTrigger>
           ))}
-          { gameflow.states.plotPhase &&
+          { gameflow.states.isPlotPhase &&
           <ContextMenu id='plot_context_menu' >
             <MenuItem onClick={this.play}>Play Plot</MenuItem>
           </ContextMenu>
