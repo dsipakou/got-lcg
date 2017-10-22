@@ -1,5 +1,5 @@
 export default {
-  state: { name: 'setup phase' },
+  state: { name: 'new game' },
   transitions: {
     'new game': {
       'goto setup': 'setup phase',

@@ -12,21 +12,50 @@ import './Board.scss'
 
 Machine.create('gameflow', game);
 
-const Board = ({ socket, deck, hand, deckActions, gameflow }) => {
-  let starthand = false;
-  if (gameflow.states.isSetupPhase) {
-    return (
-      <div className='board'>
-        <StartHand gameflow={gameflow}/>
-      </div>
-    )
-  } else {
-    return (
-      <div className='board'>
-        <OpponentSide socket={socket} />
-        <PlayerSide gameflow={gameflow} />
-      </div>
-    )
+class Board extends Component {
+  constructor() {
+    super();
+    this.gotoSetup = this.gotoSetup.bind(this);
+  }
+
+  componentDidMount() {
+    const { socket, gameflow } = this.props;
+    socket.on('game:start', () => {
+      console.log('socket');
+      gameflow.actions.gotoSetup()
+    })
+  }
+
+  gotoSetup() {
+    const { gameflow, socket } = this.props;
+    gameflow.actions.gotoSetup();
+    socket.emit('game:start');
+  }
+
+  render() {
+    const { gameflow, socket } = this.props;
+    if (gameflow.states.isNewGame) {
+      return (
+        <div className='board'>
+          <div>
+            <button onClick={this.gotoSetup}>Start game</button>
+          </div>
+        </div>
+      )
+    } else if (gameflow.states.isSetupPhase) {
+      return (
+        <div className='board'>
+          <StartHand gameflow={gameflow}/>
+        </div>
+      )
+    } else {
+      return (
+        <div className='board'>
+          <OpponentSide socket={socket} />
+          <PlayerSide gameflow={gameflow} />
+        </div>
+      )
+    }
   }
 }
 

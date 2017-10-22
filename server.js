@@ -51,4 +51,7 @@ io.on('connection', (socket) => {
         break;
     }
   });
+  socket.on('game:start', () => {
+    socket.broadcast.emit('game:start');
+  });
 });
