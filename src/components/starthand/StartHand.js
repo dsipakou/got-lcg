@@ -20,10 +20,9 @@ class StartHand extends Component {
   }
   render () {
     const { deck, hand, deckActions } = this.props
-    console.log(this.state.canMulligan)
     return (
       <div className='starthand-inner'>
-        <div className='starthand-header'>StartHand</div>
+        <div className='starthand-header'></div>
         <div className='starthand-content'>
           <div className='starthand-cardlist'>
           {
