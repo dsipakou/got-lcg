@@ -26,7 +26,7 @@ class MainDeck extends Component {
 
   render() {
     const { deck, gameflow } = this.props;
-    let text = gameflow.states.isDrawPhase ? "Click once get 2 cards" : "Draw card";
+    let text = gameflow.states.isDrawPhase ? "Click once get 2 cards" : "MAMA PAPA MATBEN MAPK";
     return (
       <div onClick={this.drawCard}>
         <Deck deck={deck} text={text}/>
