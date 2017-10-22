@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Hand from '../../components/hand/hand';
-import Location from '../../components/location/location';
+import Location from '../../components/location/Location';
 import Character from '../../components/character/character';
 import Event from '../../components/event/Event';
 import MainDeck from '../../components/deck/maindeck/MainDeck';
@@ -43,7 +43,7 @@ const PlayerSide = ({
         </div>
         <div className='permanent-cards'>
           <Character cards={characters} actions={characterActions} />
-          <Location cards={locations} actions={locationActions} />
+          <Location cards={locations} actions={locationActions} gameflow={gameflow} />
         </div>
         <div className='help-zone'>
           <Gold gold={gold} />

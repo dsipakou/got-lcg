@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import DragableCard from '../../containers/dragablecard/DragableCard';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import './location.scss';
+import './Location.scss';
 
 const boardTarget = {
   canDrop(props, monitor) {
     if (typeof monitor.getItem().card === "undefined") {
       return false;
     }
-    return (monitor.getItem().card.type === 'LOCATION' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
+    return (
+      monitor.getItem().card.type === 'LOCATION' &&
+      monitor.getItem().card.cardlocation !== monitor.getItem().card.type &&
+      props.gameflow.states.isMarshalingPhase
+    );
   },
   drop(props, monitor) {
     props.actions.playLocation(monitor.getItem().card);
@@ -33,7 +37,7 @@ function collect_props(props) {
 
 // Component
 
-const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
+const Location = ({ isOver, cards, actions, currentItem, connectDropTarget, gameflow }) => {
   const renderOverlay = (bgcolor, color) => {
     return (
       <div className='drag-overlay' style={{backgroundColor: bgcolor, color: color}}>Location zone</div>
@@ -52,8 +56,10 @@ const Location = ({isOver, cards, actions, currentItem, connectDropTarget}) => {
     currentItem != null &&
     typeof currentItem.card !== "undefined" &&
     currentItem.card.type === 'LOCATION' &&
-    currentItem.card.cardlocation !== currentItem.card.type;
+    currentItem.card.cardlocation !== currentItem.card.type &&
+    gameflow.states.isMarshalingPhase;
   return connectDropTarget(
+
     <div className='location-inner'>
     {isOver && canDrop && renderOverlay('yellow', 'black')}
     {!isOver && canDrop && renderOverlay('green', 'white')}
@@ -81,7 +87,8 @@ Location.propTypes = {
     playLocation: PropTypes.func.isRequired,
     kneelLocation: PropTypes.func.isRequired,
     standLocation: PropTypes.func.isRequired,
-  })
+  }),
+  gameflow: PropTypes.object.isRequired,
 }
 
 export default DropTarget('LOCATION', boardTarget, collect)(Location)
