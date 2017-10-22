@@ -1,24 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Deck from '../Deck';
 import PropTypes from 'prop-types';
 
-const MainDeck = ({ deck, action, gameflow }) => {
+class MainDeck extends Component {
 
-  const drawCard = () => {
-    action()
+  constructor() {
+    super();
+    this.drawCard = this.drawCard.bind(this);
+    this.drawPhaseDrawing = this.drawPhaseDrawing.bind(this);
   }
 
-  if (gameflow.states.isDrawPhase) {
-    drawCard();
-    drawCard();
-    gameflow.actions.gotoMarshal();
+  drawPhaseDrawing() {
+    this.props.action();
+    this.props.action();
+    this.props.gameflow.actions.gotoMarshal();
   }
 
-  return (
-    <div onClick={drawCard}>
-      <Deck deck={deck} text="Click to Draw"/>
-    </div>
-  )
+  drawCard() {
+    if (this.props.gameflow.states.isDrawPhase) {
+      this.drawPhaseDrawing();
+    } else {
+      this.props.action()
+    }
+  }
+
+  render() {
+    const { deck, gameflow } = this.props;
+    let text = gameflow.states.isDrawPhase ? "Click once get 2 cards" : "Draw card";
+    return (
+      <div onClick={this.drawCard}>
+        <Deck deck={deck} text={text}/>
+      </div>
+    )
+  }
+
 }
 
 MainDeck.propTypes = {

@@ -38,7 +38,7 @@ class StartHand extends Component {
           </div>
           <div className='starthand-buttons'>
           { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan}>Do mulligan</button> : null }
-          { hand.length > 0 ? <button onClick={this.gotoPlotPhase}>Start Game</button> : null }
+          { hand.length > 0 ? <button onClick={this.gotoPlotPhase}>Done</button> : null }
           </div>
         </div>
         <div className='starthand-footer'>
