@@ -42,10 +42,10 @@ class Board extends Component {
         </div>
       )
     } else if (gameflow.states.isSetupPhase) {
-      if (gameflow.payload.isYourTurn) {
+      if (!gameflow.payload.isPlayerDone) {
         return (
           <div className='board'>
-            <StartHand gameflow={gameflow}/>
+            <StartHand socket={socket} gameflow={gameflow}/>
           </div>
         )
       } else {
@@ -90,10 +90,14 @@ Board.propTypes = {
       gotoDominance: PropTypes.func.isRequired,
       gotoStanding: PropTypes.func.isRequired,
       gotoTaxation: PropTypes.func.isRequired,
+      playerDone: PropTypes.func.isRequired,
+      opponentDone: PropTypes.func.isRequired,
     }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
       isYourTurn: PropTypes.bool.isRequired,
+      isPlayerDone: PropTypes.bool.isRequired,
+      isOpponentDone: PropTypes.bool.isRequired
     })
   }),
 }
@@ -119,6 +123,8 @@ export default connect(Board)
     gotoDominance,
     gotoStanding,
     gotoTaxation,
+    playerDone,
+    opponentDone,
   }) => ({
     gameflow: {
       name: state.name,
@@ -142,10 +148,14 @@ export default connect(Board)
         gotoDominance,
         gotoStanding,
         gotoTaxation,
+        playerDone,
+        opponentDone,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,
         isYourTurn: state.isYourTurn,
+        isPlayerDone: state.isPlayerDone,
+        isOpponentDone: state.isOpponentDone,
       }
     },
   }));

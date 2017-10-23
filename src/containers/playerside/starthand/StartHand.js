@@ -14,17 +14,38 @@ class StartHand extends Component {
       canMulligan: true,
     }
     this.doMulligan = this.doMulligan.bind(this);
-    this.gotoPlotPhase = this.props.gameflow.actions.gotoPlot.bind(this);
+    this.doneStage = this.doneStage.bind(this);
+  }
+
+  componentDidMount() {
+    const { socket, gameflow } = this.props;
+    socket.on('opponent:done', () => {
+      gameflow.actions.opponentDone();
+    });
+    socket.on('game:plot', () => {
+      gameflow.actions.gotoPlot();
+    })
   }
 
   doMulligan(e) {
-    this.setState({canMulligan: false})
-    this.props.deckActions.doMulligan()
-    this.props.deckActions.getStartHand()
+    this.setState({canMulligan: false});
+    this.props.deckActions.doMulligan();
+    this.props.deckActions.getStartHand();
   }
+
+  doneStage() {
+    const { socket, gameflow } = this.props;
+    gameflow.actions.playerDone();
+    if (!gameflow.payload.isOpponentDone) {
+      socket.emit('opponent:done');
+    } else {
+      socket.emit('game:plot');
+      gameflow.actions.gotoPlot();
+    }
+  }
+
   render () {
     const { deck, hand, deckActions, gameflow } = this.props
-    console.log(this.state.canMulligan)
     return (
       <div className='starthand-inner'>
         <div className='starthand-header'>StartHand</div>
@@ -38,7 +59,7 @@ class StartHand extends Component {
           </div>
           <div className='starthand-buttons'>
           { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan}>Do mulligan</button> : null }
-          { hand.length > 0 ? <button onClick={this.gotoPlotPhase}>Done</button> : null }
+          { hand.length > 0 ? <button onClick={this.doneStage}>Done</button> : null }
           </div>
         </div>
         <div className='starthand-footer'>
@@ -50,6 +71,7 @@ class StartHand extends Component {
 }
 
 StartHand.propTypes = {
+  socket: PropTypes.object.isRequired,
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({

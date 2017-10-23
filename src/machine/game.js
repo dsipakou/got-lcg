@@ -1,16 +1,38 @@
 export default {
-  state: { name: 'new game', isFirstPlayer: false, isYourTurn: false },
+  state: {
+    name: 'new game',
+    isFirstPlayer: false,
+    isPlayerTurn: false,
+    isPlayerDone: false,
+    isOpponentDone: false,
+  },
   transitions: {
     'new game': {
       'goto setup': function(state, isFirstPlayer, isYourTurn) {
         return {
           name: 'setup phase',
           isFirstPlayer: isFirstPlayer,
-          isYourTurn: isYourTurn,
+          isPlayerTurn: isYourTurn,
+          isPlayerDone: false,
+          isOpponentDone: false,
         }
       }
     },
     'setup phase': {
+      'player done': function(state) {
+        return {
+          name: 'setup phase',
+          ...state,
+          isPlayerDone: true
+        }
+      },
+      'opponent done': function(state) {
+        return {
+          name: 'setup phase',
+          ...state,
+          isOpponentDone: true
+        }
+      },
       'goto plot': 'plot phase',
     },
     'plot phase': {
