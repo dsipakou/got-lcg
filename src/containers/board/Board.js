@@ -21,14 +21,13 @@ class Board extends Component {
   componentDidMount() {
     const { socket, gameflow } = this.props;
     socket.on('game:start', () => {
-      console.log('socket');
-      gameflow.actions.gotoSetup()
+      gameflow.actions.gotoSetup(false, false)
     })
   }
 
   gotoSetup() {
     const { gameflow, socket } = this.props;
-    gameflow.actions.gotoSetup();
+    gameflow.actions.gotoSetup(true, true);
     socket.emit('game:start');
   }
 
@@ -43,11 +42,19 @@ class Board extends Component {
         </div>
       )
     } else if (gameflow.states.isSetupPhase) {
-      return (
-        <div className='board'>
-          <StartHand gameflow={gameflow}/>
-        </div>
-      )
+      if (gameflow.payload.isYourTurn) {
+        return (
+          <div className='board'>
+            <StartHand gameflow={gameflow}/>
+          </div>
+        )
+      } else {
+        return (
+          <div className='board'>
+            <div>Wait for your opponent to complete</div>
+          </div>
+        )
+      }
     } else {
       return (
         <div className='board'>
@@ -84,6 +91,10 @@ Board.propTypes = {
       gotoStanding: PropTypes.func.isRequired,
       gotoTaxation: PropTypes.func.isRequired,
     }),
+    payload: PropTypes.shape({
+      isFirstPlayer: PropTypes.bool.isRequired,
+      isYourTurn: PropTypes.bool.isRequired,
+    })
   }),
 }
 
@@ -107,7 +118,7 @@ export default connect(Board)
     gotoChallenge,
     gotoDominance,
     gotoStanding,
-    gotoTaxation
+    gotoTaxation,
   }) => ({
     gameflow: {
       name: state.name,
@@ -132,5 +143,9 @@ export default connect(Board)
         gotoStanding,
         gotoTaxation,
       },
+      payload: {
+        isFirstPlayer: state.isFirstPlayer,
+        isYourTurn: state.isYourTurn,
+      }
     },
   }));

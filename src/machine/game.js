@@ -1,8 +1,14 @@
 export default {
-  state: { name: 'new game' },
+  state: { name: 'new game', isFirstPlayer: false, isYourTurn: false },
   transitions: {
     'new game': {
-      'goto setup': 'setup phase',
+      'goto setup': function(state, isFirstPlayer, isYourTurn) {
+        return {
+          name: 'setup phase',
+          isFirstPlayer: isFirstPlayer,
+          isYourTurn: isYourTurn,
+        }
+      }
     },
     'setup phase': {
       'goto plot': 'plot phase',
