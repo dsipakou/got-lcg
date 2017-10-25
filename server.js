@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
-const machine = require('machine');
+const StateMachine = require('javascript-state-machine');
 
 const port = 3000;
 
@@ -23,6 +23,25 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 server.listen(port);
+
+var fsm = new StateMachine({
+  init: 'solid',
+    transitions: [
+      { name: 'melt',     from: 'solid',  to: 'liquid' },
+      { name: 'freeze',   from: 'liquid', to: 'solid'  },
+      { name: 'vaporize', from: 'liquid', to: 'gas'    },
+      { name: 'condense', from: 'gas',    to: 'liquid' }
+    ],
+    methods: {
+      onMelt:     function() { console.log('I melted')    },
+      onFreeze:   function() { console.log('I froze')     },
+      onVaporize: function() { console.log('I vaporized') },
+      onCondense: function() { console.log('I condensed') }
+    }
+});
+console.log(fsm.state);
+fsm.melt()
+console.log(fsm.state);
 
 io.on('connection', (socket) => {
   socket.on('action', (data) => {
