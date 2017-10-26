@@ -1,4 +1,3 @@
-
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
@@ -7,7 +6,7 @@ const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config.js');
-const StateMachine = require('javascript-state-machine');
+const GameFlow = require('./server/StateMachine');
 
 const port = 3000;
 
@@ -24,26 +23,10 @@ app.use(webpackHotMiddleware(compiler));
 
 server.listen(port);
 
-var fsm = new StateMachine({
-  init: 'solid',
-    transitions: [
-      { name: 'melt',     from: 'solid',  to: 'liquid' },
-      { name: 'freeze',   from: 'liquid', to: 'solid'  },
-      { name: 'vaporize', from: 'liquid', to: 'gas'    },
-      { name: 'condense', from: 'gas',    to: 'liquid' }
-    ],
-    methods: {
-      onMelt:     function() { console.log('I melted')    },
-      onFreeze:   function() { console.log('I froze')     },
-      onVaporize: function() { console.log('I vaporized') },
-      onCondense: function() { console.log('I condensed') }
-    }
-});
-console.log(fsm.state);
-fsm.melt()
-console.log(fsm.state);
+var clients = [];
 
 io.on('connection', (socket) => {
+  var fsm = new GameFlow();
   socket.on('action', (data) => {
     switch (data.action.type) {
       case "ADD_LOCATION":
@@ -72,7 +55,8 @@ io.on('connection', (socket) => {
     }
   });
   socket.on('game:start', () => {
-    socket.broadcast.emit('game:start');
+    fsm.gotoSetup();
+    io.in('room123').emit('game:start', fsm.state);
   });
   socket.on('game:plot', () => {
     socket.broadcast.emit('game:plot');
@@ -80,4 +64,8 @@ io.on('connection', (socket) => {
   socket.on('opponent:done', () => {
     socket.broadcast.emit('opponent:done');
   });
+  socket.on('room', function(room) {
+    socket.join(room);
+    console.log('connected to the room' + room);
+  })
 });

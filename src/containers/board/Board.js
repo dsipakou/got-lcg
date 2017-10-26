@@ -13,27 +13,32 @@ import './Board.scss'
 Machine.create('gameflow', game);
 
 class Board extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    props.socket.on('connect', function() {
+      props.socket.emit('room', 'room123');
+    })
+    this.state = {currentState: "newGame"}
     this.gotoSetup = this.gotoSetup.bind(this);
   }
 
   componentDidMount() {
     const { socket, gameflow } = this.props;
-    socket.on('game:start', () => {
-      gameflow.actions.gotoSetup(false, false)
+    socket.on('game:start', (data) => {
+      this.setState({currentState: data})
+      //gameflow.actions.gotoSetup(false, false)
     })
   }
 
   gotoSetup() {
     const { gameflow, socket } = this.props;
-    gameflow.actions.gotoSetup(true, true);
+    //gameflow.actions.gotoSetup(true, true);
     socket.emit('game:start');
   }
 
   render() {
     const { gameflow, socket } = this.props;
-    if (gameflow.states.isNewGame) {
+    if (this.state.currentState == 'newGame') {
       return (
         <div className='board'>
           <div>
@@ -41,7 +46,7 @@ class Board extends Component {
           </div>
         </div>
       )
-    } else if (gameflow.states.isSetupPhase) {
+    } else if (this.state.currentState == 'setup') {
       if (!gameflow.payload.isPlayerDone) {
         return (
           <div className='board'>
