@@ -54,7 +54,8 @@ io.on('connection', (socket) => {
         break;
     }
   });
-  socket.on('game:start', () => {
+  socket.on('game:start', (data) => {
+    console.log(data);
     fsm.gotoSetup();
     io.in('room123').emit('game:start', fsm.state);
   });
@@ -66,6 +67,6 @@ io.on('connection', (socket) => {
   });
   socket.on('room', function(room) {
     socket.join(room);
-    console.log('connected to the room' + room);
+    console.log('connected to the room ' + room + ' with id ' + socket.id);
   })
 });

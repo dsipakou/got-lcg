@@ -24,7 +24,9 @@ class Board extends Component {
 
   componentDidMount() {
     const { socket, gameflow } = this.props;
+
     socket.on('game:start', (data) => {
+      console.log('socket id is ' + socket.id)
       this.setState({currentState: data})
       //gameflow.actions.gotoSetup(false, false)
     })
@@ -33,7 +35,7 @@ class Board extends Component {
   gotoSetup() {
     const { gameflow, socket } = this.props;
     //gameflow.actions.gotoSetup(true, true);
-    socket.emit('game:start');
+    socket.emit('game:start', {data: socket.id});
   }
 
   render() {

@@ -8,6 +8,9 @@ var GameFlow = StateMachine.factory({
     { name: 'gotoDraw', from: 'plot', to: 'draw' },
     { name: 'gotoMarshal', from: 'draw', to: 'marshal' }
   ],
+  data: function(data) {
+    return data;
+  }
   methods: {
     onSetup: function() { console.log('setup herererer') }
   }
