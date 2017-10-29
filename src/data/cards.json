@@ -143,6 +143,19 @@
     "image_url": "https://thronesdb.com/bundles/cards/01011.png"
   },
   {
+    "id": "01012",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Fortified Position",
+    "faction": "NEUTRAL",
+    "traits": ["Siege", "War"],
+    "gold": 5,
+    "initiative": 1,
+    "claim": 1,
+    "reserve": 5,
+    "image_url": "https://thronesdb.com/bundles/cards/01012.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
