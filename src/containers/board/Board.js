@@ -26,15 +26,16 @@ class Board extends Component {
     const { socket, gameflow } = this.props;
 
     socket.on('game:start', (data) => {
-      console.log('socket id is ' + socket.id)
-      this.setState({currentState: data})
-      //gameflow.actions.gotoSetup(false, false)
+      console.log(this.state.currentState)
+      this.setState({currentState: 'setup'})
+      gameflow.actions.gotoSetup(false, false)
     })
   }
 
   gotoSetup() {
     const { gameflow, socket } = this.props;
-    //gameflow.actions.gotoSetup(true, true);
+    gameflow.actions.gotoSetup(true, true);
+    this.setState({currentState: 'setup'})
     socket.emit('game:start', {data: socket.id});
   }
 
@@ -44,7 +45,7 @@ class Board extends Component {
       return (
         <div className='board'>
           <div>
-            <button onClick={this.gotoSetup}>Start game</button>
+            <button onClick={this.gotoSetup.bind(this)}>Start game</button>
           </div>
         </div>
       )
