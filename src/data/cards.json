@@ -117,6 +117,45 @@
     "image_url": "https://thronesdb.com/bundles/cards/01009.png"
   },
   {
+    "id": "01010",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Counting Coppers",
+    "faction": "NEUTRAL",
+    "traits": ["Kingdom"],
+    "gold": 2,
+    "initiative": 3,
+    "claim": 1,
+    "reserve": 10,
+    "image_url": "https://thronesdb.com/bundles/cards/01010.png"
+  },
+  {
+    "id": "01011",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Filthy Accusations",
+    "faction": "NEUTRAL",
+    "traits": ["Scheme"],
+    "gold": 4,
+    "initiative": 4,
+    "claim": 1,
+    "reserve": 6,
+    "image_url": "https://thronesdb.com/bundles/cards/01011.png"
+  },
+  {
+    "id": "01012",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Fortified Position",
+    "faction": "NEUTRAL",
+    "traits": ["Siege", "War"],
+    "gold": 5,
+    "initiative": 1,
+    "claim": 1,
+    "reserve": 5,
+    "image_url": "https://thronesdb.com/bundles/cards/01012.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
