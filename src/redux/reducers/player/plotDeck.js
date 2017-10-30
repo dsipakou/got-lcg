@@ -2,14 +2,28 @@ import { DRAW_PLOT } from '../../actions/player/plotDeck';
 import arrayShuffle from 'array-shuffle';
 import uuid from 'uuid';
 import cards from '../../../data/cards.json';
+import currentDeck from '../../../data/currentDeck.json';
 
-const arr = cards.filter((card) => {
+let deck = [];
+
+function findCard(card) {
+  return card.id === this[0];
+}
+
+for (let currentCard of currentDeck.cards) {
+  let card = cards.find(findCard, [currentCard]);
   if (card.type === 'PLOT') {
-    return card;
+    deck.push({...card, "uid": uuid.v4(), "cardlocation": "DECK"});
   }
-}).map(card => { return { "uid": uuid.v4(), "cardlocation": "PLOTDECK", ...card }});
+}
 
-const initialState = arrayShuffle(arr)
+// const arr = cards.filter((card) => {
+//   if (card.type === 'PLOT') {
+//     return card;
+//   }
+// }).map(card => { return { "uid": uuid.v4(), "cardlocation": "PLOTDECK", ...card }});
+
+const initialState = arrayShuffle(deck)
 
 function plotDeckReducer(state = initialState, action) {
   switch (action.type) {

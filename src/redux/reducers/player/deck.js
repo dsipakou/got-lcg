@@ -19,11 +19,11 @@ for (let currentCard of currentDeck.cards) {
   }
 }
 
-const arr = cards.filter((card) => {
-  if (card.type !== 'PLOT') {
-    return card;
-  }
-}).map(card => { return { "uid": uuid.v4(), "cardlocation": "DECK", ...card }});
+// const arr = cards.filter((card) => {
+//   if (card.type !== 'PLOT') {
+//     return card;
+//   }
+// }).map(card => { return { "uid": uuid.v4(), "cardlocation": "DECK", ...card }});
 
 const initialState = arrayShuffle(deck);
 
