@@ -1,7 +1,8 @@
 export const NEW_ROOM = 'NEW_ROOM';
 
-export const newRoom = () => {
+export const newRoom = (id) => {
   return {
-    type: NEW_ROOM
+    type: NEW_ROOM,
+    id: id
   }
 }

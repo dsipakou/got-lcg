@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 
 class Room extends Component {
   constructor(props) {
@@ -9,8 +10,17 @@ class Room extends Component {
     }
   }
 
+  componentDidMount() {
+    const { actions, socket } = this.props;
+    socket.on('room:created', (id) => {
+      actions.newRoom(id);
+    })
+  }
+
   createRoom() {
-    this.props.actions.newRoom();
+    const { actions, socket, rooms } = this.props;
+    let roomId = uuid.v4();
+    socket.emit('room:created', {id: roomId})
     this.setState({ roomCreated: true });
   }
 
@@ -21,6 +31,7 @@ class Room extends Component {
         { !this.state.roomCreated &&
         <button onClick={ this.createRoom.bind(this) }>Create new room</button> }
         <ul>
+        { this.state.roomCreated && <span>Wait for connect</span>}
         { rooms.map((room, index) => (<li><button key={room.id}>Join room</button></li>)) }
         </ul>
       </div>
