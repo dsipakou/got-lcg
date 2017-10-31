@@ -19,13 +19,6 @@ export default {
       }
     },
     'setup phase': {
-      'player done': function(state) {
-        return {
-          name: 'setup phase',
-          ...state,
-          isPlayerDone: true
-        }
-      },
       'opponent done': function(state) {
         return {
           name: 'setup phase',
@@ -33,9 +26,23 @@ export default {
           isOpponentDone: true
         }
       },
-      'goto plot': 'plot phase',
+      'goto plot': function(state) {
+        return {
+          name: 'plot phase',
+          isFirstPlayer: false,
+          isPlayerTurn: false,
+          isOpponentDone: false,
+        }
+      }
     },
     'plot phase': {
+      'opponent done': function(state) {
+        return {
+          name: 'setup phase',
+          ...state,
+          isOpponentDone: true
+        }
+      },
       'goto draw': 'draw phase',
     },
     'draw phase': {
