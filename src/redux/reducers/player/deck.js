@@ -36,7 +36,7 @@ function deckReducer(state = initialState, action) {
         return state;
       }
     case MAKE_DECK:
-      return arrayShuffle(arr)
+      return arrayShuffle(deck)
     default:
       return state;
   }
