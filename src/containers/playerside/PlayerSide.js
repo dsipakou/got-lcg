@@ -20,6 +20,7 @@ import { bindActionCreators } from 'redux';
 import './PlayerSide.scss';
 
 const PlayerSide = ({
+  socket,
   deck,
   hand,
   discardPile,
@@ -47,7 +48,7 @@ const PlayerSide = ({
         </div>
         <div className='help-zone'>
           <Gold gold={gold} />
-          <Plot cards={plotInPlay} />
+          <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} />
         </div>
       </div>
       <div className='cards-zone'>
@@ -61,6 +62,7 @@ const PlayerSide = ({
 }
 
 PlayerSide.propTypes = {
+  socket: PropTypes.object.isRequired,
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   discardPile: PropTypes.array.isRequired,

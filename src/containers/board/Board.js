@@ -63,7 +63,7 @@ class Board extends Component {
       return (
         <div className='board'>
           <OpponentSide socket={socket} />
-          <PlayerSide gameflow={gameflow} />
+          <PlayerSide gameflow={gameflow} socket={socket} />
         </div>
       )
     }

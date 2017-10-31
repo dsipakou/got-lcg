@@ -46,8 +46,9 @@ class PlotDeck extends Component {
   }
 
   play(event, data) {
-    this.props.actions.playPlot(data.index);
-    this.props.gameflow.actions.gotoDraw();
+    const { actions, gameflow } = this.props;
+    actions.playPlot(data.index);
+    gameflow.actions.opponentDone();
   }
 
   render () {
