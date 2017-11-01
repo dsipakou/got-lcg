@@ -62,7 +62,7 @@ class Board extends Component {
     } else {
       return (
         <div className='board'>
-          <OpponentSide socket={socket} />
+          <OpponentSide gameflow={gameflow} socket={socket} />
           <PlayerSide gameflow={gameflow} socket={socket} />
         </div>
       )
@@ -96,6 +96,7 @@ Board.propTypes = {
       gotoTaxation: PropTypes.func.isRequired,
       playerDone: PropTypes.func.isRequired,
       opponentDone: PropTypes.func.isRequired,
+      setFirstPalyer: PropTypes.func.isRequired,
     }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
@@ -129,6 +130,7 @@ export default connect(Board)
     gotoTaxation,
     playerDone,
     opponentDone,
+    setFirstPlayer,
   }) => ({
     gameflow: {
       name: state.name,
@@ -154,6 +156,7 @@ export default connect(Board)
         gotoTaxation,
         playerDone,
         opponentDone,
+        setFirstPlayer,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,

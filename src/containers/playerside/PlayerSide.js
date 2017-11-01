@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Hand from '../../components/hand/hand';
 import Location from '../../components/location/Location';
-import Character from '../../components/character/character';
+import Character from '../../components/character/Character';
 import Event from '../../components/event/Event';
 import MainDeck from '../../components/deck/maindeck/MainDeck';
 import DiscardPile from '../../components/deck/discardPile/DiscardPile';
@@ -24,7 +24,7 @@ const PlayerSide = ({
   deck,
   hand,
   discardPile,
-  plotDeck, plotInPlay,
+  plotDeck, plotInPlay, opponentPlotInPlay,
   locations,
   characters,
   event,
@@ -48,7 +48,7 @@ const PlayerSide = ({
         </div>
         <div className='help-zone'>
           <Gold gold={gold} />
-          <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} />
+          <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
         </div>
       </div>
       <div className='cards-zone'>
@@ -68,6 +68,7 @@ PlayerSide.propTypes = {
   discardPile: PropTypes.array.isRequired,
   plotDeck: PropTypes.array.isRequired,
   plotInPlay: PropTypes.array.isRequired,
+  opponentPlotInPlay: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
   characters: PropTypes.array.isRequired,
   event: PropTypes.object.isRequired,
@@ -101,6 +102,7 @@ const mapStateToProps = (state) => ({
   discardPile: state.player.discardReducer,
   plotDeck: state.player.plotDeckReducer,
   plotInPlay: state.player.plotReducer,
+  opponentPlotInPlay: state.opponent.opponentPlotReducer,
   locations: state.player.locationReducer,
   characters: state.player.characterReducer,
   event: state.player.eventReducer,

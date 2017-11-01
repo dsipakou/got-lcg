@@ -13,6 +13,7 @@ import './OpponentSide.scss';
 
 const OpponentSide = ({
   socket,
+  gameflow,
   actions,
   locations,
   locationActions,
@@ -26,13 +27,14 @@ const OpponentSide = ({
     <div className='opponent-inner'>
       <OpponentCharacter socket={socket} cards={characters} actions={characterActions} />
       <OpponentLocation socket={socket} cards={locations} actions={locationActions} />
-      <OpponentPlot socket={socket} cards={plotInPlay} actions={plotActions} />
+      <OpponentPlot socket={socket} cards={plotInPlay} actions={plotActions} gameflow={gameflow} />
     </div>
   )
 }
 
 OpponentSide.propTypes = {
   socket: PropTypes.object.isRequired,
+  gameflow: PropTypes.object.isRequired,
   actions: PropTypes.object,
   characters: PropTypes.array.isRequired,
   characterActions: PropTypes.object.isRequired,

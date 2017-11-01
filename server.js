@@ -53,14 +53,20 @@ io.on('connection', (socket) => {
   });
   socket.on('room:created', (id) => {
     socket.broadcast.emit('room:created', {id: id})
-  })
+  });
   socket.on('game:start', () => {
     socket.broadcast.emit('game:start');
   });
   socket.on('game:plot', () => {
     socket.broadcast.emit('game:plot');
   });
+  socket.on('game:draw', () => {
+    socket.broadcast.emit('game:draw');
+  });
   socket.on('opponent:done', () => {
     socket.broadcast.emit('opponent:done');
   });
+  socket.on('game:first player', (isFirstPlayer) => {
+    socket.broadcast.emit('game:first player', {isFirstPlayer: isFirstPlayer});
+  })
 });

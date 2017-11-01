@@ -4,21 +4,28 @@ import Deck from '../deck/Deck';
 
 class OpponentPlot extends Component {
   componentDidMount() {
-    const { socket, actions } = this.props;
-    socket.on('play plot', data =>
-      actions.addOpponentPlot(data.action.payload)
+    const { socket, actions, gameflow } = this.props;
+    socket.on('play plot', (data) => {
+        actions.addOpponentPlot(data.action.payload);
+        gameflow.actions.opponentDone();
+      }
     );
   }
 
   render() {
-    const { cards } = this.props;
+    const { cards, gameflow } = this.props;
     return (
       <div>
           <h2>Opponents plot</h2>
-          <Deck deck={cards} plot={true} revealed={true} />
+          <Deck deck={cards} plot={true} revealed={gameflow.payload.isOpponentDone && gameflow.payload.isPlayerDone} />
       </div>
     )
   }
+}
+
+OpponentPlot.propTypes = {
+  gameflow: PropTypes.object.isRequired,
+  cards: PropTypes.array.isRequired,
 }
 
 export default OpponentPlot;

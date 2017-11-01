@@ -48,7 +48,7 @@ class PlotDeck extends Component {
   play(event, data) {
     const { actions, gameflow } = this.props;
     actions.playPlot(data.index);
-    gameflow.actions.opponentDone();
+    gameflow.actions.playerDone();
   }
 
   render () {
@@ -64,7 +64,7 @@ class PlotDeck extends Component {
               <Card {...card} index={index} key={card.uid} plot={true} />
             </ContextMenuTrigger>
           ))}
-          { gameflow.states.isPlotPhase &&
+          { gameflow.states.isPlotPhase && !gameflow.states.isPlayerDone &&
           <ContextMenu id='plot_context_menu' >
             <MenuItem onClick={this.play}>Play Plot</MenuItem>
           </ContextMenu>
