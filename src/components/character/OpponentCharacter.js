@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/Card';
+import './OpponentCharacter.scss';
 
 class OpponentCharacter extends Component {
   componentDidMount() {
@@ -21,7 +22,7 @@ class OpponentCharacter extends Component {
   render() {
     const { cards } = this.props;
     return (
-      <div className='character-inner'>
+      <div className='opponent-character-inner'>
         {cards.map((card, index) => (
           <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
         ))}

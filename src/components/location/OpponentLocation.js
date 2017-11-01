@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../components/card/Card';
-import './location.scss';
+import './OpponentLocation.scss';
 
 class OpponentLocation extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class OpponentLocation extends Component {
   render() {
     const { cards } = this.props;
     return (
-      <div className='location-inner'>
+      <div className='opponent-location-inner'>
         {cards.map((card, index) => (
           <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
         ))}
