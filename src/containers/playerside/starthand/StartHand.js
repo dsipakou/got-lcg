@@ -35,6 +35,7 @@ class StartHand extends Component {
 
   doneStage() {
     const { socket, gameflow } = this.props;
+    gameflow.actions.playerDone();
     if (!gameflow.payload.isOpponentDone) {
       socket.emit('opponent:done');
     } else {
