@@ -17,7 +17,9 @@ class OpponentPlot extends Component {
     return (
       <div>
           <h2>Opponents plot</h2>
-          <Deck deck={cards} plot={true} revealed={gameflow.payload.isOpponentDone && gameflow.payload.isPlayerDone} />
+          <Deck deck={cards}
+            plot={true}
+            revealed={gameflow.payload.isOpponentDone && gameflow.payload.isPlayerDone} />
       </div>
     )
   }

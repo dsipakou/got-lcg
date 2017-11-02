@@ -18,8 +18,8 @@ class Plot extends Component {
     socket.on('opponent:done', () => {
       gameflow.actions.opponentDone();
     });
-    socket.on('game:first player', (isFirstPlayer) => {
-      gameflow.actions.setFirstPlayer(isFirstPlayer);
+    socket.on('game:first player', (data) => {
+      gameflow.actions.setFirstPlayer(data.isFirstPlayer);
       this.setState({setFirstPlayer: true})
     });
     socket.on('game:draw', () => {
@@ -52,23 +52,26 @@ class Plot extends Component {
       <div>
         <h2>Plot in play</h2>
         {
-          this.state.donePlotStage &&
+          !this.state.donePlotStage &&
           this.state.setFirstPlayer &&
+          gameflow.states.isPlotPhase &&
           <button onClick={this.doneTurn}>Next stage</button>
         }
         {
           this.state.setFirstPlayer &&
-          !this.state.donePlotStage &&
+          this.state.donePlotStage &&
+          gameflow.states.isPlotPhase &&
           <span>Wait for your opponent</span>
         }
         {
           gameflow.payload.isOpponentDone &&
           gameflow.payload.isPlayerDone &&
           !this.state.setFirstPlayer &&
+          gameflow.states.isPlotPhase &&
           playerPlotsInPlay[playerPlotsInPlay.length - 1].initiative > opponentPlotsInPlay[opponentPlotsInPlay.length - 1].initiative &&
-          <button onClick={() => this.chooseFirstPlayer(true)}>I will be first player</button> && <button onClick={() => this.chooseFirstPlayer(false)}>My opponent will be first player</button>
+          <div><button onClick={() => this.chooseFirstPlayer(true)}>Me first</button><button onClick={() => this.chooseFirstPlayer(false)}>Opponent first</button></div>
         }
-        <Deck deck={cards} plot={true} revealed={gameflow.payload.isOpponentDone} />
+        <Deck deck={cards} plot={true} revealed={true} />
       </div>
     )
   }
