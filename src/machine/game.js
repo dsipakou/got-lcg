@@ -66,9 +66,30 @@ export default {
           isPlayerDone: false,
         }
       },
-      'goto draw': 'draw phase',
+      'goto draw': function(state) {
+        return {
+          ...state,
+          name: 'draw phase',
+          isOpponentDone: false,
+          isPlayerDone: false,
+        }
+      },
     },
     'draw phase': {
+      'player done': function(state) {
+        return {
+          ...state,
+          name: 'draw phase',
+          isPlayerDone: true
+        }
+      },
+      'opponent done': function(state) {
+        return {
+          ...state,
+          name: 'draw phase',
+          isOpponentDone: true
+        }
+      },
       'goto marshal': 'marshaling phase'
     },
     'marshaling phase': {

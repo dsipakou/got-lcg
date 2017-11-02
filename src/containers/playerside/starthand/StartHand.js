@@ -45,7 +45,7 @@ class StartHand extends Component {
   }
 
   render () {
-    const { deck, hand, deckActions, gameflow } = this.props
+    const { deck, hand, deckActions, gameflow, socket } = this.props
     return (
       <div className='starthand-inner'>
         <div className='starthand-header'>StartHand</div>
@@ -63,7 +63,7 @@ class StartHand extends Component {
           </div>
         </div>
         <div className='starthand-footer'>
-          <MainDeck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } gameflow={gameflow} />
+          <MainDeck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } gameflow={gameflow} socket={socket} />
         </div>
       </div>
     )

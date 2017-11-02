@@ -63,10 +63,13 @@ io.on('connection', (socket) => {
   socket.on('game:draw', () => {
     socket.broadcast.emit('game:draw');
   });
+  socket.on('game:marshal', () => {
+    socket.broadcast.emit('game:marshal');
+  });
   socket.on('opponent:done', () => {
     socket.broadcast.emit('opponent:done');
   });
   socket.on('game:first player', (isFirstPlayer) => {
     socket.broadcast.emit('game:first player', {isFirstPlayer: isFirstPlayer});
-  })
+  });
 });

@@ -52,7 +52,7 @@ const PlayerSide = ({
         </div>
       </div>
       <div className='cards-zone'>
-        <MainDeck deck={deck} action={deckActions.drawCard} gameflow={gameflow} />
+        <MainDeck deck={deck} action={deckActions.drawCard} gameflow={gameflow} socket={socket} />
         <Hand cards={hand} />
         <DiscardPile cards={discardPile} />
         <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
