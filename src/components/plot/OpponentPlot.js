@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import Deck from '../deck/Deck';
 
 class OpponentPlot extends Component {
+  constructor() {
+    super();
+    this.state = {
+      revealed: false,
+    }
+  }
+
   componentDidMount() {
     const { socket, actions, gameflow } = this.props;
     socket.on('play plot', (data) => {
@@ -19,7 +26,7 @@ class OpponentPlot extends Component {
           <h2>Opponents plot</h2>
           <Deck deck={cards}
             plot={true}
-            revealed={gameflow.payload.isOpponentDone && gameflow.payload.isPlayerDone} />
+            revealed={!gameflow.states.isPlotPhase ? true : gameflow.payload.isPlayerDone} />
       </div>
     )
   }
