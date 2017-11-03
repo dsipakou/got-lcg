@@ -1,0 +1,14 @@
+.message-overlay {
+  position: absolute;
+  display: flex;
+  flex-flow: row wrap;
+  color: black;
+  top: 150px;
+  left: 50%;
+  z-index: 1;
+  font-size: 3em;
+  justify-content: center;
+  align-items: center;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
