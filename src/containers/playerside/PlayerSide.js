@@ -43,7 +43,7 @@ const PlayerSide = ({
           <Event card={event} actions={eventActions} />
         </div>
         <div className='permanent-cards'>
-          <Character cards={characters} actions={characterActions} />
+          <Character cards={characters} actions={characterActions} gameflow={gameflow} socket={socket} />
           <Location cards={locations} actions={locationActions} gameflow={gameflow} />
         </div>
         <div className='help-zone'>
