@@ -9,6 +9,7 @@ export default {
   transitions: {
     'new game': {
       'goto setup': function(state, isFirstPlayer, isYourTurn) {
+        console.log(state)
         return {
           name: 'setup phase',
           isFirstPlayer: isFirstPlayer,
@@ -20,6 +21,7 @@ export default {
     },
     'setup phase': {
       'player done': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'setup phase',
@@ -27,6 +29,7 @@ export default {
         }
       },
       'opponent done': function(state) {
+        console.log(state)
         return {
           name: 'setup phase',
           ...state,
@@ -34,6 +37,7 @@ export default {
         }
       },
       'goto plot': function(state) {
+        console.log(state)
         return {
           name: 'plot phase',
           isOpponentDone: false,
@@ -44,6 +48,7 @@ export default {
     },
     'plot phase': {
       'player done': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'plot phase',
@@ -51,6 +56,7 @@ export default {
         }
       },
       'opponent done': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'plot phase',
@@ -58,15 +64,18 @@ export default {
         }
       },
       'set first player': function(state, isFirstPlayer) {
+        console.log(state)
         return {
           ...state,
           name: 'plot phase',
           isFirstPlayer: isFirstPlayer,
+          isYourTurn: isFirstPlayer,
           isOpponentDone: false,
           isPlayerDone: false,
         }
       },
       'goto draw': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'draw phase',
@@ -77,6 +86,7 @@ export default {
     },
     'draw phase': {
       'player done': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'draw phase',
@@ -84,6 +94,7 @@ export default {
         }
       },
       'opponent done': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'draw phase',
