@@ -31,6 +31,7 @@ class PlotDeck extends Component {
     super();
     this.state = {
       showModal: false,
+      done: false,
     }
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -38,17 +39,18 @@ class PlotDeck extends Component {
   }
 
   openModal() {
-    this.setState({ showModal: true, })
+    this.setState({ showModal: true })
   }
 
   closeModal() {
-    this.setState({ showModal: false, })
+    this.setState({ showModal: false })
   }
 
   play(event, data) {
     const { actions, gameflow } = this.props;
     actions.playPlot(data.index);
     gameflow.actions.playerDone();
+    this.setState({ done: true })
   }
 
   render () {
@@ -64,7 +66,7 @@ class PlotDeck extends Component {
               <Card {...card} index={index} key={card.uid} plot={true} />
             </ContextMenuTrigger>
           ))}
-          { gameflow.states.isPlotPhase && !gameflow.states.isPlayerDone &&
+          { gameflow.states.isPlotPhase && !this.state.done &&
           <ContextMenu id='plot_context_menu' >
             <MenuItem onClick={this.play}>Play Plot</MenuItem>
           </ContextMenu>
