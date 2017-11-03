@@ -25,7 +25,7 @@ const OpponentSide = ({
 
   return (
     <div className='opponent-inner'>
-      <OpponentCharacter socket={socket} cards={characters} actions={characterActions} />
+      <OpponentCharacter socket={socket} cards={characters} actions={characterActions} gameflow={gameflow} />
       <OpponentLocation socket={socket} cards={locations} actions={locationActions} />
       <OpponentPlot socket={socket} cards={plotInPlay} actions={plotActions} gameflow={gameflow} />
     </div>
