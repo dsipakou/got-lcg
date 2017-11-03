@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './StartHand.scss';
 import Card from '../../../components/card/Card';
 import MainDeck from '../../../components/deck/maindeck/MainDeck';
+import Messages from '../../../components/general/Messages';
 import { getStartHand, doMulligan } from '../../../redux/actions/player/deck';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -46,9 +47,11 @@ class StartHand extends Component {
 
   render () {
     const { deck, hand, deckActions, gameflow, socket } = this.props
+
     return (
       <div className='starthand-inner'>
-        <div className='starthand-header'>StartHand</div>
+        { !gameflow.payload.isPlayerDone && <Messages text='Choose your start hand' /> }
+        { gameflow.payload.isPlayerDone && <Messages text='Wait for opponent done' /> }
         <div className='starthand-content'>
           <div className='starthand-cardlist'>
           {
@@ -58,8 +61,8 @@ class StartHand extends Component {
           }
           </div>
           <div className='starthand-buttons'>
-          { this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan}>Do mulligan</button> : null }
-          { hand.length > 0 ? <button onClick={this.doneStage}>Done</button> : null }
+            { !gameflow.payload.isPlayerDone && this.state.canMulligan && hand.length > 0 ? <button onClick={this.doMulligan}>Do mulligan</button> : null }
+            { !gameflow.payload.isPlayerDone && hand.length > 0 ? <button onClick={this.doneStage}>Done</button> : null }
           </div>
         </div>
         <div className='starthand-footer'>
