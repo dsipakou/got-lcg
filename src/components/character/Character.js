@@ -12,7 +12,11 @@ const boardTarget = {
     if (typeof monitor.getItem().card === "undefined") {
       return false;
     }
-    return (monitor.getItem().card.type === 'CHARACTER' && monitor.getItem().card.cardlocation !== monitor.getItem().card.type);
+    return (
+      monitor.getItem().card.type === 'CHARACTER' &&
+      monitor.getItem().card.cardlocation !== monitor.getItem().card.type &&
+      props.gameflow.states.isMarshalingPhase
+    );
   },
   drop(props, monitor) {
     enoughGold = props.actions.playCharacter(monitor.getItem().card);
@@ -54,7 +58,9 @@ const Character = ({ isOver, cards, actions, currentItem, connectDropTarget }) =
     currentItem != null &&
     typeof currentItem.card !== "undefined" &&
     currentItem.card.type === 'CHARACTER' &&
-    currentItem.card.cardlocation !== currentItem.card.type;
+    currentItem.card.cardlocation !== currentItem.card.type &&
+    props.gameflow.states.isMarshalingPhase;
+    
   return connectDropTarget(
     <div className='character-inner' >
       {!enoughGold && <span>Not enough gold</span>}

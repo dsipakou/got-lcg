@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import DragableCard from '../../containers/dragablecard/DragableCard';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import Messages from '../general/Messages';
 import './Location.scss';
 
 const boardTarget = {
@@ -13,7 +14,8 @@ const boardTarget = {
     return (
       monitor.getItem().card.type === 'LOCATION' &&
       monitor.getItem().card.cardlocation !== monitor.getItem().card.type &&
-      props.gameflow.states.isMarshalingPhase
+      props.gameflow.states.isMarshalingPhase &&
+      props.gameflow.payload.isYourTurn
     );
   },
   drop(props, monitor) {
@@ -57,10 +59,12 @@ const Location = ({ isOver, cards, actions, currentItem, connectDropTarget, game
     typeof currentItem.card !== "undefined" &&
     currentItem.card.type === 'LOCATION' &&
     currentItem.card.cardlocation !== currentItem.card.type &&
-    gameflow.states.isMarshalingPhase;
-  return connectDropTarget(
+    gameflow.states.isMarshalingPhase &&
+    gameflow.payload.isYourTurn;
 
+  return connectDropTarget(
     <div className='location-inner'>
+    { gameflow.states.isMarshalingPhase && !gameflow.payload.isYourTurn && <Messages text='Wait for your turn' /> }
     {isOver && canDrop && renderOverlay('yellow', 'black')}
     {!isOver && canDrop && renderOverlay('green', 'white')}
       { cards.map((card, index) => (
@@ -68,12 +72,13 @@ const Location = ({ isOver, cards, actions, currentItem, connectDropTarget, game
           <DragableCard {...card} index={index} key={card.uid} />
         </ContextMenuTrigger>
       )) }
-
-      <ContextMenu id='card_context_menu' >
-        <MenuItem onClick={kneelLocation}>Kneel</MenuItem>
-        <MenuItem divider/>
-        <MenuItem onClick={standLocation}>Stand</MenuItem>
-      </ContextMenu>
+      { gameflow.states.isChallengesPhase &&
+        <ContextMenu id='card_context_menu' >
+          <MenuItem onClick={kneelLocation}>Kneel</MenuItem>
+          <MenuItem divider/>
+          <MenuItem onClick={standLocation}>Stand</MenuItem>
+        </ContextMenu>
+      }
     </div>
   );
 

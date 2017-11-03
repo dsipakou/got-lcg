@@ -31,7 +31,7 @@ class Plot extends Component {
     const { gameflow, socket } = this.props;
     this.setState({setFirstPlayer: true});
     gameflow.actions.setFirstPlayer(isPlayer);
-    socket.emit('game:first player', {isFirstPlayer: !isPlayer});
+    socket.emit('game:first player', (!isPlayer));
   }
 
   doneTurn() {

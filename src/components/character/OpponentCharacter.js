@@ -20,7 +20,7 @@ class OpponentCharacter extends Component {
   }
 
   render() {
-    const { cards } = this.props;
+    const { cards, gameflow } = this.props;
     return (
       <div className='opponent-character-inner'>
         {cards.map((card, index) => (
@@ -33,6 +33,7 @@ class OpponentCharacter extends Component {
 
 OpponentCharacter.propTypes = {
   socket: PropTypes.object.isRequired,
+  gameflow: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired,
   actions: PropTypes.object
 }

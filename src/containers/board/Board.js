@@ -46,19 +46,11 @@ class Board extends Component {
         </div>
       )
     } else if (gameflow.states.isSetupPhase) {
-      if (!gameflow.payload.isPlayerDone) {
-        return (
-          <div className='board'>
-            <StartHand socket={socket} gameflow={gameflow}/>
-          </div>
-        )
-      } else {
-        return (
-          <div className='board'>
-            <div>Wait for your opponent to complete</div>
-          </div>
-        )
-      }
+      return (
+        <div className='board'>
+          <StartHand socket={socket} gameflow={gameflow}/>
+        </div>
+      )
     } else {
       return (
         <div className='board'>
