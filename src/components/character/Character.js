@@ -39,56 +39,74 @@ const collect_props = (props) => {
 
 // Component
 
-const Character = ({ isOver, socket, cards, gameflow, actions, currentItem, connectDropTarget }) => {
-  const renderOverlay = (bgcolor, color) => {
+class Character extends Component {
+  constructor() {
+    super();
+    this.doneStage = this.doneStage.bind(this);
+  }
+
+  componentDidMount() {
+    const { gameflow, socket } = this.props;
+    socket.on('opponent:done', () => {
+      gameflow.actions.opponentDone();
+      gameflow.actions.yourTurn(true);
+    })
+  }
+
+  renderOverlay(bgcolor, color) {
     return (
       <div className="drag-overlay" style={{ backgroundColor: bgcolor, color: color }}>Character zone</div>
     )
   }
 
-  const kneelCharacter = (e, data) => {
+  kneelCharacter(e, data) {
+    const { actions } = this.props;
     actions.kneelCharacter(data.index)
   }
 
-  const standCharacter = (e, data) => {
+  standCharacter(e, data) {
+    const { actions } = this.props;
     actions.standCharacter(data.index)
   }
 
-  const doneStage = () => {
+  doneStage() {
+    const { gameflow, socket } = this.props;
     if (gameflow.payload.isOpponentDone) {
       gameflow.actions.gotoChallenge();
       socket.emit('game:challenge');
     } else {
+      gameflow.actions.yourTurn(false);
       socket.emit('opponent:done');
     }
   }
 
-  let canDrop =
-    currentItem != null &&
-    typeof currentItem.card !== "undefined" &&
-    currentItem.card.type === 'CHARACTER' &&
-    currentItem.card.cardlocation !== currentItem.card.type &&
-    gameflow.states.isMarshalingPhase;
-
-  return connectDropTarget(
-    <div className='character-inner' >
-      {!enoughGold && <span>Not enough gold</span>}
-      {isOver && canDrop && renderOverlay('yellow', 'black')}
-      {!isOver && canDrop && renderOverlay('green', 'white')}
-      <button onClick={doneStage}>I'm done</button>
-      { cards.map((card, index) => (
-        <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
-          <DropableCard card={card} index={index} key={card.uid} />
-        </ContextMenuTrigger>
-      )) }
-      <ContextMenu id='character_context_menu' >
-        <MenuItem onClick={kneelCharacter}>Kneel</MenuItem>
-        <MenuItem divider/>
-        <MenuItem onClick={standCharacter}>Stand</MenuItem>
-      </ContextMenu>
-    </div>
-  );
-
+  render() {
+    const { isOver, socket, cards, gameflow, actions, currentItem, connectDropTarget } = this.props;
+    let canDrop =
+      currentItem != null &&
+      typeof currentItem.card !== "undefined" &&
+      currentItem.card.type === 'CHARACTER' &&
+      currentItem.card.cardlocation !== currentItem.card.type &&
+      gameflow.states.isMarshalingPhase;
+    return connectDropTarget(
+      <div className='character-inner' >
+        {!enoughGold && <span>Not enough gold</span>}
+        {isOver && canDrop && this.renderOverlay.bind(this, 'yellow', 'black')}
+        {!isOver && canDrop && this.renderOverlay.bind(this, 'green', 'white')}
+        { !gameflow.states.isPlotPhase && !gameflow.states.isDrawPhase && gameflow.payload.isYourTurn && <button onClick={this.doneStage}>Im done</button> }
+        { cards.map((card, index) => (
+          <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
+            <DropableCard card={card} index={index} key={card.uid} />
+          </ContextMenuTrigger>
+        )) }
+        <ContextMenu id='character_context_menu' >
+          <MenuItem onClick={this.kneelCharacter.bind(this)}>Kneel</MenuItem>
+          <MenuItem divider/>
+          <MenuItem onClick={this.standCharacter.bind(this)}>Stand</MenuItem>
+        </ContextMenu>
+      </div>
+    );
+  }
 }
 
 Character.propTypes = {
