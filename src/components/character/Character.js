@@ -50,6 +50,9 @@ class Character extends Component {
     socket.on('opponent:done', () => {
       gameflow.actions.opponentDone();
       gameflow.actions.yourTurn(true);
+    });
+    socket.on('game:challenge', () => {
+      gameflow.actions.gotoChallenge();
     })
   }
 
