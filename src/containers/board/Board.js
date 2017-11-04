@@ -89,6 +89,7 @@ Board.propTypes = {
       playerDone: PropTypes.func.isRequired,
       opponentDone: PropTypes.func.isRequired,
       setFirstPalyer: PropTypes.func.isRequired,
+      yourTurn: PropTypes.func.isRequired,
     }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
@@ -123,6 +124,7 @@ export default connect(Board)
     playerDone,
     opponentDone,
     setFirstPlayer,
+    yourTurn,
   }) => ({
     gameflow: {
       name: state.name,
@@ -149,6 +151,7 @@ export default connect(Board)
         playerDone,
         opponentDone,
         setFirstPlayer,
+        yourTurn,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,

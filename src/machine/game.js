@@ -101,6 +101,13 @@ export default {
           isOpponentDone: true
         }
       },
+      'your turn': function(state, isYourTurn) {
+        console.log(state)
+        return {
+          ...state,
+          isYourTurn: isYourTurn,
+        }
+      },
       'goto marshal': 'marshaling phase'
     },
     'marshaling phase': {
