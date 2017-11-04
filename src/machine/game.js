@@ -101,6 +101,31 @@ export default {
           isOpponentDone: true
         }
       },
+      'goto marshal': function(state) {
+        return {
+          ...state,
+          name: 'marshaling phase',
+          isOpponentDone: false,
+          isPlayerDone: false,
+          isYourTurn: state.isFirstPlayer,
+        }
+      },
+    },
+    'marshaling phase': {
+      'player done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          isPlayerDone: true
+        }
+      },
+      'opponent done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          isOpponentDone: true
+        }
+      },
       'your turn': function(state, isYourTurn) {
         console.log(state)
         return {
@@ -108,10 +133,7 @@ export default {
           isYourTurn: isYourTurn,
         }
       },
-      'goto marshal': 'marshaling phase'
-    },
-    'marshaling phase': {
-      'goto challenge': 'challenges phase'
+      'goto challenge': 'challenges phase',
     },
     'challenges phase': {
       'goto dominance': 'dominance phase'
