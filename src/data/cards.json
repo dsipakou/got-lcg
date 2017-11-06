@@ -169,6 +169,19 @@
     "image_url": "https://thronesdb.com/bundles/cards/01013.png"
   },
   {
+    "id": "01014",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Jousting Contest",
+    "faction": "NEUTRAL",
+    "traits": ["War"],
+    "gold": 4,
+    "initiative": 3,
+    "claim": 1,
+    "reserve": 6,
+    "image_url": "https://thronesdb.com/bundles/cards/01014.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
