@@ -182,6 +182,19 @@
     "image_url": "https://thronesdb.com/bundles/cards/01014.png"
   },
   {
+    "id": "01015",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Marched to the Wall",
+    "faction": "NEUTRAL",
+    "traits": ["Edict"],
+    "gold": 4,
+    "initiative": 8,
+    "claim": 1,
+    "reserve": 5,
+    "image_url": "https://thronesdb.com/bundles/cards/01015.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
