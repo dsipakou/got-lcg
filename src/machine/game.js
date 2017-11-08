@@ -5,12 +5,18 @@ export default {
     isPlayerTurn: false,
     isPlayerDone: false,
     isOpponentDone: false,
+    challenges: {
+      military: false,
+      intigue: false,
+      power: false,
+    }
   },
   transitions: {
     'new game': {
       'goto setup': function(state, isFirstPlayer, isYourTurn) {
         console.log(state)
         return {
+          ...state,
           name: 'setup phase',
           isFirstPlayer: isFirstPlayer,
           isPlayerTurn: isYourTurn,
@@ -31,7 +37,6 @@ export default {
       'opponent done': function(state) {
         console.log(state)
         return {
-          name: 'setup phase',
           ...state,
           isOpponentDone: true
         }
@@ -39,6 +44,7 @@ export default {
       'goto plot': function(state) {
         console.log(state)
         return {
+          ...state,
           name: 'plot phase',
           isOpponentDone: false,
           isPlayerDone: false,
@@ -51,7 +57,6 @@ export default {
         console.log(state)
         return {
           ...state,
-          name: 'plot phase',
           isPlayerDone: true
         }
       },
@@ -59,7 +64,6 @@ export default {
         console.log(state)
         return {
           ...state,
-          name: 'plot phase',
           isOpponentDone: true
         }
       },
@@ -67,7 +71,6 @@ export default {
         console.log(state)
         return {
           ...state,
-          name: 'plot phase',
           isFirstPlayer: isFirstPlayer,
           isYourTurn: isFirstPlayer,
           isOpponentDone: false,
@@ -89,7 +92,6 @@ export default {
         console.log(state)
         return {
           ...state,
-          name: 'draw phase',
           isPlayerDone: true
         }
       },
@@ -97,7 +99,6 @@ export default {
         console.log(state)
         return {
           ...state,
-          name: 'draw phase',
           isOpponentDone: true
         }
       },
@@ -133,7 +134,13 @@ export default {
           isYourTurn: isYourTurn,
         }
       },
-      'goto challenge': 'challenges phase',
+      'goto challenge': function(state) {
+        return {
+          ...state,
+          name: 'challenges phase',
+          isYourTurn: state.isFirstPlayer,
+        }
+      },
     },
     'challenges phase': {
       'goto dominance': 'dominance phase'
