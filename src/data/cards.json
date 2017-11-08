@@ -156,6 +156,45 @@
     "image_url": "https://thronesdb.com/bundles/cards/01012.png"
   },
   {
+    "id": "01013",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Heads on Spikes",
+    "faction": "NEUTRAL",
+    "traits": ["Edict", "War"],
+    "gold": 4,
+    "initiative": 6,
+    "claim": 1,
+    "reserve": 6,
+    "image_url": "https://thronesdb.com/bundles/cards/01013.png"
+  },
+  {
+    "id": "01014",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Jousting Contest",
+    "faction": "NEUTRAL",
+    "traits": ["War"],
+    "gold": 4,
+    "initiative": 3,
+    "claim": 1,
+    "reserve": 6,
+    "image_url": "https://thronesdb.com/bundles/cards/01014.png"
+  },
+  {
+    "id": "01015",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Marched to the Wall",
+    "faction": "NEUTRAL",
+    "traits": ["Edict"],
+    "gold": 4,
+    "initiative": 8,
+    "claim": 1,
+    "reserve": 5,
+    "image_url": "https://thronesdb.com/bundles/cards/01015.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
