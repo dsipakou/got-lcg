@@ -48,8 +48,8 @@ const PlayerSide = ({
           <Location cards={locations} actions={locationActions} gameflow={gameflow} />
         </div>
         <div className='help-zone'>
-          { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls />}
-          { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span>}
+          { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls gameflow={gameflow} /> }
+          { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span> }
           <Gold gold={gold} />
           <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
         </div>
