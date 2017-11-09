@@ -7,8 +7,9 @@ export default {
     isOpponentDone: false,
     challenges: {
       military: false,
-      intigue: false,
+      intrigue: false,
       power: false,
+      currentChallenge: '',
     }
   },
   transitions: {
@@ -135,6 +136,7 @@ export default {
         }
       },
       'goto challenge': function(state) {
+        console.log(state)
         return {
           ...state,
           name: 'challenges phase',
@@ -143,6 +145,44 @@ export default {
       },
     },
     'challenges phase': {
+      'player done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          military: false,
+          intigue: false,
+          power: false,
+          currentChallenge: '',
+        }
+      },
+      'military done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          military: true,
+        }
+      },
+      'intrigue done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          intrigue: true,
+        }
+      },
+      'power done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          power: true,
+        }
+      },
+      'set current challenge': function(state, challenge) {
+        console.log(state)
+        return {
+          ...state,
+          currentChallenge: challenge,
+        }
+      },
       'goto dominance': 'dominance phase'
     },
     'dominance phase': {

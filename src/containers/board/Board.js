@@ -76,6 +76,7 @@ Board.propTypes = {
       isDominancePhase: PropTypes.bool.isRequired,
       isStandingPhase: PropTypes.bool.isRequired,
       isTaxationPhase: PropTypes.bool.isRequired,
+      currentChallenge: PropTypes.string.isRequired,
     }),
     actions: PropTypes.shape({
       gotoSetup: PropTypes.func.isRequired,
@@ -90,6 +91,12 @@ Board.propTypes = {
       opponentDone: PropTypes.func.isRequired,
       setFirstPalyer: PropTypes.func.isRequired,
       yourTurn: PropTypes.func.isRequired,
+    }),
+    challenges: PropTypes.shape({
+      militaryDone: PropTypes.func.isRequired,
+      intrigueDone: PropTypes.func.isRequired,
+      powerDone: PropTypes.func.isRequired,
+      setCurrentChallenge: PropTypes.func.isRequired,
     }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
@@ -125,6 +132,10 @@ export default connect(Board)
     opponentDone,
     setFirstPlayer,
     yourTurn,
+    militaryDone,
+    intrigueDone,
+    powerDone,
+    setCurrentChallenge,
   }) => ({
     gameflow: {
       name: state.name,
@@ -138,6 +149,7 @@ export default connect(Board)
         isDominancePhase: isDominancePhase(),
         isStandingPhase: isStandingPhase(),
         isTaxationPhase: isTaxationPhase(),
+        setCurrentChallenge: state.challenges.currentChallenge,
       },
       actions: {
         gotoSetup,
@@ -152,6 +164,12 @@ export default connect(Board)
         opponentDone,
         setFirstPlayer,
         yourTurn,
+      },
+      challenges: {
+        militaryDone,
+        intrigueDone,
+        powerDone,
+        setCurrentChallenge,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,
