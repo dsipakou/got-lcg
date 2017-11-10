@@ -195,6 +195,19 @@
     "image_url": "https://thronesdb.com/bundles/cards/01015.png"
   },
   {
+    "id": "01016",
+    "set": "CORE",
+    "type": "PLOT",
+    "name": "Marching Orders",
+    "faction": "NEUTRAL",
+    "traits": ["Edict", "War"],
+    "gold": 9,
+    "initiative": 3,
+    "claim": 1,
+    "reserve": 4,
+    "image_url": "https://thronesdb.com/bundles/cards/01016.png"
+  },
+  {
     "id": "01028",
     "set": "CORE",
     "type": "CHARACTER",
