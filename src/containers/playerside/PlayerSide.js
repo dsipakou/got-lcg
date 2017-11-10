@@ -9,6 +9,7 @@ import DiscardPile from '../../components/deck/discardPile/DiscardPile';
 import PlotDeck from '../../components/deck/plotdeck/PlotDeck';
 import Plot from '../../components/plot/Plot';
 import Gold from '../../components/player/gold/Gold';
+import ChallengeControls from '../../components/challenges/ChallengeControls';
 import { playLocation, playCharacter, playEvent } from '../../redux/actions/player/hand';
 import { discardEvent } from '../../redux/actions/player/event';
 import { kneelLocation, standLocation } from '../../redux/actions/player/location';
@@ -47,6 +48,8 @@ const PlayerSide = ({
           <Location cards={locations} actions={locationActions} gameflow={gameflow} />
         </div>
         <div className='help-zone'>
+          { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls gameflow={gameflow} /> }
+          { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span> }
           <Gold gold={gold} />
           <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
         </div>
