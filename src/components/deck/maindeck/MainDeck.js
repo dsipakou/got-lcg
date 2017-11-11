@@ -14,16 +14,6 @@ class MainDeck extends Component {
     }
   }
 
-  componentDidMount() {
-    const { socket, gameflow } = this.props;
-    socket.on('opponent:done', () => {
-      gameflow.actions.opponentDone();
-    })
-    socket.on('game:marshal', () => {
-      gameflow.actions.gotoMarshal();
-    })
-  }
-
   drawPhaseDrawing() {
     const { action } = this.props;
     action();
@@ -43,8 +33,8 @@ class MainDeck extends Component {
   doneStage() {
     const { gameflow, socket } = this.props;
     if (gameflow.payload.isOpponentDone) {
-      gameflow.actions.gotoMarshal();
-      socket.emit('game:marshal');
+      gameflow.actions.gotoNext();
+      socket.emit('game:nextphase');
     } else {
       gameflow.actions.playerDone();
       socket.emit('opponent:done');

@@ -103,7 +103,7 @@ export default {
           isOpponentDone: true
         }
       },
-      'goto marshal': function(state) {
+      'goto next': function(state) {
         return {
           ...state,
           name: 'marshaling phase',
@@ -135,7 +135,7 @@ export default {
           isYourTurn: isYourTurn,
         }
       },
-      'goto challenge': function(state) {
+      'goto next': function(state) {
         console.log(state)
         return {
           ...state,
@@ -181,6 +181,20 @@ export default {
         return {
           ...state,
           currentChallenge: challenge,
+        }
+      },
+      'opponent done': function(state) {
+        console.log(state)
+        return {
+          ...state,
+          isOpponentDone: true
+        }
+      },
+      'your turn': function(state, isYourTurn) {
+        console.log(state)
+        return {
+          ...state,
+          isYourTurn: isYourTurn,
         }
       },
       'goto dominance': 'dominance phase'

@@ -63,11 +63,8 @@ io.on('connection', (socket) => {
   socket.on('game:draw', () => {
     socket.broadcast.emit('game:draw');
   });
-  socket.on('game:marshal', () => {
-    socket.broadcast.emit('game:marshal');
-  });
-  socket.on('game:challenge', () => {
-    socket.broadcast.emit('game:challenge');
+  socket.on('game:nextphase', () => {
+    socket.broadcast.emit('game:nextphase');
   });
   socket.on('opponent:done', () => {
     socket.broadcast.emit('opponent:done');
