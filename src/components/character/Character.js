@@ -40,21 +40,6 @@ const collect_props = (props) => {
 // Component
 
 class Character extends Component {
-  constructor() {
-    super();
-    this.doneStage = this.doneStage.bind(this);
-  }
-
-  componentDidMount() {
-    const { gameflow, socket } = this.props;
-    socket.on('opponent:done', () => {
-      gameflow.actions.opponentDone();
-      gameflow.actions.yourTurn(true);
-    });
-    socket.on('game:challenge', () => {
-      gameflow.actions.gotoChallenge();
-    })
-  }
 
   renderOverlay(bgcolor, color) {
     return (
@@ -72,17 +57,6 @@ class Character extends Component {
     actions.standCharacter(data.index)
   }
 
-  doneStage() {
-    const { gameflow, socket } = this.props;
-    if (gameflow.payload.isOpponentDone) {
-      gameflow.actions.gotoChallenge();
-      socket.emit('game:challenge');
-    } else {
-      gameflow.actions.yourTurn(false);
-      socket.emit('opponent:done');
-    }
-  }
-
   render() {
     const { isOver, socket, cards, gameflow, actions, currentItem, connectDropTarget } = this.props;
     let canDrop =
@@ -96,7 +70,6 @@ class Character extends Component {
         {!enoughGold && <span>Not enough gold</span>}
         {isOver && canDrop && this.renderOverlay.bind(this, 'yellow', 'black')}
         {!isOver && canDrop && this.renderOverlay.bind(this, 'green', 'white')}
-        { !gameflow.states.isPlotPhase && !gameflow.states.isDrawPhase && gameflow.payload.isYourTurn && <button onClick={this.doneStage}>Im done</button> }
         { cards.map((card, index) => (
           <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
             <DropableCard card={card} index={index} key={card.uid} />

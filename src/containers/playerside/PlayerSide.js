@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hand from '../../components/hand/hand';
 import Location from '../../components/location/Location';
@@ -10,6 +10,7 @@ import PlotDeck from '../../components/deck/plotdeck/PlotDeck';
 import Plot from '../../components/plot/Plot';
 import Gold from '../../components/player/gold/Gold';
 import ChallengeControls from '../../components/challenges/ChallengeControls';
+import { DoneButton } from '../../components/general/Buttons';
 import { playLocation, playCharacter, playEvent } from '../../redux/actions/player/hand';
 import { discardEvent } from '../../redux/actions/player/event';
 import { kneelLocation, standLocation } from '../../redux/actions/player/location';
@@ -20,48 +21,63 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import './PlayerSide.scss';
 
-const PlayerSide = ({
-  socket,
-  deck,
-  hand,
-  discardPile,
-  plotDeck, plotInPlay, opponentPlotInPlay,
-  locations,
-  characters,
-  event,
-  gold,
-  deckActions,
-  locationActions,
-  characterActions,
-  eventActions,
-  plotActions,
-  gameflow,
-}) => {
-  return(
-    <div className='player-inner'>
-      <div className='play-zone'>
-        <div className='events'>
-          <Event card={event} actions={eventActions} />
+class PlayerSide extends Component {
+  componentDidMount() {
+    const { socket, gameflow } = this.props;
+    socket.on('opponent:done', () => {
+      gameflow.actions.opponentDone();
+      gameflow.actions.yourTurn(true);
+    });
+    socket.on('game:nextphase', () => {
+      gameflow.actions.gotoNext();
+    })
+  }
+
+  render() {
+    const { socket,
+      deck,
+      hand,
+      discardPile,
+      plotDeck, plotInPlay, opponentPlotInPlay,
+      locations,
+      characters,
+      event,
+      gold,
+      deckActions,
+      locationActions,
+      characterActions,
+      eventActions,
+      plotActions,
+      gameflow } = this.props;
+    return(
+      <div className='player-inner'>
+        <div className='play-zone'>
+          <div className='events'>
+            <Event card={event} actions={eventActions} />
+          </div>
+          <div className='permanent-cards'>
+            <Character cards={characters} actions={characterActions} gameflow={gameflow} socket={socket} />
+            <Location cards={locations} actions={locationActions} gameflow={gameflow} />
+          </div>
+          <div className='help-zone'>
+            { gameflow.states.isMarshalingPhase && gameflow.payload.isYourTurn && <DoneButton gameflow={gameflow} socket={socket}/> }
+            { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <DoneButton gameflow={gameflow} socket={socket} /> }
+            { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls gameflow={gameflow} /> }
+            { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span> }
+            <Gold gold={gold} />
+            <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
+          </div>
         </div>
-        <div className='permanent-cards'>
-          <Character cards={characters} actions={characterActions} gameflow={gameflow} socket={socket} />
-          <Location cards={locations} actions={locationActions} gameflow={gameflow} />
-        </div>
-        <div className='help-zone'>
-          { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls gameflow={gameflow} /> }
-          { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span> }
-          <Gold gold={gold} />
-          <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
+        <div className='cards-zone'>
+          <MainDeck deck={deck} action={deckActions.drawCard} gameflow={gameflow} socket={socket} />
+          <Hand cards={hand} />
+          <DiscardPile cards={discardPile} />
+          <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
         </div>
       </div>
-      <div className='cards-zone'>
-        <MainDeck deck={deck} action={deckActions.drawCard} gameflow={gameflow} socket={socket} />
-        <Hand cards={hand} />
-        <DiscardPile cards={discardPile} />
-        <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
-      </div>
-    </div>
-  );
+    );
+  }
+
 }
 
 PlayerSide.propTypes = {
