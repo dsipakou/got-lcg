@@ -72,4 +72,10 @@ io.on('connection', (socket) => {
   socket.on('game:first player', (isFirstPlayer) => {
     socket.broadcast.emit('game:first player', {isFirstPlayer: isFirstPlayer});
   });
+  socket.on('game:your turn', () => {
+    socket.broadcast.emit('game:your turn');
+  });
+  socket.on('challenge:set', (challenge) => {
+    socket.broadcast.emit('challenge:set', (challenge))
+  })
 });
