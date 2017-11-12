@@ -167,6 +167,7 @@ export default connect(Board)
         intrigueDone,
         powerDone,
         setCurrentChallenge,
+        currentChallenge: state.challenges.currentChallenge,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,

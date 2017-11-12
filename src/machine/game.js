@@ -180,7 +180,9 @@ export default {
         console.log(state)
         return {
           ...state,
-          currentChallenge: challenge,
+          challenges: {
+            currentChallenge: challenge,
+          }
         }
       },
       'opponent done': function(state) {
