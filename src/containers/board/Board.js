@@ -76,7 +76,6 @@ Board.propTypes = {
       isDominancePhase: PropTypes.bool.isRequired,
       isStandingPhase: PropTypes.bool.isRequired,
       isTaxationPhase: PropTypes.bool.isRequired,
-      currentChallenge: PropTypes.string.isRequired,
     }),
     actions: PropTypes.shape({
       gotoSetup: PropTypes.func.isRequired,
@@ -88,7 +87,7 @@ Board.propTypes = {
       gotoNext: PropTypes.func.isRequired,
       playerDone: PropTypes.func.isRequired,
       opponentDone: PropTypes.func.isRequired,
-      setFirstPalyer: PropTypes.func.isRequired,
+      setFirstPlayer: PropTypes.func.isRequired,
       yourTurn: PropTypes.func.isRequired,
     }),
     challenges: PropTypes.shape({
@@ -96,6 +95,10 @@ Board.propTypes = {
       intrigueDone: PropTypes.func.isRequired,
       powerDone: PropTypes.func.isRequired,
       setCurrentChallenge: PropTypes.func.isRequired,
+      currentChallenge: PropTypes.string.isRequired,
+      isYourTurn: PropTypes.bool.isRequired,
+      isPlayerDone: PropTypes.bool.isRequired,
+      isOpponentDone: PropTypes.bool.isRequired,
     }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
@@ -147,7 +150,6 @@ export default connect(Board)
         isDominancePhase: isDominancePhase(),
         isStandingPhase: isStandingPhase(),
         isTaxationPhase: isTaxationPhase(),
-        setCurrentChallenge: state.challenges.currentChallenge,
       },
       actions: {
         gotoSetup,
@@ -168,6 +170,9 @@ export default connect(Board)
         powerDone,
         setCurrentChallenge,
         currentChallenge: state.challenges.currentChallenge,
+        isYourTurn: state.challenges.isYourTurn,
+        isPlayerDone: state.challenges.isPlayerDone,
+        isOpponentDone: state.challenges.isOpponentDone,
       },
       payload: {
         isFirstPlayer: state.isFirstPlayer,
