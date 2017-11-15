@@ -91,16 +91,6 @@ Board.propTypes = {
       setFirstPlayer: PropTypes.func.isRequired,
       yourTurn: PropTypes.func.isRequired,
     }),
-    challenges: PropTypes.shape({
-      militaryDone: PropTypes.func.isRequired,
-      intrigueDone: PropTypes.func.isRequired,
-      powerDone: PropTypes.func.isRequired,
-      setCurrentChallenge: PropTypes.func.isRequired,
-      currentChallenge: PropTypes.string.isRequired,
-      isYourTurn: PropTypes.bool.isRequired,
-      isPlayerDone: PropTypes.bool.isRequired,
-      isOpponentDone: PropTypes.bool.isRequired,
-    }),
     payload: PropTypes.shape({
       isFirstPlayer: PropTypes.bool.isRequired,
       isYourTurn: PropTypes.bool.isRequired,
@@ -138,16 +128,6 @@ export default connect(Board)
         opponentDone: gameflow.opponentDone,
         setFirstPlayer: gameflow.setFirstPlayer,
         yourTurn: gameflow.yourTurn,
-      },
-      challenges: {
-        militaryDone: gameflow.militaryDone,
-        intrigueDone: gameflow.intrigueDone,
-        powerDone: gameflow.powerDone,
-        setCurrentChallenge: gameflow.setCurrentChallenge,
-        currentChallenge: gameflow.state.challenges.currentChallenge,
-        isYourTurn: gameflow.state.challenges.isYourTurn,
-        isPlayerDone: gameflow.state.challenges.isPlayerDone,
-        isOpponentDone: gameflow.state.challenges.isOpponentDone,
       },
       payload: {
         isFirstPlayer: gameflow.state.isFirstPlayer,

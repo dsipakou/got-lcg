@@ -58,33 +58,46 @@ class PlayerSide extends Component {
             <Event card={event} actions={eventActions} />
           </div>
           <div className="permanent-cards">
-            <Character cards={characters} actions={characterActions} gameflow={gameflow} socket={socket} />
+            <Character
+              cards={characters}
+              actions={characterActions}
+              gameflow={gameflow}
+              socket={socket}
+            />
             <Location cards={locations} actions={locationActions} gameflow={gameflow} />
           </div>
           <div className="help-zone">
             {
               gameflow.states.isMarshalingPhase &&
               gameflow.payload.isYourTurn &&
-              <DoneButton gameflow={gameflow} socket={socket} /> }
+              <DoneButton gameflow={gameflow} socket={socket} />
+            }
             {
               gameflow.states.isChallengesPhase &&
               gameflow.payload.isYourTurn &&
-              <DoneButton gameflow={gameflow} socket={socket} /> }
+              <DoneButton gameflow={gameflow} socket={socket} />
+            }
             {
               gameflow.states.isChallengesPhase &&
-              gameflow.payload.isYourTurn &&
-              <ChallengeControls gameflow={gameflow} /> }
-            {
-              gameflow.states.isChallengesPhase &&
-              !gameflow.payload.isYourTurn &&
-              <span>Wait for your opponent</span>
+              <ChallengeControls gameflow={gameflow} socket={socket} />
             }
             <Gold gold={gold} />
-            <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
+            <Plot
+              cards={plotInPlay}
+              socket={socket}
+              gameflow={gameflow}
+              playerPlotsInPlay={plotInPlay}
+              opponentPlotsInPlay={opponentPlotInPlay}
+            />
           </div>
         </div>
-        <div className='cards-zone'>
-          <MainDeck deck={deck} action={deckActions.drawCard} gameflow={gameflow} socket={socket} />
+        <div className="cards-zone">
+          <MainDeck
+            deck={deck}
+            action={deckActions.drawCard}
+            gameflow={gameflow}
+            socket={socket}
+          />
           <Hand cards={hand} />
           <DiscardPile cards={discardPile} />
           <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
@@ -92,7 +105,6 @@ class PlayerSide extends Component {
       </div>
     );
   }
-
 }
 
 PlayerSide.propTypes = {
@@ -130,7 +142,7 @@ PlayerSide.propTypes = {
   gameflow: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   deck: state.player.deckReducer,
   hand: state.player.handReducer,
   discardPile: state.player.discardReducer,
@@ -141,13 +153,13 @@ const mapStateToProps = (state) => ({
   characters: state.player.characterReducer,
   event: state.player.eventReducer,
   gold: state.player.propertiesReducer.gold,
-})
+});
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   deckActions: bindActionCreators({
     drawCard,
     getStartHand,
-    doMulligan
+    doMulligan,
   }, dispatch),
   locationActions: bindActionCreators({
     playLocation,
@@ -166,6 +178,6 @@ const mapDispatchToProps = (dispatch) => ({
   plotActions: bindActionCreators({
     playPlot,
   }, dispatch),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerSide);

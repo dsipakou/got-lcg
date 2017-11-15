@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
     }
   });
   socket.on('room:created', (id) => {
-    socket.broadcast.emit('room:created', {id: id})
+    socket.broadcast.emit('room:created', { id });
   });
   socket.on('game:start', () => {
     socket.broadcast.emit('game:start');
@@ -70,12 +70,15 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('opponent:done');
   });
   socket.on('game:first player', (isFirstPlayer) => {
-    socket.broadcast.emit('game:first player', {isFirstPlayer: isFirstPlayer});
+    socket.broadcast.emit('game:first player', { isFirstPlayer });
   });
   socket.on('game:your turn', () => {
     socket.broadcast.emit('game:your turn');
   });
   socket.on('challenge:set', (challenge) => {
-    socket.broadcast.emit('challenge:set', (challenge))
-  })
+    socket.broadcast.emit('challenge:set', (challenge));
+  });
+  socket.on('challenge:attack', () => {
+    socket.broadcast.emit('challenge:attack');
+  });
 });
