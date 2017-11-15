@@ -6,15 +6,6 @@ export default {
     isPlayerDone: false,
     isOpponentDone: false,
     isYourTurn: false,
-    challenges: {
-      isPlayerDone: false,
-      isOpponentDone: false,
-      isYourTurn: false,
-      military: false,
-      intrigue: false,
-      power: false,
-      currentChallenge: '',
-    }
   },
   transitions: {
     'new game': {
@@ -160,9 +151,6 @@ export default {
           ...state,
           name: 'challenges phase',
           isYourTurn: state.isFirstPlayer,
-          challenges: {
-            isYourTurn: state.isFirstPlayer,
-          }
         }
       },
     },
@@ -173,46 +161,6 @@ export default {
         return {
           ...state,
           isPlayerDone: true,
-        }
-      },
-      'military done': function(state) {
-        console.log('MILITARY DONE:')
-        console.log(state);
-        return {
-          ...state,
-          challenges: {
-            military: true
-          }
-        }
-      },
-      'intrigue done': function(state) {
-        console.log('INTRIGUE DONE:')
-        console.log(state);
-        return {
-          ...state,
-          challenges: {
-            intrigue: true,
-          }
-        }
-      },
-      'power done': function(state) {
-        console.log('POWER DONE:')
-        console.log(state);
-        return {
-          ...state,
-          challenges: {
-            power: true,
-          }
-        }
-      },
-      'set current challenge': function(state, challenge) {
-        console.log('SET CURRENT CHALLENGE:')
-        console.log(state);
-        return {
-          ...state,
-          challenges: {
-            currentChallenge: challenge,
-          }
         }
       },
       'opponent done': function(state) {
