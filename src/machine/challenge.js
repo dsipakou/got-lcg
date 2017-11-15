@@ -9,7 +9,4 @@ export default {
     power: false,
     currentChallenge: '',
   },
-  transitions: {
-    
-  }
-}
+};

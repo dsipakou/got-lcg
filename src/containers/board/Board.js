@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
@@ -8,57 +8,58 @@ import StartHand from '../playerside/starthand/StartHand';
 import { connect } from 'stent/lib/react';
 import { Machine } from 'stent';
 import game from '../../machine/game';
-import './Board.scss'
+import challenge from '../../machine/challenge';
+import './Board.scss';
 
 Machine.create('gameflow', game);
+Machine.create('challengeflow', challenge);
 
 class Board extends Component {
   constructor(props) {
     super(props);
-    props.socket.on('connect', function() {
+    props.socket.on('connect', () => {
       props.socket.emit('room', 'room123');
-    })
+    });
     this.gotoSetup = this.gotoSetup.bind(this);
   }
 
   componentDidMount() {
     const { socket, gameflow } = this.props;
 
-    socket.on('game:start', (data) => {
-      gameflow.actions.gotoSetup(false, false)
-    })
+    socket.on('game:start', () => {
+      gameflow.actions.gotoSetup(false, false);
+    });
   }
 
   gotoSetup() {
     const { gameflow, socket } = this.props;
     gameflow.actions.gotoSetup(true, true);
-    socket.emit('game:start', {data: socket.id});
+    socket.emit('game:start', { data: socket.id });
   }
 
   render() {
     const { gameflow, socket } = this.props;
     if (gameflow.states.isNewGame) {
       return (
-        <div className='board'>
+        <div className="board">
           <div>
             <button onClick={this.gotoSetup.bind(this)}>Start game</button>
           </div>
         </div>
-      )
+      );
     } else if (gameflow.states.isSetupPhase) {
       return (
-        <div className='board'>
-          <StartHand socket={socket} gameflow={gameflow}/>
+        <div className="board">
+          <StartHand socket={socket} gameflow={gameflow} />
         </div>
-      )
-    } else {
-      return (
-        <div className='board'>
-          <OpponentSide gameflow={gameflow} socket={socket} />
-          <PlayerSide gameflow={gameflow} socket={socket} />
-        </div>
-      )
+      );
     }
+    return (
+      <div className="board">
+        <OpponentSide gameflow={gameflow} socket={socket} />
+        <PlayerSide gameflow={gameflow} socket={socket} />
+      </div>
+    );
   }
 }
 
@@ -110,75 +111,49 @@ Board.propTypes = {
 }
 
 export default connect(Board)
-  .with('gameflow')
-  .map(({
-    state,
-    isNewGame,
-    isSetupPhase,
-    isPlotPhase,
-    isDrawPhase,
-    isMarshalingPhase,
-    isChallengesPhase,
-    isDominancePhase,
-    isStandingPhase,
-    isTaxationPhase,
-    gotoSetup,
-    gotoPlot,
-    gotoDraw,
-    gotoDominance,
-    gotoStanding,
-    gotoTaxation,
-    gotoNext,
-    playerDone,
-    opponentDone,
-    setFirstPlayer,
-    yourTurn,
-    militaryDone,
-    intrigueDone,
-    powerDone,
-    setCurrentChallenge,
-  }) => ({
+  .with('gameflow', 'challengeflow')
+  .map((gameflow, challengeflow) => ({
     gameflow: {
-      name: state.name,
+      name: gameflow.state.name,
       states: {
-        isNewGame: isNewGame(),
-        isSetupPhase: isSetupPhase(),
-        isPlotPhase: isPlotPhase(),
-        isDrawPhase: isDrawPhase(),
-        isMarshalingPhase: isMarshalingPhase(),
-        isChallengesPhase: isChallengesPhase(),
-        isDominancePhase: isDominancePhase(),
-        isStandingPhase: isStandingPhase(),
-        isTaxationPhase: isTaxationPhase(),
+        isNewGame: gameflow.isNewGame(),
+        isSetupPhase: gameflow.isSetupPhase(),
+        isPlotPhase: gameflow.isPlotPhase(),
+        isDrawPhase: gameflow.isDrawPhase(),
+        isMarshalingPhase: gameflow.isMarshalingPhase(),
+        isChallengesPhase: gameflow.isChallengesPhase(),
+        isDominancePhase: gameflow.isDominancePhase(),
+        isStandingPhase: gameflow.isStandingPhase(),
+        isTaxationPhase: gameflow.isTaxationPhase(),
       },
       actions: {
-        gotoSetup,
-        gotoPlot,
-        gotoDraw,
-        gotoDominance,
-        gotoStanding,
-        gotoTaxation,
-        gotoNext,
-        playerDone,
-        opponentDone,
-        setFirstPlayer,
-        yourTurn,
+        gotoSetup: gameflow.gotoSetup,
+        gotoPlot: gameflow.gotoPlot,
+        gotoDraw: gameflow.gotoDraw,
+        gotoDominance: gameflow.gotoDominance,
+        gotoStanding: gameflow.gotoStanding,
+        gotoTaxation: gameflow.gotoTaxation,
+        gotoNext: gameflow.gotoNext,
+        playerDone: gameflow.playerDone,
+        opponentDone: gameflow.opponentDone,
+        setFirstPlayer: gameflow.setFirstPlayer,
+        yourTurn: gameflow.yourTurn,
       },
       challenges: {
-        militaryDone,
-        intrigueDone,
-        powerDone,
-        setCurrentChallenge,
-        currentChallenge: state.challenges.currentChallenge,
-        isYourTurn: state.challenges.isYourTurn,
-        isPlayerDone: state.challenges.isPlayerDone,
-        isOpponentDone: state.challenges.isOpponentDone,
+        militaryDone: gameflow.militaryDone,
+        intrigueDone: gameflow.intrigueDone,
+        powerDone: gameflow.powerDone,
+        setCurrentChallenge: gameflow.setCurrentChallenge,
+        currentChallenge: gameflow.state.challenges.currentChallenge,
+        isYourTurn: gameflow.state.challenges.isYourTurn,
+        isPlayerDone: gameflow.state.challenges.isPlayerDone,
+        isOpponentDone: gameflow.state.challenges.isOpponentDone,
       },
       payload: {
-        isFirstPlayer: state.isFirstPlayer,
-        isYourTurn: state.isYourTurn,
-        isPlayerDone: state.isPlayerDone,
-        isOpponentDone: state.isOpponentDone,
+        isFirstPlayer: gameflow.state.isFirstPlayer,
+        isYourTurn: gameflow.state.isYourTurn,
+        isPlayerDone: gameflow.state.isPlayerDone,
+        isOpponentDone: gameflow.state.isOpponentDone,
       }
     },
   }));

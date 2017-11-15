@@ -1,5 +1,3 @@
-import update from 'react-addons-update';
-
 export default {
   state: {
     name: 'new game',

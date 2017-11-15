@@ -1,5 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+const MILITARY = 'MILITARY';
+const INTRIGUE = 'INTRIGUE';
+const POWER = 'POWER';
+
 
 class ChallengeControls extends Component {
   constructor() {
@@ -12,15 +17,20 @@ class ChallengeControls extends Component {
       military: false,
       intrigue: false,
       power: false,
-      hideContorls: false,
+      hideControls: false,
+      yourTurn: this.props.isYourTurn,
     }
   }
 
   componentDidMount() {
     const { socket, gameflow } = this.props;
 
+    if (gameflow.state.isYourTurn) {
+      this.setState({ yourTurn: true });
+    }
+
     socket.on('challenge:attack', () => {
-      this.setState({hideContorls: false})
+      this.setState({ hideControls: false })
     });
 
     socket.on('game:your turn', () => {
@@ -28,19 +38,21 @@ class ChallengeControls extends Component {
     });
 
     socket.on('challenge:set', (challenge) => {
-      switch(challenge) {
-        case 'MILITARY': {
-          this.setState({military: true});
+      switch (challenge) {
+        case MILITARY: {
+          this.setState({ military: true });
           break;
         };
-        case 'INTRIGUE': {
+        case INTRIGUE: {
           this.setState({intrigue: true});
           break;
         };
-        case 'POWER': {
+        case POWER: {
           this.setState({power: true});
           break;
-        }
+        };
+        default:
+          break;
       }
     });
   }
@@ -49,10 +61,7 @@ class ChallengeControls extends Component {
     const { gameflow, socket } = this.props;
     this.setState({ military: true });
     gameflow.challenges.setCurrentChallenge('MILITARY');
-    socket.emit('challenge:set', ("MILITARY"));
-    return (
-      <button>asfasfsaf</button>
-    )
+    socket.emit('challenge:set', ('MILITARY'));
   }
 
   chooseIntrigue() {
@@ -68,7 +77,7 @@ class ChallengeControls extends Component {
   }
 
   attack() {
-    const { socket } = this.props;
+    const { socket, gameflow } = this.props;
     this.setState({hideContorls: true});
     socket.emit('challenge:attack');
     socket.emit('game:your turn');
@@ -77,7 +86,7 @@ class ChallengeControls extends Component {
 
   render() {
     const { gameflow } = this.props;
-    let militaryButton = !this.state.military ? "Military" : "Done military";
+    const militaryButton = !this.state.military ? 'Military' : 'Done military';
     return (
       <div>
         { !(gameflow.challenges.currentChallenge === '') && <button onClick={this.attack}>Attack</button>}
@@ -85,11 +94,12 @@ class ChallengeControls extends Component {
         { gameflow.challenges.currentChallenge === '' && !this.state.intrigue && <button onClick={this.chooseIntrigue}>Intrigue</button> }
         { gameflow.challenges.currentChallenge === '' && !this.state.power && <button onClick={this.choosePower}>Power</button> }
       </div>
-    )
+    );
   }
 }
 
 ChallengeControls.propTypes = {
+  socket: PropTypes.object.isRequired,
   gameflow: PropTypes.object.isRequired,
 }
 

@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hand from '../../components/hand/hand';
@@ -17,8 +19,6 @@ import { kneelLocation, standLocation } from '../../redux/actions/player/locatio
 import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
 import { drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
 import { playPlot } from '../../redux/actions/player/plot';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import './PlayerSide.scss';
 
 class PlayerSide extends Component {
@@ -30,11 +30,12 @@ class PlayerSide extends Component {
     });
     socket.on('game:nextphase', () => {
       gameflow.actions.gotoNext();
-    })
+    });
   }
 
   render() {
-    const { socket,
+    const {
+      socket,
       deck,
       hand,
       discardPile,
@@ -48,22 +49,36 @@ class PlayerSide extends Component {
       characterActions,
       eventActions,
       plotActions,
-      gameflow } = this.props;
-    return(
-      <div className='player-inner'>
-        <div className='play-zone'>
-          <div className='events'>
+      gameflow,
+    } = this.props;
+    return (
+      <div className="player-inner">
+        <div className="play-zone">
+          <div className="events">
             <Event card={event} actions={eventActions} />
           </div>
-          <div className='permanent-cards'>
+          <div className="permanent-cards">
             <Character cards={characters} actions={characterActions} gameflow={gameflow} socket={socket} />
             <Location cards={locations} actions={locationActions} gameflow={gameflow} />
           </div>
-          <div className='help-zone'>
-            { gameflow.states.isMarshalingPhase && gameflow.payload.isYourTurn && <DoneButton gameflow={gameflow} socket={socket}/> }
-            { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <DoneButton gameflow={gameflow} socket={socket} /> }
-            { gameflow.states.isChallengesPhase && gameflow.payload.isYourTurn && <ChallengeControls gameflow={gameflow} /> }
-            { gameflow.states.isChallengesPhase && !gameflow.payload.isYourTurn && <span>Wait for your opponent</span> }
+          <div className="help-zone">
+            {
+              gameflow.states.isMarshalingPhase &&
+              gameflow.payload.isYourTurn &&
+              <DoneButton gameflow={gameflow} socket={socket} /> }
+            {
+              gameflow.states.isChallengesPhase &&
+              gameflow.payload.isYourTurn &&
+              <DoneButton gameflow={gameflow} socket={socket} /> }
+            {
+              gameflow.states.isChallengesPhase &&
+              gameflow.payload.isYourTurn &&
+              <ChallengeControls gameflow={gameflow} /> }
+            {
+              gameflow.states.isChallengesPhase &&
+              !gameflow.payload.isYourTurn &&
+              <span>Wait for your opponent</span>
+            }
             <Gold gold={gold} />
             <Plot cards={plotInPlay} socket={socket} gameflow={gameflow} playerPlotsInPlay={plotInPlay} opponentPlotsInPlay={opponentPlotInPlay} />
           </div>
