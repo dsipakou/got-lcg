@@ -8,11 +8,9 @@ import StartHand from '../playerside/starthand/StartHand';
 import { connect } from 'stent/lib/react';
 import { Machine } from 'stent';
 import game from '../../machine/game';
-import challenge from '../../machine/challenge';
 import './Board.scss';
 
 Machine.create('gameflow', game);
-Machine.create('challengeflow', challenge);
 
 class Board extends Component {
   constructor(props) {
@@ -101,8 +99,8 @@ Board.propTypes = {
 }
 
 export default connect(Board)
-  .with('gameflow', 'challengeflow')
-  .map((gameflow, challengeflow) => ({
+  .with('gameflow')
+  .map(gameflow => ({
     gameflow: {
       name: gameflow.state.name,
       states: {

@@ -17,7 +17,6 @@ class ChallengeControls extends Component {
       military: false,
       intrigue: false,
       power: false,
-      hideControls: false,
       yourTurn: false,
       currentChallenge: '',
     };
@@ -28,10 +27,6 @@ class ChallengeControls extends Component {
     if (gameflow.payload.isYourTurn) {
       this.setState({ yourTurn: true });
     }
-
-    socket.on('challenge:attack', () => {
-      this.setState({ hideControls: false });
-    });
 
     socket.on('game:your turn', () => {
       gameflow.actions.yourTurn(true);
@@ -74,14 +69,12 @@ class ChallengeControls extends Component {
 
   attack() {
     const { socket, gameflow } = this.props;
-    this.setState({ hideContorls: true });
     socket.emit('challenge:attack');
     socket.emit('game:your turn');
     gameflow.actions.yourTurn(false);
   }
 
   render() {
-    const { gameflow } = this.props;
     const militaryButton = !this.state.military ? 'Military' : 'Done military';
     if (this.state.yourTurn) {
       return (
