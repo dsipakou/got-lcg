@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Deck from '../Deck';
 import PropTypes from 'prop-types';
+import Deck from '../Deck';
 
 class MainDeck extends Component {
-
   constructor() {
     super();
     this.drawCard = this.drawCard.bind(this);
@@ -11,22 +10,22 @@ class MainDeck extends Component {
     this.doneStage = this.doneStage.bind(this);
     this.state = {
       drawComplete: false,
-    }
+    };
   }
 
   drawPhaseDrawing() {
     const { action } = this.props;
     action();
     action();
-    this.setState({drawComplete: true})
+    this.setState({ drawComplete: true });
   }
 
   drawCard() {
     const { gameflow } = this.props;
-    if (this.props.gameflow.states.isDrawPhase) {
+    if (gameflow.states.isDrawPhase) {
       this.drawPhaseDrawing();
-    } else {
-      this.props.action()
+    } else if (gameflow.states.isSetupPhase) {
+      this.props.action();
     }
   }
 
@@ -43,18 +42,27 @@ class MainDeck extends Component {
 
   render() {
     const { deck, gameflow } = this.props;
-    let text = gameflow.states.isDrawPhase ? "Click once get 2 cards" : "MAMA PAPA MATBEN MAPK";
+    const text = gameflow.states.isDrawPhase ? 'Click once get 2 cards' : 'MAMA PAPA MATBEN MAPK';
     return (
       <div>
-        { gameflow.states.isDrawPhase && this.state.drawComplete && !gameflow.payload.isPlayerDone && <button onClick={this.doneStage}>Next stage</button> }
-        { gameflow.states.isDrawPhase && !gameflow.payload.isOpponentDone && gameflow.payload.isPlayerDone && <span>Wait for opponent</span> }
+        {
+          gameflow.states.isDrawPhase &&
+          this.state.drawComplete &&
+          !gameflow.payload.isPlayerDone &&
+          <button onClick={this.doneStage}>Next stage</button>
+        }
+        {
+          gameflow.states.isDrawPhase &&
+          !gameflow.payload.isOpponentDone &&
+          gameflow.payload.isPlayerDone &&
+          <span>Wait for opponent</span>
+        }
         <div onClick={this.drawCard}>
           <Deck deck={deck} text={text}/>
         </div>
       </div>
-    )
+    );
   }
-
 }
 
 MainDeck.propTypes = {
@@ -62,6 +70,6 @@ MainDeck.propTypes = {
   deck: PropTypes.array.isRequired,
   action: PropTypes.func.isRequired,
   gameflow: PropTypes.object.isRequired,
-}
+};
 
 export default MainDeck;
