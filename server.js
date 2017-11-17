@@ -81,4 +81,7 @@ io.on('connection', (socket) => {
   socket.on('challenge:attack', () => {
     socket.broadcast.emit('challenge:attack');
   });
+  socket.on('challenge:defence', () => {
+    socket.broadcast.emit('challenge:defence');
+  });
 });
