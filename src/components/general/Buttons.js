@@ -19,7 +19,7 @@ export const DoneButton = ({gameflow, socket}) => {
 
   return (
     <div>
-      <button onClick={doneClick}>I'm done</button>
+      <button onClick={doneClick}>Im done</button>
     </div>
   )
 }
