@@ -9,21 +9,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const customStyles = {
-  content : {
-    height                : '40%',
-    width                 : '90%',
-    display               : 'flex',
-    flexFlow              : 'row wrap',
-    alignItems            : 'center',
-    justifyContent        : 'center',
-    background            : 'papayawhip',
-  }
+  content: {
+    height: '40%',
+    width: '90%',
+    display: 'flex',
+    flexFlow: 'row wrap',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'papayawhip',
+  },
 };
 
 function collect_props(props) {
   return {
-    index: props.index
-  }
+    index: props.index,
+  };
 }
 
 class PlotDeck extends Component {
@@ -32,29 +32,29 @@ class PlotDeck extends Component {
     this.state = {
       showModal: false,
       done: false,
-    }
+    };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.play = this.play.bind(this);
   }
 
   openModal() {
-    this.setState({ showModal: true })
+    this.setState({ showModal: true });
   }
 
   closeModal() {
-    this.setState({ showModal: false })
+    this.setState({ showModal: false });
   }
 
   play(event, data) {
     const { actions, gameflow } = this.props;
     actions.playPlot(data.index);
     gameflow.actions.playerDone();
-    this.setState({ done: true })
+    this.setState({ done: true });
   }
 
-  render () {
-    const { cards, gameflow } = this.props
+  render() {
+    const { cards, gameflow } = this.props;
     return (
       <div onClick={this.openModal}>
         <Deck deck={cards} text="Plot Pile" plot={true} />
@@ -62,18 +62,18 @@ class PlotDeck extends Component {
           onRequestClose={this.closeModal}
           isOpen={this.state.showModal}>
           {cards.map((card, index) => (
-            <ContextMenuTrigger holdToDisplay={-1} id='plot_context_menu' collect={collect_props} key={card.uid} index={index}>
+            <ContextMenuTrigger holdToDisplay={-1} id="plot_context_menu" collect={collect_props} key={card.uid} index={index}>
               <Card {...card} index={index} key={card.uid} plot={true} />
             </ContextMenuTrigger>
           ))}
           { gameflow.states.isPlotPhase && !this.state.done &&
-          <ContextMenu id='plot_context_menu' >
+          <ContextMenu id="plot_context_menu">
             <MenuItem onClick={this.play}>Play Plot</MenuItem>
           </ContextMenu>
           }
         </Modal>
       </div>
-    )
+    );
   }
 }
 
