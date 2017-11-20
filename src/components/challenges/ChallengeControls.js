@@ -37,7 +37,7 @@ class ChallengeControls extends Component {
       this.setChallenge(challenge);
     });
     socket.on('challenge:attack', () => {
-      this.setState({ isYourTurn: true });
+      this.setState({ isYourTurn: true, defence: true });
     });
     socket.on('challenge:defence', () => {
       this.setState({ isYourTurn: true, currentChallenge: '' });
@@ -49,6 +49,7 @@ class ChallengeControls extends Component {
         power: false,
         isYourTurn: true,
         currentChallenge: '',
+        defence: false,
       });
     });
   }
@@ -97,12 +98,11 @@ class ChallengeControls extends Component {
   defence() {
     const { socket } = this.props;
     socket.emit('challenge:defence');
-    this.setState({ isYourTurn: false });
+    this.setState({ isYourTurn: false, defence: false });
   }
 
   render() {
     const { gameflow } = this.props;
-    const militaryButton = !this.state.military ? 'Military' : 'Done military';
     if (this.state.isYourTurn) {
       return (
         <div>
@@ -119,12 +119,13 @@ class ChallengeControls extends Component {
           {
             !gameflow.payload.isYourTurn &&
             this.state.isYourTurn &&
+            this.state.defence &&
             <button onClick={this.defence}>Defence</button>
           }
           {
             gameflow.payload.isYourTurn &&
             !this.state.military &&
-            <button onClick={this.chooseMilitary}>{militaryButton}</button>
+            <button onClick={this.chooseMilitary}>Military</button>
           }
           {
             gameflow.payload.isYourTurn &&
