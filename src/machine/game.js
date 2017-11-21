@@ -179,7 +179,15 @@ export default {
           isYourTurn: isYourTurn,
         }
       },
-      'goto dominance': 'dominance phase'
+      'goto next': function(state) {
+        console.log('GOTO NEXT:')
+        console.log(state);
+        return {
+          ...state,
+          name: 'dominance phase',
+          isYourTurn: state.isFirstPlayer,
+        }
+      }
     },
     'dominance phase': {
       'goto standing': 'standing phase'
