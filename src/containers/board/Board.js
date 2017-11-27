@@ -7,10 +7,19 @@ import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../playerside/starthand/StartHand';
 import { connect } from 'stent/lib/react';
 import { Machine } from 'stent';
+import { store } from '../../app';
 import game from '../../machine/game';
+import { updateMachine } from '../../redux/actions/general/game';
 import './Board.scss';
 
 Machine.create('gameflow', game);
+Machine.addMiddleware({
+  onActionDispatched(actionName) {
+    console.log(this.state);
+    store.dispatch(updateMachine(this.state));
+    actionName();
+  },
+});
 
 class Board extends Component {
   constructor(props) {
