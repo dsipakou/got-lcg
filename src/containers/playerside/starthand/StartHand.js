@@ -4,7 +4,7 @@ import './StartHand.scss';
 import Card from '../../../components/card/Card';
 import MainDeck from '../../../components/deck/maindeck/MainDeck';
 import Messages from '../../../components/general/Messages';
-import { getStartHand, doMulligan } from '../../../redux/actions/player/deck';
+import { makeDeck, getStartHand, doMulligan } from '../../../redux/actions/player/deck';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -47,7 +47,7 @@ class StartHand extends Component {
 
   render () {
     const { deck, hand, deckActions, gameflow, socket } = this.props
-
+    const initDeck = deckActions.makeDeck();
     return (
       <div className='starthand-inner'>
         { !gameflow.payload.isPlayerDone && <Messages text='Choose your start hand' /> }
@@ -66,7 +66,7 @@ class StartHand extends Component {
           </div>
         </div>
         <div className='starthand-footer'>
-          <MainDeck deck={deck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } gameflow={gameflow} socket={socket} />
+          <MainDeck deck={initDeck} action={hand.length == 0 ? deckActions.getStartHand : ()=>{} } gameflow={gameflow} socket={socket} />
         </div>
       </div>
     )
@@ -78,6 +78,7 @@ StartHand.propTypes = {
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   deckActions: PropTypes.shape({
+    makeDeck: PropTypes.func.isRequired,
     getStartHand: PropTypes.func.isRequired,
     doMulligan: PropTypes.func.isRequired,
   }),
@@ -91,6 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deckActions: bindActionCreators({
+    makeDeck,
     getStartHand,
     doMulligan
   }, dispatch),

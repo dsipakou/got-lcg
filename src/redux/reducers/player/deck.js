@@ -3,21 +3,29 @@ import { getCard } from '../../actions/player/deck';
 import arrayShuffle from 'array-shuffle';
 import uuid from 'uuid';
 import { DRAW_CARD, MAKE_DECK } from '../../actions/player/deck';
-import cards from '../../../data/cards.json';
 import currentDeck from '../../../data/currentDeck.json';
 
-let deck = [];
+/*const cards = fetch(`http://127.0.0.1:8000/cards/`)
+              .then(response => response.json())
+              .catch(error => {throw error});*/
 
 function findCard(card) {
-  return card.id === this[0];
+  return card.db_id === this[0];
 }
 
-for (let currentCard of currentDeck.cards) {
-  let card = cards.find(findCard, [currentCard]);
-  if (card.type !== 'PLOT') {
-    deck.push({...card, "uid": uuid.v4(), "cardlocation": "DECK"});
+function makeDeck(cards) {
+  let deck = [];
+  for (let currentCard of currentDeck.cards) {
+    let card = cards.find(findCard, [currentCard]);
+    if (card.type !== 'PLOT') {
+      deck.push({...card, "uid": uuid.v4(), "cardlocation": "DECK"});
+    }
   }
+
+  return deck;
 }
+
+
 
 // const arr = cards.filter((card) => {
 //   if (card.type !== 'PLOT') {
@@ -25,18 +33,18 @@ for (let currentCard of currentDeck.cards) {
 //   }
 // }).map(card => { return { "uid": uuid.v4(), "cardlocation": "DECK", ...card }});
 
-const initialState = arrayShuffle(deck);
+const initialState = [];
 
 function deckReducer(state = initialState, action) {
   switch (action.type) {
     case DRAW_CARD:
       if (state.length > 0) {
         return state.filter(card => card.uid != action.uid);
-      } else {
-        return state;
       }
+      return state;
     case MAKE_DECK:
-      return arrayShuffle(deck)
+      let deck = makeDeck(action.cards);
+      return arrayShuffle(deck);
     default:
       return state;
   }

@@ -17,7 +17,7 @@ import { playLocation, playCharacter, playEvent } from '../../redux/actions/play
 import { discardEvent } from '../../redux/actions/player/event';
 import { kneelLocation, standLocation } from '../../redux/actions/player/location';
 import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
-import { drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
+import { makeDeck, drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
 import { playPlot } from '../../redux/actions/player/plot';
 import './PlayerSide.scss';
 
@@ -51,6 +51,7 @@ class PlayerSide extends Component {
       plotActions,
       gameflow,
     } = this.props;
+
     return (
       <div className="player-inner">
         <div className="play-zone">
@@ -125,8 +126,10 @@ PlayerSide.propTypes = {
   event: PropTypes.object.isRequired,
   gold: PropTypes.number.isRequired,
   deckActions: PropTypes.shape({
+    makeDeck: PropTypes.func,
     drawCard: PropTypes.func,
-    getStartHand: PropTypes.func
+    getStartHand: PropTypes.func,
+    doMulligan: PropTypes.func,
   }),
   locationActions: PropTypes.shape({
     playLocation: PropTypes.func.isRequired,
@@ -162,6 +165,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   deckActions: bindActionCreators({
+    makeDeck,
     drawCard,
     getStartHand,
     doMulligan,

@@ -5,20 +5,38 @@ export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND';
 export const MAKE_DECK = 'MAKE_DECK';
 const START_HAND_SIZE = 7;
 
-let cardId = 0;
-
 export const removeDeckCard = (uid) => {
   return {
     type: DRAW_CARD,
     uid
+  };
+};
+
+export const makeDeckFromCardArray = (cards) => {
+  return {
+    type: MAKE_DECK,
+    cards,
+  };
+};
+
+const shouldMakeDeck = (state) => {
+  const cards = state.player.deckReducer;
+  if (cards.length === 0) {
+    return true;
   }
-}
+  return false;
+};
 
 export const makeDeck = () => {
-  return {
-    type: MAKE_DECK
-  }
-}
+  return (dispatch, getState) => {
+    if (shouldMakeDeck(getState())) {
+      return fetch('http://localhost:8000/cards')
+        .then(response => response.json())
+        .then(json => dispatch(makeDeckFromCardArray(json)));
+    }
+    Promise.resolve();
+  };
+};
 
 export const drawCard = () => {
   return (dispatch, getState) => {
