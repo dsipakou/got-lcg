@@ -3,6 +3,7 @@ import { addCardToHand, foldHand } from './hand';
 export const DRAW_CARD = 'DRAW_CARD';
 export const ADD_CARD_TO_HAND = 'ADD_CARD_TO_HAND';
 export const MAKE_DECK = 'MAKE_DECK';
+export const FOLD_DECK = 'FOLD_DECK';
 const START_HAND_SIZE = 7;
 
 export const removeDeckCard = (uid) => {
@@ -38,6 +39,12 @@ export const makeDeck = () => {
   };
 };
 
+export const foldDeck = () => {
+  return {
+    type: FOLD_DECK,
+  };
+};
+
 export const drawCard = () => {
   return (dispatch, getState) => {
     const deck = getState().player.deckReducer;
@@ -46,8 +53,8 @@ export const drawCard = () => {
       dispatch(addCardToHand(lastCard));
       dispatch(removeDeckCard(lastCard.uid));
     }
-  }
-}
+  };
+};
 
 export const getStartHand = () => {
   return (dispatch, getState) => {
@@ -59,12 +66,13 @@ export const getStartHand = () => {
         dispatch(removeDeckCard(lastCard.uid));
       }
     }
-  }
-}
+  };
+};
 
 export const doMulligan = () => {
   return (dispatch) => {
     dispatch(foldHand());
+    dispatch(foldDeck());
     dispatch(makeDeck());
-  }
-}
+  };
+};
