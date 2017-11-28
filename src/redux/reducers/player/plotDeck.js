@@ -1,6 +1,6 @@
-import { DRAW_PLOT } from '../../actions/player/plotDeck';
 import arrayShuffle from 'array-shuffle';
 import uuid from 'uuid';
+import { DRAW_PLOT } from '../../actions/player/plotDeck';
 import cards from '../../../data/cards.json';
 import currentDeck from '../../../data/currentDeck.json';
 
