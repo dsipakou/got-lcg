@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'stent/lib/react';
+import { Machine } from 'stent';
 import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
 import Lobby from '../lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../playerside/starthand/StartHand';
-import { connect } from 'stent/lib/react';
-import { Machine } from 'stent';
 import { store } from '../../app';
 import game from '../../machine/game';
 import { updateMachine } from '../../redux/actions/general/game';
