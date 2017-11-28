@@ -9,20 +9,20 @@ export default {
   },
   transitions: {
     'new game': {
-      'goto setup': function(state, isFirstPlayer, isYourTurn) {
+      'goto setup': function (state, isFirstPlayer, isYourTurn) {
         console.log(state)
         return {
           ...state,
           name: 'setup phase',
-          isFirstPlayer: isFirstPlayer,
-          isYourTurn: isYourTurn,
+          isFirstPlayer,
+          isYourTurn,
           isPlayerDone: false,
           isOpponentDone: false,
         }
       }
     },
     'setup phase': {
-      'player done': function(state) {
+      'player done': function (state) {
         console.log('PLAYER DONE:')
         console.log(state);
         return {
@@ -31,7 +31,7 @@ export default {
           isPlayerDone: true
         }
       },
-      'opponent done': function(state) {
+      'opponent done': function (state) {
         console.log('OPPONENT DONE:')
         console.log(state);
         return {
@@ -39,7 +39,7 @@ export default {
           isOpponentDone: true
         }
       },
-      'goto plot': function(state) {
+      'goto plot': function (state) {
         console.log('GOTO PLOT:')
         console.log(state);
         return {
@@ -52,7 +52,7 @@ export default {
       },
     },
     'plot phase': {
-      'player done': function(state) {
+      'player done': function (state) {
         console.log('PLAYER DONE:')
         console.log(state);
         return {
@@ -60,7 +60,7 @@ export default {
           isPlayerDone: true
         }
       },
-      'opponent done': function(state) {
+      'opponent done': function (state) {
         console.log('OPPONENT DONE:')
         console.log(state);
         return {
@@ -68,18 +68,18 @@ export default {
           isOpponentDone: true
         }
       },
-      'set first player': function(state, isFirstPlayer) {
+      'set first player': function (state, isFirstPlayer) {
         console.log('SET FIRST PLAYER:')
         console.log(state);
         return {
           ...state,
-          isFirstPlayer: isFirstPlayer,
+          isFirstPlayer,
           isYourTurn: isFirstPlayer,
           isOpponentDone: false,
           isPlayerDone: false,
         }
       },
-      'goto draw': function(state) {
+      'goto draw': function (state) {
         console.log('GOTO DRAW:')
         console.log(state);
         return {
@@ -91,7 +91,7 @@ export default {
       },
     },
     'draw phase': {
-      'player done': function(state) {
+      'player done': function (state) {
         console.log('PLAYER DONE:')
         console.log(state);
         return {
@@ -99,7 +99,7 @@ export default {
           isPlayerDone: true
         }
       },
-      'opponent done': function(state) {
+      'opponent done': function (state) {
         console.log('OPPONENT DONE:')
         console.log(state);
         return {
@@ -107,7 +107,7 @@ export default {
           isOpponentDone: true
         }
       },
-      'goto next': function(state) {
+      'goto next': function (state) {
         console.log('GOTO NEXT:')
         console.log(state);
         return {
@@ -120,15 +120,15 @@ export default {
       },
     },
     'marshaling phase': {
-      'player done': function(state) {
-        console.log('PLAYER DONE:')
+      'player done': function (state) {
+        console.log('PLAYER DONE:');
         console.log(state);
         return {
           ...state,
-          isPlayerDone: true
-        }
+          isPlayerDone: true,
+        };
       },
-      'opponent done': function(state) {
+      'opponent done': function (state) {
         console.log('OPPONENT DONE:')
         console.log(state);
         return {
@@ -136,15 +136,15 @@ export default {
           isOpponentDone: true
         }
       },
-      'your turn': function(state, isYourTurn) {
+      'your turn': function (state, isYourTurn) {
         console.log('YOUR TURN:')
         console.log(state);
         return {
           ...state,
-          isYourTurn: isYourTurn,
+          isYourTurn,
         }
       },
-      'goto next': function(state) {
+      'goto next': function (state) {
         console.log('GOTO NEXT:')
         console.log(state);
         return {
@@ -155,7 +155,7 @@ export default {
       },
     },
     'challenges phase': {
-      'player done': function(state) {
+      'player done': function (state) {
         console.log('PLAYER DONE:')
         console.log(state);
         return {
@@ -163,7 +163,7 @@ export default {
           isPlayerDone: true,
         }
       },
-      'opponent done': function(state) {
+      'opponent done': function (state) {
         console.log('OPPONENT DONE:')
         console.log(state);
         return {
@@ -171,15 +171,15 @@ export default {
           isOpponentDone: true
         }
       },
-      'your turn': function(state, isYourTurn) {
+      'your turn': function (state, isYourTurn) {
         console.log('YOUR TURN:')
         console.log(state);
         return {
           ...state,
-          isYourTurn: isYourTurn,
+          isYourTurn,
         }
       },
-      'goto next': function(state) {
+      'goto next': function (state) {
         console.log('GOTO NEXT:')
         console.log(state);
         return {
@@ -190,13 +190,109 @@ export default {
       }
     },
     'dominance phase': {
-      'goto standing': 'standing phase'
+      'player done': function (state) {
+        console.log('PLAYER DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isPlayerDone: true,
+        }
+      },
+      'opponent done': function (state) {
+        console.log('OPPONENT DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isOpponentDone: true
+        }
+      },
+      'your turn': function (state, isYourTurn) {
+        console.log('YOUR TURN:')
+        console.log(state);
+        return {
+          ...state,
+          isYourTurn,
+        }
+      },
+      'goto next': function (state) {
+        console.log('GOTO NEXT:')
+        console.log(state);
+        return {
+          ...state,
+          name: 'standing phase',
+          isYourTurn: state.isFirstPlayer,
+        }
+      }
     },
     'standing phase': {
-      'goto taxation': 'taxation phase'
+      'player done': function (state) {
+        console.log('PLAYER DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isPlayerDone: true,
+        }
+      },
+      'opponent done': function (state) {
+        console.log('OPPONENT DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isOpponentDone: true
+        }
+      },
+      'your turn': function (state, isYourTurn) {
+        console.log('YOUR TURN:')
+        console.log(state);
+        return {
+          ...state,
+          isYourTurn,
+        }
+      },
+      'goto next': function (state) {
+        console.log('GOTO NEXT:')
+        console.log(state);
+        return {
+          ...state,
+          name: 'taxation phase',
+          isYourTurn: state.isFirstPlayer,
+        }
+      }
     },
     'taxation phase': {
-      'goto plot': 'plot phase'
+      'player done': function (state) {
+        console.log('PLAYER DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isPlayerDone: true,
+        }
+      },
+      'opponent done': function (state) {
+        console.log('OPPONENT DONE:')
+        console.log(state);
+        return {
+          ...state,
+          isOpponentDone: true
+        }
+      },
+      'your turn': function (state, isYourTurn) {
+        console.log('YOUR TURN:')
+        console.log(state);
+        return {
+          ...state,
+          isYourTurn,
+        }
+      },
+      'goto next': function (state) {
+        console.log('GOTO NEXT:')
+        console.log(state);
+        return {
+          ...state,
+          name: 'plot phase',
+          isYourTurn: state.isFirstPlayer,
+        }
+      }
     }
   }
 };
