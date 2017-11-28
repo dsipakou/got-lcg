@@ -13,8 +13,8 @@ import './OpponentSide.scss';
 
 const OpponentSide = ({
   socket,
+  dispatch,
   gameflow,
-  actions,
   locations,
   locationActions,
   characters,
@@ -22,19 +22,36 @@ const OpponentSide = ({
   plotInPlay,
   plotActions,
 }) => {
-
   return (
-    <div className='opponent-inner'>
-      <OpponentCharacter socket={socket} cards={characters} actions={characterActions} gameflow={gameflow} />
-      <OpponentLocation socket={socket} cards={locations} actions={locationActions} />
-      <OpponentPlot socket={socket} cards={plotInPlay} actions={plotActions} gameflow={gameflow} />
+    <div className="opponent-inner">
+      <OpponentCharacter
+        socket={socket}
+        dispatch={dispatch}
+        cards={characters}
+        actions={characterActions}
+        gameflow={gameflow}
+      />
+      <OpponentLocation
+        socket={socket}
+        dispatch={dispatch}
+        cards={locations}
+        actions={locationActions}
+      />
+      <OpponentPlot
+        socket={socket}
+        dispatch={dispatch}
+        cards={plotInPlay}
+        actions={plotActions}
+        gameflow={gameflow}
+      />
     </div>
-  )
-}
+  );
+};
 
 OpponentSide.propTypes = {
   socket: PropTypes.object.isRequired,
   gameflow: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   actions: PropTypes.object,
   characters: PropTypes.array.isRequired,
   characterActions: PropTypes.object.isRequired,

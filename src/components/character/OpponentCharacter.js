@@ -2,27 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../card/Card';
 import './OpponentCharacter.scss';
+import {
+  addOpponentCharacter,
+  kneelOpponentCharacter,
+  standOpponentCharacter,
+} from '../../redux/actions/opponent/opponentCharacter';
 
 class OpponentCharacter extends Component {
   componentDidMount() {
-    const { socket, actions } = this.props;
+    const { socket, dispatch } = this.props;
     socket.on('add character', data =>
-      actions.addOpponentCharacter(data.action.payload)
+      dispatch(addOpponentCharacter(data.action.payload))
     );
-
     socket.on('kneel character', data =>
-      actions.kneelOpponentCharacter(data.action.index)
+      dispatch(kneelOpponentCharacter(data.action.index))
     );
-
     socket.on('stand character', data =>
-      actions.standOpponentCharacter(data.action.index)
+      dispatch(standOpponentCharacter(data.action.index))
     );
   }
 
   render() {
-    const { cards, gameflow } = this.props;
+    const { cards } = this.props;
     return (
-      <div className='opponent-character-inner'>
+      <div className="opponent-character-inner">
         {cards.map((card, index) => (
           <Card {...card} index={index} key={card.uid} revealed={true} opponent={true} />
         ))}
@@ -34,6 +37,7 @@ class OpponentCharacter extends Component {
 OpponentCharacter.propTypes = {
   socket: PropTypes.object.isRequired,
   gameflow: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   cards: PropTypes.array.isRequired,
   actions: PropTypes.object
 }
