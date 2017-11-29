@@ -58,12 +58,15 @@ export const drawCard = () => {
 
 export const getStartHand = () => {
   return (dispatch, getState) => {
-    for (var i = 0; i < START_HAND_SIZE; i++) {
-      const deck = getState().player.deckReducer;
-      if (deck.length > 0) {
-        const lastCard = deck[deck.length - 1];
-        dispatch(addCardToHand(lastCard));
-        dispatch(removeDeckCard(lastCard.uid));
+    const hand = getState().player.handReducer;
+    if (hand.length === 0) {
+      for (let i = 0; i < START_HAND_SIZE; i += 1) {
+        const deck = getState().player.deckReducer;
+        if (deck.length > 0) {
+          const lastCard = deck[deck.length - 1];
+          dispatch(addCardToHand(lastCard));
+          dispatch(removeDeckCard(lastCard.uid));
+        }
       }
     }
   };

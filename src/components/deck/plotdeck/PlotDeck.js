@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Modal from 'react-modal';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import Deck from '../Deck';
 import Card from '../../card/Card';
-import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import Modal from 'react-modal';
 import { playPlot } from '../../../redux/actions/player/plot';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 const customStyles = {
   content: {
@@ -20,7 +18,7 @@ const customStyles = {
   },
 };
 
-function collect_props(props) {
+function collectProps(props) {
   return {
     index: props.index,
   };
@@ -47,8 +45,8 @@ class PlotDeck extends Component {
   }
 
   play(event, data) {
-    const { actions, gameflow } = this.props;
-    actions.playPlot(data.index);
+    const { dispatch, gameflow } = this.props;
+    dispatch(playPlot(data.index));
     gameflow.actions.playerDone();
     this.setState({ done: true });
   }
@@ -57,19 +55,23 @@ class PlotDeck extends Component {
     const { cards, gameflow } = this.props;
     return (
       <div onClick={this.openModal}>
-        <Deck deck={cards} text="Plot Pile" plot={true} />
-        <Modal style={customStyles}
+        <Deck deck={cards} text="Plot Pile" plot />
+        <Modal
+          style={customStyles}
           onRequestClose={this.closeModal}
-          isOpen={this.state.showModal}>
+          isOpen={this.state.showModal}
+        >
           {cards.map((card, index) => (
-            <ContextMenuTrigger holdToDisplay={-1} id="plot_context_menu" collect={collect_props} key={card.uid} index={index}>
-              <Card {...card} index={index} key={card.uid} plot={true} />
+            <ContextMenuTrigger holdToDisplay={-1} id="plot_context_menu" collect={collectProps} key={card.uid} index={index}>
+              <Card {...card} index={index} key={card.uid} plot />
             </ContextMenuTrigger>
           ))}
-          { gameflow.states.isPlotPhase && !this.state.done &&
-          <ContextMenu id="plot_context_menu">
-            <MenuItem onClick={this.play}>Play Plot</MenuItem>
-          </ContextMenu>
+          {
+            gameflow.states.isPlotPhase &&
+            !this.state.done &&
+            <ContextMenu id="plot_context_menu">
+              <MenuItem onClick={this.play}>Play Plot</MenuItem>
+            </ContextMenu>
           }
         </Modal>
       </div>
@@ -78,9 +80,9 @@ class PlotDeck extends Component {
 }
 
 PlotDeck.propTypes = {
-  cards: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   gameflow: PropTypes.object.isRequired,
-}
+  cards: PropTypes.array.isRequired,
+};
 
 export default PlotDeck;

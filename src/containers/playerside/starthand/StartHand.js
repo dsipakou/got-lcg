@@ -83,7 +83,7 @@ class StartHand extends Component {
         <div className="starthand-footer">
           <MainDeck
             deck={deck}
-            action={hand.length === 0 ? dispatch(getStartHand()) : () => {}}
+            dispatch={dispatch}
             gameflow={gameflow}
             socket={socket}
           />

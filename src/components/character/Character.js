@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
-import DropableCard from '../../containers/dropablecard/DropableCard';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
+import DropableCard from '../../containers/dropablecard/DropableCard';
+import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
+import { playCharacter } from '../../redux/actions/player/hand';
 import './character.scss';
 
 let enoughGold = true;
 
 const boardTarget = {
-  canDrop(props, monitor){
-    if (typeof monitor.getItem().card === "undefined") {
+  canDrop(props, monitor) {
+    if (typeof monitor.getItem().card === 'undefined') {
       return false;
     }
     return (
@@ -19,7 +21,7 @@ const boardTarget = {
     );
   },
   drop(props, monitor) {
-    enoughGold = props.actions.playCharacter(monitor.getItem().card);
+    enoughGold = props.dispatch(playCharacter(monitor.getItem().card));
   },
 };
 
@@ -31,54 +33,65 @@ function collect(connect, monitor) {
   };
 }
 
-const collect_props = (props) => {
+const collectProps = (props) => {
   return {
-    index: props.index
-  }
-}
+    index: props.index,
+  };
+};
 
 // Component
 
 class Character extends Component {
-
-  renderOverlay(bgcolor, color) {
-    return (
-      <div className="drag-overlay" style={{ backgroundColor: bgcolor, color: color }}>Character zone</div>
-    )
+  constructor() {
+    super();
+    this.kneelCharacter = this.kneelCharacter.bind(this);
+    this.standCharacter = this.standCharacter.bind(this);
   }
 
   kneelCharacter(e, data) {
-    const { actions } = this.props;
-    actions.kneelCharacter(data.index)
+    const { dispatch } = this.props;
+    dispatch(kneelCharacter(data.index));
   }
 
   standCharacter(e, data) {
-    const { actions } = this.props;
-    actions.standCharacter(data.index)
+    const { dispatch } = this.props;
+    dispatch(standCharacter(data.index));
   }
 
+  renderOverlay(bgcolor, color) {
+    return (
+      <div className="drag-overlay" style={{ backgroundColor: bgcolor, color }}>Location zone</div>
+    );
+  };
+
   render() {
-    const { isOver, socket, cards, gameflow, actions, currentItem, connectDropTarget } = this.props;
-    let canDrop =
+    const {
+      gameflow,
+      cards,
+      isOver,
+      currentItem,
+      connectDropTarget,
+    } = this.props;
+    const canDrop =
       currentItem != null &&
-      typeof currentItem.card !== "undefined" &&
+      typeof currentItem.card !== 'undefined' &&
       currentItem.card.type === 'CHARACTER' &&
       currentItem.card.cardlocation !== currentItem.card.type &&
       gameflow.states.isMarshalingPhase;
     return connectDropTarget(
-      <div className='character-inner' >
+      <div className="character-inner">
         {!enoughGold && <span>Not enough gold</span>}
         {isOver && canDrop && this.renderOverlay.bind(this, 'yellow', 'black')}
         {!isOver && canDrop && this.renderOverlay.bind(this, 'green', 'white')}
         { cards.map((card, index) => (
-          <ContextMenuTrigger holdToDisplay={-1} id='character_context_menu' collect={collect_props} key={card.uid} index={index}>
+          <ContextMenuTrigger holdToDisplay={-1} id="character_context_menu" collect={collectProps} key={card.uid} index={index}>
             <DropableCard card={card} index={index} key={card.uid} />
           </ContextMenuTrigger>
         )) }
-        <ContextMenu id='character_context_menu' >
-          <MenuItem onClick={this.kneelCharacter.bind(this)}>Kneel</MenuItem>
-          <MenuItem divider/>
-          <MenuItem onClick={this.standCharacter.bind(this)}>Stand</MenuItem>
+        <ContextMenu id="character_context_menu" >
+          <MenuItem onClick={this.kneelCharacter}>Kneel</MenuItem>
+          <MenuItem divider />
+          <MenuItem onClick={this.standCharacter}>Stand</MenuItem>
         </ContextMenu>
       </div>
     );
@@ -86,16 +99,12 @@ class Character extends Component {
 }
 
 Character.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   gameflow: PropTypes.object.isRequired,
-  socket: PropTypes.object.isRequired,
   cards: PropTypes.array.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
-  actions: PropTypes.shape({
-    playCharacter: PropTypes.func.isRequired,
-    kneelCharacter: PropTypes.func.isRequired,
-    standCharacter: PropTypes.func.isRequired,
-  })
+  currentItem: PropTypes.object.isRequired
 }
 
-export default DropTarget('CHARACTER', boardTarget, collect)(Character)
+export default DropTarget('CHARACTER', boardTarget, collect)(Character);

@@ -1,7 +1,6 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Hand from '../../components/hand/hand';
 import Location from '../../components/location/Location';
 import Character from '../../components/character/Character';
@@ -13,12 +12,6 @@ import Plot from '../../components/plot/Plot';
 import Gold from '../../components/player/gold/Gold';
 import ChallengeControls from '../../components/challenges/ChallengeControls';
 import { DoneButton } from '../../components/general/Buttons';
-import { playLocation, playCharacter, playEvent } from '../../redux/actions/player/hand';
-import { discardEvent } from '../../redux/actions/player/event';
-import { kneelLocation, standLocation } from '../../redux/actions/player/location';
-import { kneelCharacter, standCharacter } from '../../redux/actions/player/character';
-import { makeDeck, drawCard, getStartHand, doMulligan } from '../../redux/actions/player/deck';
-import { playPlot } from '../../redux/actions/player/plot';
 import './PlayerSide.scss';
 
 class PlayerSide extends Component {
@@ -36,6 +29,8 @@ class PlayerSide extends Component {
   render() {
     const {
       socket,
+      dispatch,
+      gameflow,
       deck,
       hand,
       discardPile,
@@ -44,28 +39,28 @@ class PlayerSide extends Component {
       characters,
       event,
       gold,
-      deckActions,
-      locationActions,
-      characterActions,
-      eventActions,
-      plotActions,
-      gameflow,
     } = this.props;
 
     return (
       <div className="player-inner">
         <div className="play-zone">
           <div className="events">
-            <Event card={event} actions={eventActions} />
+            <Event
+              dispatch={dispatch}
+              card={event}
+            />
           </div>
           <div className="permanent-cards">
             <Character
-              cards={characters}
-              actions={characterActions}
+              dispatch={dispatch}
               gameflow={gameflow}
-              socket={socket}
+              cards={characters}
             />
-            <Location cards={locations} actions={locationActions} gameflow={gameflow} />
+            <Location
+              dispatch={dispatch}
+              cards={locations}
+              gameflow={gameflow}
+            />
           </div>
           <div className="help-zone">
             {
@@ -99,14 +94,18 @@ class PlayerSide extends Component {
         </div>
         <div className="cards-zone">
           <MainDeck
-            deck={deck}
-            action={deckActions.drawCard}
-            gameflow={gameflow}
             socket={socket}
+            dispatch={dispatch}
+            gameflow={gameflow}
+            deck={deck}
           />
           <Hand cards={hand} />
           <DiscardPile cards={discardPile} />
-          <PlotDeck cards={plotDeck} actions={plotActions} gameflow={gameflow} />
+          <PlotDeck
+            dispatch={dispatch}
+            cards={plotDeck}
+            gameflow={gameflow}
+          />
         </div>
       </div>
     );
@@ -115,6 +114,8 @@ class PlayerSide extends Component {
 
 PlayerSide.propTypes = {
   socket: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  gameflow: PropTypes.object.isRequired,
   deck: PropTypes.array.isRequired,
   hand: PropTypes.array.isRequired,
   discardPile: PropTypes.array.isRequired,
@@ -125,30 +126,7 @@ PlayerSide.propTypes = {
   characters: PropTypes.array.isRequired,
   event: PropTypes.object.isRequired,
   gold: PropTypes.number.isRequired,
-  deckActions: PropTypes.shape({
-    makeDeck: PropTypes.func,
-    drawCard: PropTypes.func,
-    getStartHand: PropTypes.func,
-    doMulligan: PropTypes.func,
-  }),
-  locationActions: PropTypes.shape({
-    playLocation: PropTypes.func.isRequired,
-    kneelLocation: PropTypes.func.isRequired,
-    standLocation: PropTypes.func.isRequired,
-  }),
-  characterActions: PropTypes.shape({
-    playCharacter: PropTypes.func.isRequired,
-    kneelCharacter: PropTypes.func.isRequired,
-    standCharacter: PropTypes.func.isRequired,
-  }),
-  eventActions: PropTypes.shape({
-    playEvent: PropTypes.func.isRequired,
-  }),
-  plotActions: PropTypes.shape({
-    playPlot: PropTypes.func.isRequired,
-  }),
-  gameflow: PropTypes.object.isRequired,
-}
+};
 
 const mapStateToProps = state => ({
   deck: state.player.deckReducer,
@@ -163,30 +141,4 @@ const mapStateToProps = state => ({
   gold: state.player.propertiesReducer.gold,
 });
 
-const mapDispatchToProps = dispatch => ({
-  deckActions: bindActionCreators({
-    makeDeck,
-    drawCard,
-    getStartHand,
-    doMulligan,
-  }, dispatch),
-  locationActions: bindActionCreators({
-    playLocation,
-    standLocation,
-    kneelLocation,
-  }, dispatch),
-  characterActions: bindActionCreators({
-    playCharacter,
-    standCharacter,
-    kneelCharacter,
-  }, dispatch),
-  eventActions: bindActionCreators({
-    playEvent,
-    discardEvent,
-  }, dispatch),
-  plotActions: bindActionCreators({
-    playPlot,
-  }, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerSide);
+export default connect(mapStateToProps)(PlayerSide);

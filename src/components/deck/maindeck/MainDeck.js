@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Deck from '../Deck';
+import { drawCard, getStartHand } from '../../../redux/actions/player/deck';
 
 class MainDeck extends Component {
   constructor() {
@@ -14,18 +15,18 @@ class MainDeck extends Component {
   }
 
   drawPhaseDrawing() {
-    const { action } = this.props;
-    action();
-    action();
+    const { dispatch } = this.props;
+    dispatch(drawCard());
+    dispatch(drawCard());
     this.setState({ drawComplete: true });
   }
 
   drawCard() {
-    const { gameflow } = this.props;
+    const { gameflow, dispatch } = this.props;
     if (gameflow.states.isDrawPhase) {
       this.drawPhaseDrawing();
     } else if (gameflow.states.isSetupPhase) {
-      this.props.action();
+      dispatch(getStartHand());
     }
   }
 
@@ -58,7 +59,7 @@ class MainDeck extends Component {
           <span>Wait for opponent</span>
         }
         <div onClick={this.drawCard}>
-          <Deck deck={deck} text={text}/>
+          <Deck deck={deck} text={text} />
         </div>
       </div>
     );
@@ -67,9 +68,10 @@ class MainDeck extends Component {
 
 MainDeck.propTypes = {
   socket: PropTypes.object.isRequired,
-  deck: PropTypes.array.isRequired,
-  action: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
   gameflow: PropTypes.object.isRequired,
+  deck: PropTypes.array.isRequired,
+  action: PropTypes.func,
 };
 
 export default MainDeck;

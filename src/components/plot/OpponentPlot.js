@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Deck from '../deck/Deck';
+import { addOpponentPlot } from '../../redux/actions/opponent/opponentPlot';
 
 class OpponentPlot extends Component {
-  constructor() {
-    super();
-    this.state = {
-      revealed: false,
-    }
-  }
-
   componentDidMount() {
-    const { socket, actions, gameflow } = this.props;
+    const { socket, dispatch, gameflow } = this.props;
     socket.on('play plot', (data) => {
-        actions.addOpponentPlot(data.action.payload);
-        gameflow.actions.opponentDone();
-      }
-    );
+      dispatch(addOpponentPlot(data.action.payload));
+      gameflow.actions.opponentDone();
+    });
   }
 
   render() {
@@ -33,7 +26,9 @@ class OpponentPlot extends Component {
 }
 
 OpponentPlot.propTypes = {
+  socket: PropTypes.object.isRequired,
   gameflow: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   cards: PropTypes.array.isRequired,
 }
 
