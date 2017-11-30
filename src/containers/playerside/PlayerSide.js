@@ -74,13 +74,18 @@ class PlayerSide extends Component {
               <DoneButton gameflow={gameflow} socket={socket} />
             }
             {
-              gameflow.states.isChallengesPhase &&
-              <ChallengeControls gameflow={gameflow} socket={socket} />
-            }
-            {
               gameflow.states.isDominancePhase &&
               gameflow.payload.isYourTurn &&
               <DoneButton gameflow={gameflow} socket={socket} />
+            }
+            {
+              gameflow.states.isStandingPhase &&
+              gameflow.payload.isYourTurn &&
+              <DoneButton gameflow={gameflow} socket={socket} />
+            }
+            {
+              gameflow.states.isChallengesPhase &&
+              <ChallengeControls gameflow={gameflow} socket={socket} />
             }
             <Gold gold={gold} />
             <Plot
