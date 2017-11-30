@@ -32,7 +32,6 @@ class Board extends Component {
 
   componentDidMount() {
     const { socket, gameflow } = this.props;
-
     socket.on('game:start', () => {
       gameflow.actions.gotoSetup(false, false);
     });

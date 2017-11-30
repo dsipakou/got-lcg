@@ -16,12 +16,14 @@ class OpponentPlot extends Component {
     const { cards, gameflow } = this.props;
     return (
       <div>
-          <h2>Opponents plot</h2>
-          <Deck deck={cards}
-            plot={true}
-            revealed={!gameflow.states.isPlotPhase ? true : gameflow.payload.isPlayerDone} />
+        <h2>Opponents plot</h2>
+        <Deck
+          deck={cards}
+          plot
+          revealed={!gameflow.states.isPlotPhase ? true : gameflow.payload.isPlayerDone}
+        />
       </div>
-    )
+    );
   }
 }
 
