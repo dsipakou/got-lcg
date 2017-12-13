@@ -50,7 +50,7 @@ class LoginForm extends Component {
     return (
       <div>
         <input id="username" onChange={this.usernameChange} />
-        <input id="password" onChange={this.passwordChange} />
+        <input id="password" type="password" onChange={this.passwordChange} />
         <button id="login_btn" onClick={this.doLogin}>Login</button>
       </div>
     );
