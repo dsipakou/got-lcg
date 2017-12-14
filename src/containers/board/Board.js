@@ -7,7 +7,7 @@ import OpponentSide from '../../containers/opponentside/OpponentSide';
 import Lobby from '../lobby/Lobby';
 import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../playerside/starthand/StartHand';
-import { store } from '../../app';
+import store from '../../redux/store';
 import game from '../../machine/game';
 import { updateMachine } from '../../redux/actions/general/game';
 import './Board.scss';
