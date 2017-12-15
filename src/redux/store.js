@@ -1,6 +1,7 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { REHYDRATE, PURGE, persistStore, persistCombineReducers } from 'redux-persist';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import storage from 'redux-persist/lib/storage';
 import combiner from './reducers/combiner';
 
@@ -10,6 +11,16 @@ const config = {
   key: 'primary',
   storage,
 };
+
+// eslint-disable-next-line no-underscore-dangle
+let devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
+  devTools = null;
+}
+
+// if (devTools !== 'undefined') {
+//   devTools = a => a;
+// }
 
 const ioMiddleware = () => next => (action) => {
   console.log(action.type);
@@ -23,7 +34,7 @@ const store = createStore(
   reducer,
   compose(
     applyMiddleware(thunk, ioMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    devTools,
   ),
 );
 
