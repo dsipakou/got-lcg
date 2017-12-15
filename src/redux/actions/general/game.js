@@ -10,6 +10,6 @@ export const newGame = () => {
 export const updateMachine = (payload) => {
   return {
     type: UPDATE_MACHINE,
-    payload: payload,
+    payload,
   };
 };
