@@ -4,8 +4,6 @@ import { connect } from 'stent/lib/react';
 import { Machine } from 'stent';
 import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
-import Lobby from '../lobby/Lobby';
-import Navigation from '../../components/navigation/Navigation';
 import StartHand from '../playerside/starthand/StartHand';
 import store from '../../redux/store';
 import game from '../../machine/game';
@@ -15,8 +13,8 @@ import './Board.scss';
 Machine.create('gameflow', game);
 Machine.addMiddleware({
   onActionDispatched(actionName) {
-    console.log(this.state);
-    store.dispatch(updateMachine(this.state));
+    console.log(this);
+    store.dispatch(updateMachine(this));
     actionName();
   },
 });
