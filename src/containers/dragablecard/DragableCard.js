@@ -4,8 +4,6 @@ import { DragSource } from 'react-dnd';
 import { connect } from 'react-redux';
 import Card from '../../components/card/Card';
 
-const CARD_TYPE = 'CARD';
-
 const cardSource = {
   beginDrag(props) {
     return {
