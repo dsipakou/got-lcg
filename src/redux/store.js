@@ -1,7 +1,6 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { persistStore, persistCombineReducers } from 'redux-persist';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import storage from 'redux-persist/lib/storage';
 import combiner from './reducers/combiner';
 
