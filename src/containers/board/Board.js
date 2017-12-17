@@ -6,15 +6,24 @@ import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
 import StartHand from '../playerside/starthand/StartHand';
 import store from '../../redux/store';
-import game from '../../machine/game';
 import { updateMachine } from '../../redux/actions/general/game';
+import { machineState, machineTransitions } from '../../machine/game';
 import './Board.scss';
 
-Machine.create('gameflow', game);
+let currentState = machineState;
+
+if (store.getState().general.gameReducer.length > 0) {
+  currentState = store.getState().general.gameReducer;
+}
+Machine.create(
+  'gameflow',
+  { state: currentState, transitions: machineTransitions },
+);
+
 Machine.addMiddleware({
   onActionDispatched(actionName) {
     console.log(this);
-    store.dispatch(updateMachine(this));
+    store.dispatch(updateMachine(this.state));
     actionName();
   },
 });
