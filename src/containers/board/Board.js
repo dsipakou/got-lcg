@@ -12,6 +12,8 @@ import './Board.scss';
 
 let currentState = machineState;
 
+console.log(store.getState().general.gameReducer.length);
+console.log(store.getState().general.gameReducer);
 if (store.getState().general.gameReducer.length > 0) {
   currentState = store.getState().general.gameReducer;
 }
@@ -42,6 +44,10 @@ class Board extends Component {
     socket.on('game:start', () => {
       gameflow.actions.gotoSetup(false, false);
     });
+    Machine.create(
+      'gameflow',
+      { state: currentState, transitions: machineTransitions },
+    );
   }
 
   gotoSetup() {
