@@ -10,13 +10,8 @@ import { updateMachine } from '../../redux/actions/general/game';
 import { machineState, machineTransitions } from '../../machine/game';
 import './Board.scss';
 
-let currentState = machineState;
+const currentState = machineState;
 
-console.log(store.getState().general.gameReducer.length);
-console.log(store.getState().general.gameReducer);
-if (store.getState().general.gameReducer.length > 0) {
-  currentState = store.getState().general.gameReducer;
-}
 Machine.create(
   'gameflow',
   { state: currentState, transitions: machineTransitions },
@@ -44,10 +39,6 @@ class Board extends Component {
     socket.on('game:start', () => {
       gameflow.actions.gotoSetup(false, false);
     });
-    Machine.create(
-      'gameflow',
-      { state: currentState, transitions: machineTransitions },
-    );
   }
 
   gotoSetup() {
