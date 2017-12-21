@@ -9,6 +9,7 @@ const socket = require('socket.io-client')('http://localhost:3000');
 const config = {
   key: 'primary',
   storage,
+  debug: true,
 };
 
 // eslint-disable-next-line no-underscore-dangle
@@ -29,20 +30,18 @@ const ioMiddleware = () => next => (action) => {
 
 const reducer = persistCombineReducers(config, combiner);
 
-const store = createStore(
-  reducer,
-  compose(
-    applyMiddleware(thunk, ioMiddleware),
-    devTools,
-  ),
-);
+function configureStore() {
+  const store = createStore(
+    reducer,
+    compose(
+      applyMiddleware(thunk, ioMiddleware),
+      devTools,
+    ),
+  );
 
-persistStore(
-  store,
-  null,
-  () => {
-    store.getState();
-  },
-);
+  const persistor = persistStore(store);
 
-export default store;
+  return { store, persistor };
+}
+
+export default configureStore;

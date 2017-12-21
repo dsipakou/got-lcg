@@ -5,12 +5,13 @@ import { Machine } from 'stent';
 import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
 import StartHand from '../playerside/starthand/StartHand';
-import store from '../../redux/store';
+import configureStore from '../../redux/store';
 import { updateMachine } from '../../redux/actions/general/game';
 import { machineState, machineTransitions } from '../../machine/game';
 import './Board.scss';
 
 const currentState = machineState;
+const { store } = configureStore();
 
 Machine.create(
   'gameflow',
