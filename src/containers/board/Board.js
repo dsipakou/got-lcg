@@ -13,6 +13,8 @@ import './Board.scss';
 const currentState = machineState;
 const { store } = configureStore();
 
+console.log(store.getState());
+
 Machine.create(
   'gameflow',
   { state: currentState, transitions: machineTransitions },
@@ -33,6 +35,14 @@ class Board extends Component {
       props.socket.emit('room', 'room123');
     });
     this.gotoSetup = this.gotoSetup.bind(this);
+  }
+
+  componentWillMount() {
+    console.log(store.getState().general.gameReducer);
+    Machine.create(
+      'gameflow',
+      { state: store.getState().general.gameReducer, transitions: machineTransitions },
+    );
   }
 
   componentDidMount() {
