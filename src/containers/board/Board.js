@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'stent/lib/react';
 import { Machine } from 'stent';
+import * as ha from 'stent/lib';
 import PlayerSide from '../../containers/playerside/PlayerSide';
 import OpponentSide from '../../containers/opponentside/OpponentSide';
 import StartHand from '../playerside/starthand/StartHand';
@@ -35,14 +36,6 @@ class Board extends Component {
       props.socket.emit('room', 'room123');
     });
     this.gotoSetup = this.gotoSetup.bind(this);
-  }
-
-  componentWillMount() {
-    console.log(store.getState().general.gameReducer);
-    Machine.create(
-      'gameflow',
-      { state: store.getState().general.gameReducer, transitions: machineTransitions },
-    );
   }
 
   componentDidMount() {
