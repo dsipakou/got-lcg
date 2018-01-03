@@ -16,7 +16,7 @@ const Card = ({
     'card': true,
     'card-kneeled': kneel,
     'card-opponent': opponent,
-    'plot': plot,
+    plot,
   });
   return (
     <div className={cardClass} style={{ opacity: isDragging ? 0.5 : 1 }}>
