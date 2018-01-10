@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react'
 import { browserHistory, BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import Board from './containers/board/Board';
+import BoardContainer from './containers/board/BoardContainer';
 import Lobby from './containers/lobby/Lobby';
 import Layout from './components/Layout';
 import configureStore from './redux/store';
@@ -27,7 +27,7 @@ render(
             loading={<div>Hello loading</div>}
             persistor={persistor}
           >
-          <Route exact path="/" component={connectSocket(Board)} />
+            <Route exact path="/" component={connectSocket(BoardContainer)} />
           </PersistGate>
           <Route path="/lobby" component={connectSocket(Lobby)} />
         </Switch>

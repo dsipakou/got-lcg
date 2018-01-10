@@ -9,11 +9,16 @@ import StartHand from '../playerside/starthand/StartHand';
 import configureStore from '../../redux/store';
 import { updateMachine } from '../../redux/actions/general/game';
 import { machineState, machineTransitions } from '../../machine/game';
+import { newGame } from '../../redux/actions/general/game';
 import './Board.scss';
+import { Logger } from 'stent/lib/middlewares';
+
+Machine.addMiddleware(Logger);
 
 const currentState = machineState;
 const { store } = configureStore();
 
+console.log('Now in Board component');
 console.log(store.getState());
 
 Machine.create(
@@ -46,7 +51,8 @@ class Board extends Component {
   }
 
   gotoSetup() {
-    const { gameflow, socket } = this.props;
+    const { gameflow, socket, dispatch } = this.props;
+    dispatch(newGame());
     gameflow.actions.gotoSetup(true, true);
     socket.emit('game:start', { data: socket.id });
   }
@@ -112,6 +118,7 @@ Board.propTypes = {
       isOpponentDone: PropTypes.bool.isRequired
     })
   }),
+  dispatch: PropTypes.func.isRequired,
 }
 
 export default connect(Board)
