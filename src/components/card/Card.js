@@ -8,7 +8,7 @@ const Card = ({
   kneel,
   plot,
   opponent,
-  imageUrl,
+  image_url,
   revealed,
   isDragging,
 }) => {
@@ -20,14 +20,14 @@ const Card = ({
   });
   return (
     <div className={cardClass} style={{ opacity: isDragging ? 0.5 : 1 }}>
-      { revealed && <img src={imageUrl} alt={name} /> }
+      { revealed && <img src={image_url} alt={name} /> }
     </div>
   );
 };
 
 Card.propTypes = {
   uid: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
+  image_url: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,
   cardlocation: PropTypes.string.isRequired,
@@ -41,7 +41,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   name: '',
-  imageUrl: 'about:blank',
+  image_url: 'about:blank',
   isDragging: false,
   revealed: true,
   kneel: false,

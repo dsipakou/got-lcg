@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DragSource } from 'react-dnd';
-import { connect } from 'react-redux';
 import Card from '../../components/card/Card';
 
 const cardSource = {
